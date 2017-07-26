@@ -57,15 +57,15 @@ int main(int argc, char *argv[])
 	Post post;
 	post.setObjectName("post");
 
-	post.resize(1700, 850);
-	post.setMinimumHeight(850);
+	//post.resize(1700, 850);
+	//post.setMinimumHeight(850);
 	post.move(200, 40);
 	
     post.show();
     splash.finish(&post);
 	
-	if (post.m_flagExistAccount == 0 && messageAccount() == QMessageBox::Yes) // если ящика не существует, и если Yes,
-		post.slotCreateAccount();                                             // то переход к созданию ящика
+	//if (post.m_flagExistAccount == 0 && messageAccount() == QMessageBox::Yes) // если ящика не существует, и если Yes,
+		//post.slotCreateAccount();                                             // то переход к созданию ящика
 	
 	//qDebug() << QTextCodec::availableCodecs();
 	

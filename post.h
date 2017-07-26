@@ -46,7 +46,8 @@ class Post : public QWidget
 {
 	Q_OBJECT
 private :
-    
+    Ui::PostClass ui;
+	
 	QTextCodec       *m_pcodec;
 	
 	QCursor          *m_pCursor;
