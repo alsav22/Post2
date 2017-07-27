@@ -75,61 +75,61 @@ Post::Post(QWidget *pwgt /*= 0*/) : QWidget(pwgt)
 //
 // список адресов
 	
-	//m_pListAddress = new QListWidget;
-	//m_pListAddress ->setStyleSheet("font: oblique bold 13pt Times; color: black;"); // oblique
-	////m_pListAddress ->setMinimumWidth(300);
-	//m_pListAddress ->setFixedWidth(290);
-	//m_pListAddress ->setIconSize(QSize(124, 152));
-	//m_pListAddress ->setViewMode(QListView::IconMode);
+	//ui.m_pListAddress = new QListWidget;
+	//ui.m_pListAddress ->setStyleSheet("font: oblique bold 13pt Times; color: black;"); // oblique
+	////ui.m_pListAddress ->setMinimumWidth(300);
+	//ui.m_pListAddress ->setFixedWidth(290);
+	//ui.m_pListAddress ->setIconSize(QSize(124, 152));
+	//ui.m_pListAddress ->setViewMode(QListView::IconMode);
 	//
 	//m_pCursor = new QCursor(Qt::PointingHandCursor);
-	//m_pListAddress ->setCursor(*m_pCursor);
+	//ui.m_pListAddress ->setCursor(*m_pCursor);
 	
 	/*QCursor cur(Qt::PointingHandCursor);
-	m_pListAddress ->setCursor(cur);*/
+	ui.m_pListAddress ->setCursor(cur);*/
 //
 //	QVBoxLayout *pvbLayoutAddress = new QVBoxLayout;
 //	//QSplitter *pgridLayoutAddress= new QSplitter(Qt::Vertical);
 //	pvbLayoutAddress ->addWidget(plblAddress);
-//	pvbLayoutAddress ->addWidget(m_pListAddress);
+//	pvbLayoutAddress ->addWidget(ui.m_pListAddress);
 //
-//	//connect(m_pListAddress, SIGNAL(itemClicked(QListWidgetItem *)), this, SLOT(slotChoiceAddress(QListWidgetItem *)));
-//	connect(m_pListAddress, SIGNAL(currentItemChanged (QListWidgetItem *, QListWidgetItem *)) , this, SLOT(slotChoiceAddress(QListWidgetItem *)));
+//	//connect(ui.m_pListAddress, SIGNAL(itemClicked(QListWidgetItem *)), this, SLOT(slotChoiceAddress(QListWidgetItem *)));
+//	connect(ui.m_pListAddress, SIGNAL(currentItemChanged (QListWidgetItem *, QListWidgetItem *)) , this, SLOT(slotChoiceAddress(QListWidgetItem *)));
 //
 //// список отправленных писем
 //	
-//	m_pListMessageSend = new QListWidget;
-//    //m_pListMessageSend ->setStyleSheet("font: oblique bold 13pt Times; color: black;"); // oblique
-//	//m_pListMessageSend ->setMinimumWidth(300);
-//	//m_pListMessageSend ->setFixedWidth(290);
-//	//m_pListMessageSend ->setIconSize(QSize(124, 152));
-//	//m_pListMessageSend ->setViewMode(QListView::IconMode);
-//	
-//	m_pCursor = new QCursor(Qt::PointingHandCursor);
-//	m_pListMessageSend ->setCursor(*m_pCursor);
-//
-//	m_pListMessageSend ->setObjectName("ListMessageSend");
-//	
-//	//connect(m_pListMessageSend, SIGNAL(itemClicked(QListWidgetItem *)), this, SLOT(slotChoiceMessage(QListWidgetItem *)));
-//	connect(m_pListMessageSend, SIGNAL(currentItemChanged (QListWidgetItem *, QListWidgetItem *)) , this, SLOT(slotChoiceMessage(QListWidgetItem *)));
-//
-//// список полученных писем
-//	
-//	m_pListMessageReceived = new QListWidget;
-//	//m_pListMessageReceived ->setStyleSheet("font: oblique bold 13pt Times; color: black;"); // oblique
-//	//m_pListMessageReceived ->setMinimumWidth(300);
-//	//m_pListMessageReceived ->setFixedWidth(290);
-//	//m_pListMessageReceived ->setIconSize(QSize(124, 152));
-//	//m_pListMessageReceived ->setViewMode(QListView::IconMode);
-//	
-//	m_pCursor = new QCursor(Qt::PointingHandCursor);
-//	m_pListMessageReceived ->setCursor(*m_pCursor);
-//	
-//	m_pListMessageReceived ->setObjectName("ListMessageReceived");
-//	
-//	//connect(m_pListMessageReceived, SIGNAL(itemClicked(QListWidgetItem *)), this, SLOT(slotChoiceMessage(QListWidgetItem *)));
-//	connect(m_pListMessageReceived, SIGNAL(currentItemChanged (QListWidgetItem *, QListWidgetItem *)) , this, SLOT(slotChoiceMessage(QListWidgetItem *)));
-//
+	m_pListMessageSend = new QListWidget;
+    //m_pListMessageSend ->setStyleSheet("font: oblique bold 13pt Times; color: black;"); // oblique
+	//m_pListMessageSend ->setMinimumWidth(300);
+	//m_pListMessageSend ->setFixedWidth(290);
+	//m_pListMessageSend ->setIconSize(QSize(124, 152));
+	//m_pListMessageSend ->setViewMode(QListView::IconMode);
+	
+	m_pCursor = new QCursor(Qt::PointingHandCursor);
+	m_pListMessageSend ->setCursor(*m_pCursor);
+
+	m_pListMessageSend ->setObjectName("ListMessageSend");
+	
+	//connect(m_pListMessageSend, SIGNAL(itemClicked(QListWidgetItem *)), this, SLOT(slotChoiceMessage(QListWidgetItem *)));
+	connect(m_pListMessageSend, SIGNAL(currentItemChanged (QListWidgetItem *, QListWidgetItem *)) , this, SLOT(slotChoiceMessage(QListWidgetItem *)));
+
+// список полученных писем
+	
+	m_pListMessageReceived = new QListWidget;
+	//m_pListMessageReceived ->setStyleSheet("font: oblique bold 13pt Times; color: black;"); // oblique
+	//m_pListMessageReceived ->setMinimumWidth(300);
+	//m_pListMessageReceived ->setFixedWidth(290);
+	//m_pListMessageReceived ->setIconSize(QSize(124, 152));
+	//m_pListMessageReceived ->setViewMode(QListView::IconMode);
+	
+	m_pCursor = new QCursor(Qt::PointingHandCursor);
+	m_pListMessageReceived ->setCursor(*m_pCursor);
+	
+	m_pListMessageReceived ->setObjectName("ListMessageReceived");
+	
+	//connect(m_pListMessageReceived, SIGNAL(itemClicked(QListWidgetItem *)), this, SLOT(slotChoiceMessage(QListWidgetItem *)));
+	connect(m_pListMessageReceived, SIGNAL(currentItemChanged (QListWidgetItem *, QListWidgetItem *)) , this, SLOT(slotChoiceMessage(QListWidgetItem *)));
+
 //// Получение и Служебная информация	
 //	
 //  // Получение
@@ -437,89 +437,89 @@ Post::Post(QWidget *pwgt /*= 0*/) : QWidget(pwgt)
 //
 ////==============================================================================
 //
-//// создание сокета для SMTP и соединение его со слотами обработки сигналов
-//    m_pSocketSMTP = new QSslSocket(this);
-//	//m_pSocketSMTP = new QTcpSocket(this);
-//
-//	//m_pSocketSMTP ->setPrivateKey("grupal.key");
-//    //m_pSocketSMTP ->setLocalCertificate("grupal.crt");
-//
-//	connect(m_pSocketSMTP, SIGNAL(connected()), SLOT(slotConnectedSMTP()));
-//    connect(m_pSocketSMTP, SIGNAL(readyRead()), SLOT(slotReadyReadSMTP()));
-//    connect(m_pSocketSMTP, SIGNAL(error(QAbstractSocket::SocketError)),
-//                     this, SLOT(slotErrorSMTP(QAbstractSocket::SocketError)));
-//
-//// создание сокета для POP и соединение его со слотами обработки сигналов
-//	//m_pSocketPOP = new QTcpSocket(this);
-//	m_pSocketPOP = new QSslSocket(this);
-//
-//    //m_pSocketPOP ->setPrivateKey("grupal.key");
-//    //m_pSocketPOP ->setLocalCertificate("grupal.crt");
-//
-//	connect(m_pSocketPOP, SIGNAL(connected()), SLOT(slotConnectedPOP()));
-//    //connect(m_pSocketPOP, SIGNAL(readyRead()), SLOT(slotReadyReadPOP()));
-//    connect(m_pSocketPOP, SIGNAL(error    (QAbstractSocket::SocketError)),
-//                          this,  SLOT(slotErrorPOP(QAbstractSocket::SocketError)));
-////............................................................
-//
-////============================================================================
-//
-//	if (QFile::exists(PATH_ACCOUNT)) // если файл существует
-//	{
-//		QFile file(PATH_ACCOUNT);
-//	
-//		file.open(QIODevice::ReadOnly | QIODevice::Text);
-//		QTextStream fin(&file);
-//		
-//		// создание ящика
-//			m_pcurrentAccount = new Account;
-//			
-//			m_flagExistAccount = 1;    // флаг существования ящика
-//			
-//			fin >> *m_pcurrentAccount; // чтение данных ящика из файла (с декодированием пароля в двух видах)
-//			                           // !!! два вида пароля в файле должны быть в закодированном виде !!!
-//
-//			m_pAccountInfo ->setText(m_pcurrentAccount ->gete_mail()); // вывод e-mail текущего ящика 
-//			                                                           // в поле Текущий ящик
-//			file.close();
-//    }
-//	else  m_flagExistAccount = 0;  // если файла нет
-//
-//	m_pvectorMessageSend     = new QList<Message>; // массив писем отправленных
-//	m_pvectorMessageReceived = new QList<Message>; // массив писем полученных
-//	m_pvectorAddress         = new QList<Address>; // массив адресов
-//
-//	m_pcurrentAddress        = new Address;          // текущий адрес
-//	m_pcurrentMessage        = new Message;          // текущее письмо
-//		
-//  // чтение из файлов в массивы всех адресов, отправленных и полученных писем
-//	if (QFile::exists(PATH_ADDRESS))
-//	{
-//		readFileInVector(m_pvectorAddress, PATH_ADDRESS, S);
-//		readVectorInListWidget(m_pvectorAddress, m_pListAddress); // заполняем поле Адреса
-//	}
-//			
-//	if (QFile::exists(PATH_SENDER))
-//		readFileInVector(m_pvectorMessageSend, PATH_SENDER, S); // нужно?
-//			
-//	if (QFile::exists(PATH_RECEIVER))
-//		readFileInVector(m_pvectorMessageReceived, PATH_RECEIVER, S); // нужно?
-//
-//  // заполнение списков отправленных и полученных писем
-//	readVectorInListWidget(m_pvectorMessageSend,     m_pListMessageSend    ); // заполняем список отправленных писем
-//    readVectorInListWidget(m_pvectorMessageReceived, m_pListMessageReceived); // заполняем список полученных писем
-//
-////=========================================================================================		 
-//    
-//	//QString s = "Василий Иванович";
-//	//QString s2 = "Pz8/Pz8/Pz8/Pz8/Pw==";
-//    
-//	//QString s = "UGFjaWZpYyBPY2Vhbg==";
-//	//qDebug() << "base64_decode" << base64_decode(s);
-//	//s2 = base64_decode(s2);
-//	//qDebug() << "base64_decode" << s2;
-//	//qDebug() << "base64_decode" << QString::fromLocal8Bit(s2.toStdString().c_str());
-//	//qDebug() << base64_encode(s, s.size());
+// создание сокета для SMTP и соединение его со слотами обработки сигналов
+    m_pSocketSMTP = new QSslSocket(this);
+	//m_pSocketSMTP = new QTcpSocket(this);
+
+	//m_pSocketSMTP ->setPrivateKey("grupal.key");
+    //m_pSocketSMTP ->setLocalCertificate("grupal.crt");
+
+	connect(m_pSocketSMTP, SIGNAL(connected()), SLOT(slotConnectedSMTP()));
+    connect(m_pSocketSMTP, SIGNAL(readyRead()), SLOT(slotReadyReadSMTP()));
+    connect(m_pSocketSMTP, SIGNAL(error(QAbstractSocket::SocketError)),
+                     this, SLOT(slotErrorSMTP(QAbstractSocket::SocketError)));
+
+// создание сокета для POP и соединение его со слотами обработки сигналов
+	//m_pSocketPOP = new QTcpSocket(this);
+	m_pSocketPOP = new QSslSocket(this);
+
+    //m_pSocketPOP ->setPrivateKey("grupal.key");
+    //m_pSocketPOP ->setLocalCertificate("grupal.crt");
+
+	connect(m_pSocketPOP, SIGNAL(connected()), SLOT(slotConnectedPOP()));
+    //connect(m_pSocketPOP, SIGNAL(readyRead()), SLOT(slotReadyReadPOP()));
+    connect(m_pSocketPOP, SIGNAL(error    (QAbstractSocket::SocketError)),
+                          this,  SLOT(slotErrorPOP(QAbstractSocket::SocketError)));
+//............................................................
+
+//============================================================================
+
+	if (QFile::exists(PATH_ACCOUNT)) // если файл существует
+	{
+		QFile file(PATH_ACCOUNT);
+	
+		file.open(QIODevice::ReadOnly | QIODevice::Text);
+		QTextStream fin(&file);
+		
+		// создание ящика
+			m_pcurrentAccount = new Account;
+			
+			m_flagExistAccount = 1;    // флаг существования ящика
+			
+			fin >> *m_pcurrentAccount; // чтение данных ящика из файла (с декодированием пароля в двух видах)
+			                           // !!! два вида пароля в файле должны быть в закодированном виде !!!
+
+			ui.m_pAccountInfo ->setText(m_pcurrentAccount ->gete_mail()); // вывод e-mail текущего ящика 
+			                                                           // в поле Текущий ящик
+			file.close();
+    }
+	else  m_flagExistAccount = 0;  // если файла нет
+
+	m_pvectorMessageSend     = new QList<Message>; // массив писем отправленных
+	m_pvectorMessageReceived = new QList<Message>; // массив писем полученных
+	m_pvectorAddress         = new QList<Address>; // массив адресов
+
+	m_pcurrentAddress        = new Address;          // текущий адрес
+	m_pcurrentMessage        = new Message;          // текущее письмо
+		
+  // чтение из файлов в массивы всех адресов, отправленных и полученных писем
+	if (QFile::exists(PATH_ADDRESS))
+	{
+		readFileInVector(m_pvectorAddress, PATH_ADDRESS, S);
+		readVectorInListWidget(m_pvectorAddress, ui.m_pListAddress); // заполняем поле Адреса
+	}
+			
+	if (QFile::exists(PATH_SENDER))
+		readFileInVector(m_pvectorMessageSend, PATH_SENDER, S); // нужно?
+			
+	if (QFile::exists(PATH_RECEIVER))
+		readFileInVector(m_pvectorMessageReceived, PATH_RECEIVER, S); // нужно?
+
+  // заполнение списков отправленных и полученных писем
+	readVectorInListWidget(m_pvectorMessageSend,     m_pListMessageSend    ); // заполняем список отправленных писем
+    readVectorInListWidget(m_pvectorMessageReceived, m_pListMessageReceived); // заполняем список полученных писем
+
+//=========================================================================================		 
+    
+	//QString s = "Василий Иванович";
+	//QString s2 = "Pz8/Pz8/Pz8/Pz8/Pw==";
+    
+	//QString s = "UGFjaWZpYyBPY2Vhbg==";
+	//qDebug() << "base64_decode" << base64_decode(s);
+	//s2 = base64_decode(s2);
+	//qDebug() << "base64_decode" << s2;
+	//qDebug() << "base64_decode" << QString::fromLocal8Bit(s2.toStdString().c_str());
+	//qDebug() << base64_encode(s, s.size());
 }
 
 
@@ -534,14 +534,14 @@ void Post::slotSendMessage()
 		return;
 	}
 	
-	m_pinfoSend    ->clear();
-	m_pinfoReceive ->clear();
+	ui.m_pinfoSend    ->clear();
+	ui.m_pinfoReceive ->clear();
     
 	// если поле Кому пустое. Если не пустое, то текущий адрес будет заполнен 
 	// или в slotChoiceAddress, или в slottextChanged
-	if (m_pTo ->text().isEmpty()) 
+	if (ui.m_pTo ->text().isEmpty()) 
 	{
-		outputInfo(m_pinfoSend, arrInfo[SEND_ERROR].strInfo + "\nВведите или выберите адрес.", arrInfo[SEND_ERROR].strSound);
+		outputInfo(ui.m_pinfoSend, arrInfo[SEND_ERROR].strInfo + "\nВведите или выберите адрес.", arrInfo[SEND_ERROR].strSound);
 		return;
 	}
 
@@ -578,8 +578,8 @@ m_pTo ->insert(m_pcurrentAccount ->gete_mail());
 	m_pcurrentMessage ->setdate   (date.currentDateTime().toString(Qt::SystemLocaleDate)); // дата отправки
 	m_pcurrentMessage ->setfrom   (m_pcurrentAccount ->getname() + " <" + m_pcurrentAccount ->gete_mail() + ">"); // добавляем имя к полю from, добавляем к e-mail "<>"
 	m_pcurrentMessage ->setto     (m_pcurrentAddress ->getname() + " <" + m_pcurrentAddress ->gete_mail() + ">"); // добавляем имя к полю to,   добавляем к e-mail "<>"
-	m_pcurrentMessage ->setsubject(m_pSubject        ->text());
-	m_pcurrentMessage ->settext   (m_ptxtMessage     ->toPlainText());
+	m_pcurrentMessage ->setsubject(ui.m_pSubject        ->text());
+	m_pcurrentMessage ->settext   (ui.m_ptxtMessage     ->toPlainText());
 	
 	//if (m_pcurrentMessage != NULL) 
 	//{
@@ -595,7 +595,7 @@ m_pTo ->insert(m_pcurrentAccount ->gete_mail());
 	//								 m_pSubject        ->text(), 
 	//								 m_ptxtMessage     ->toPlainText());
    
-   setcommandsSMTP(m_pcurrentAccount, m_pTo); // заполнение вектора командами для сервера SMTP
+   setcommandsSMTP(m_pcurrentAccount, ui.m_pTo); // заполнение вектора командами для сервера SMTP
 
    flagErrorSend     = 0;
    m_c               = 0;
@@ -615,8 +615,8 @@ void Post::slotReceiveMessage()
 		return;
 	}
 	
-	m_pinfoSend    ->clear();
-	m_pinfoReceive ->clear();
+	ui.m_pinfoSend    ->clear();
+	ui.m_pinfoReceive ->clear();
 	
 	//m_pinfoReceive ->setText("AAAA");	
 	
@@ -664,29 +664,29 @@ void Post::slotReceiveMessage()
 		{
 			qDebug() << "false";
 			m_pSocketPOP ->abort();
-			outputInfo(m_pinfoReceive, arrInfo[REC_ERROR].strInfo + arrError[7], arrInfo[REC_ERROR].strSound); // сообщение - ошибка ("Неполадки в сети")
+			outputInfo(ui.m_pinfoReceive, arrInfo[REC_ERROR].strInfo + arrError[7], arrInfo[REC_ERROR].strSound); // сообщение - ошибка ("Неполадки в сети")
 			
 			QApplication::restoreOverrideCursor();
 			return;
 		}
 	
 	qDebug() << "true";
-		m_ptxtSender ->append(QWidget::tr("Новые данные сервера POP доступны для чтения."));
+		ui.m_ptxtSender ->append(QWidget::tr("Новые данные сервера POP доступны для чтения."));
 	
 		in >> word;
 		str = word + in.readAll(); // чтение сообщений сервера
-		m_ptxtSender ->append(str); // вывод сообщений сервера
+		ui.m_ptxtSender ->append(str); // вывод сообщений сервера
 
 		if (str[0] == '-') // если сервер выдал ошибку
 		{ 
 			m_pSocketPOP ->abort();
-			outputInfo(m_pinfoReceive, arrInfo[REC_ERROR].strInfo + arrError[m_c], arrInfo[REC_ERROR].strSound); // сообщение - ошибка
+			outputInfo(ui.m_pinfoReceive, arrInfo[REC_ERROR].strInfo + arrError[m_c], arrInfo[REC_ERROR].strSound); // сообщение - ошибка
 			
 			QApplication::restoreOverrideCursor();
 			return; 
 		}
 		
-		outputCommands(m_ptxtSender, vectorCommands[m_c], out); // отправка команд серверу
+		outputCommands(ui.m_ptxtSender, vectorCommands[m_c], out); // отправка команд серверу
 		m_c++;
 		
 	}
@@ -695,22 +695,22 @@ void Post::slotReceiveMessage()
 	{
 		qDebug() << "false";
 		m_pSocketPOP ->abort();
-		outputInfo(m_pinfoReceive, arrInfo[REC_ERROR].strInfo + arrError[7], arrInfo[REC_ERROR].strSound); // сообщение - ошибка ("Неполадки в сети")
+		outputInfo(ui.m_pinfoReceive, arrInfo[REC_ERROR].strInfo + arrError[7], arrInfo[REC_ERROR].strSound); // сообщение - ошибка ("Неполадки в сети")
 		
 		QApplication::restoreOverrideCursor();
 		return;
 	}
 	 
   qDebug() << "true";
-	m_ptxtSender ->append(QWidget::tr("Новые данные сервера POP доступны для чтения."));
+	ui.m_ptxtSender ->append(QWidget::tr("Новые данные сервера POP доступны для чтения."));
 
 	in >> word;        // чтение ответа сервера после STAT
 	if (word[0] == '-') 
 	{ 
 		str = word + in.readAll(); 
-		m_ptxtSender ->append(str); qDebug() << str;
+		ui.m_ptxtSender ->append(str); qDebug() << str;
 		m_pSocketPOP ->abort();
-		outputInfo(m_pinfoReceive, arrInfo[REC_ERROR].strInfo + arrError[m_c], arrInfo[REC_ERROR].strSound); // сообщение - ошибка
+		outputInfo(ui.m_pinfoReceive, arrInfo[REC_ERROR].strInfo + arrError[m_c], arrInfo[REC_ERROR].strSound); // сообщение - ошибка
 		
 		QApplication::restoreOverrideCursor();
 		return; 
@@ -718,12 +718,12 @@ void Post::slotReceiveMessage()
 		
 	in >> m_number; // чтение количества писем
 	str = word + " " + QString::number(m_number) + in.readAll(); // readAll() читает количество байтов
-	m_ptxtSender ->append(str); qDebug() << str;
+	ui.m_ptxtSender ->append(str); qDebug() << str;
 		
 	if (m_number == 0) // выход, если писем 0
 	{
 		m_pSocketPOP ->abort();
-		outputInfo(m_pinfoReceive, arrInfo[REC_INFO].strInfo, arrInfo[REC_INFO].strSound);
+		outputInfo(ui.m_pinfoReceive, arrInfo[REC_INFO].strInfo, arrInfo[REC_INFO].strSound);
 		
 		QApplication::restoreOverrideCursor();
 		return; 
@@ -733,17 +733,17 @@ void Post::slotReceiveMessage()
 	m_k++;
 	for (uint i = 0; i < m_number; i++)
 	{	
-		outputCommands(m_ptxtSender, vectorCommands[m_c] + QString::number(m_k), out); // вывод RETR m_k
+		outputCommands(ui.m_ptxtSender, vectorCommands[m_c] + QString::number(m_k), out); // вывод RETR m_k
 		m_c++;
 
 	    QVector <QString> vecstr;
 		vecstr.reserve(10000000);
 
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>		
-		if (!reedTextMessage(m_pSocketPOP, in, m_ptxtSender, vecstr)) // чтение текста письма в vecstr
+		if (!reedTextMessage(m_pSocketPOP, in, ui.m_ptxtSender, vecstr)) // чтение текста письма в vecstr
 		{
 			m_pSocketPOP ->abort();
-			outputInfo(m_pinfoReceive, arrInfo[REC_ERROR].strInfo + arrError[7], arrInfo[REC_ERROR].strSound); // сообщение - ошибка
+			outputInfo(ui.m_pinfoReceive, arrInfo[REC_ERROR].strInfo + arrError[7], arrInfo[REC_ERROR].strSound); // сообщение - ошибка
 			
 			QApplication::restoreOverrideCursor();
 
@@ -761,13 +761,13 @@ void Post::slotReceiveMessage()
 			fullstr += vecstr[i];
 		//	fullstr += '\n';
 		}
-		m_ptxtSender ->append(fullstr); // вывод данных письма
+		ui.m_ptxtSender ->append(fullstr); // вывод данных письма
 	qDebug() << fullstr;
 		
 		if (vecstr[0][0] == '-') // проверка ответа сервера после RETR
 		{
 			m_pSocketPOP ->abort();
-			outputInfo(m_pinfoReceive, arrInfo[REC_ERROR].strInfo + arrError[m_c], arrInfo[REC_ERROR].strSound); // сообщение - ошибка
+			outputInfo(ui.m_pinfoReceive, arrInfo[REC_ERROR].strInfo + arrError[m_c], arrInfo[REC_ERROR].strSound); // сообщение - ошибка
 			
 			QApplication::restoreOverrideCursor();
 
@@ -780,7 +780,7 @@ void Post::slotReceiveMessage()
 		if ( vecstr.last().size() >= 5 && vecstr.last().right(5) != (RN + "." + RN))
 		{
 			m_pSocketPOP ->abort();
-			outputInfo(m_pinfoReceive, arrInfo[REC_ERROR].strInfo + arrError[m_c], arrInfo[REC_ERROR].strSound); // сообщение - ошибка
+			outputInfo(ui.m_pinfoReceive, arrInfo[REC_ERROR].strInfo + arrError[m_c], arrInfo[REC_ERROR].strSound); // сообщение - ошибка
 			
 			QApplication::restoreOverrideCursor();
 			
@@ -793,12 +793,12 @@ void Post::slotReceiveMessage()
 		//чтение письма, извлечение нужных данных в Message, форматирование и сохранение в векторе
 		m_pvectorMessageReceived ->push_back(formatMessage(extractfromString(fullstr)));
 
-		m_ptxtReceiver << m_pvectorMessageReceived ->last(); // вывод письма в поле Получение
+		ui.m_ptxtReceiver << m_pvectorMessageReceived ->last(); // вывод письма в поле Получение
 		
 		 m_pListMessageReceived << m_pvectorMessageReceived ->last(); // вывод письма в список полученных писем
 
 		if (!writeObjectInFile(&m_pvectorMessageReceived ->last(), PATH_RECEIVER)) // записываем письмо в файл
-					m_ptxtMessage ->append(QWidget::tr("Ошибка открытия файла для записи!"));
+					ui.m_ptxtMessage ->append(QWidget::tr("Ошибка открытия файла для записи!"));
 
 		if (pPathAttachment != NULL) // удаляем путь к папке с прикреплёнными файлами
 		{
@@ -811,8 +811,8 @@ void Post::slotReceiveMessage()
 		fullstr.squeeze();
 		
 		if (m_pcurrentAccount ->getflagdele() == "1") // если удалять письма на сервере
-				outputCommands(m_ptxtSender, vectorCommands[m_c] + QString::number(m_k), out); // вывод DELE m_k
-		else outputCommands(m_ptxtSender, vectorCommands[m_c], out); // вывод NOOP
+				outputCommands(ui.m_ptxtSender, vectorCommands[m_c] + QString::number(m_k), out); // вывод DELE m_k
+		else outputCommands(ui.m_ptxtSender, vectorCommands[m_c], out); // вывод NOOP
 		
 		m_c++;
 		
@@ -820,22 +820,22 @@ void Post::slotReceiveMessage()
 		{
 			qDebug() << "false";
 			m_pSocketPOP ->abort();
-			outputInfo(m_pinfoReceive, arrInfo[REC_ERROR].strInfo + arrError[7], arrInfo[REC_ERROR].strSound); // сообщение - ошибка ("Неполадки в сети")
+			outputInfo(ui.m_pinfoReceive, arrInfo[REC_ERROR].strInfo + arrError[7], arrInfo[REC_ERROR].strSound); // сообщение - ошибка ("Неполадки в сети")
 			
 			QApplication::restoreOverrideCursor();
 			return;
 		}
 		
 	qDebug() << "true";
-		m_ptxtSender ->append(QWidget::tr("Новые данные сервера POP доступны для чтения."));
+		ui.m_ptxtSender ->append(QWidget::tr("Новые данные сервера POP доступны для чтения."));
 
 		str = in.readAll(); // чтение ответа сервера после DELE
-		m_ptxtSender ->append(str); qDebug() << str;
+		ui.m_ptxtSender ->append(str); qDebug() << str;
 		
 		if (str[0] == '-') 
 		{ 
 			m_pSocketPOP ->abort();
-			outputInfo(m_pinfoReceive, arrInfo[REC_ERROR].strInfo + arrError[m_c], arrInfo[REC_ERROR].strSound);
+			outputInfo(ui.m_pinfoReceive, arrInfo[REC_ERROR].strInfo + arrError[m_c], arrInfo[REC_ERROR].strSound);
 			
 			QApplication::restoreOverrideCursor();
 			return; 
@@ -847,9 +847,9 @@ void Post::slotReceiveMessage()
 		{
 			QString str = numbermessage(m_k - 1);
 			
-			outputInfo(m_pinfoReceive, arrInfo[REC_DONE].strInfo + str, arrInfo[REC_DONE].strSound); // сообщение - новая почта
+			outputInfo(ui.m_pinfoReceive, arrInfo[REC_DONE].strInfo + str, arrInfo[REC_DONE].strSound); // сообщение - новая почта
 			
-			outputCommands(m_ptxtSender, vectorCommands[m_c], out); // вывод QUIT
+			outputCommands(ui.m_ptxtSender, vectorCommands[m_c], out); // вывод QUIT
 		}
 		else m_c -= 2;
 
@@ -859,17 +859,17 @@ void Post::slotReceiveMessage()
 	{
 		qDebug() << "false";
 		m_pSocketPOP ->abort();
-		outputInfo(m_pinfoReceive, arrInfo[REC_ERROR].strInfo + arrError[7], arrInfo[REC_ERROR].strSound); // сообщение - ошибка ("Неполадки в сети")
+		outputInfo(ui.m_pinfoReceive, arrInfo[REC_ERROR].strInfo + arrError[7], arrInfo[REC_ERROR].strSound); // сообщение - ошибка ("Неполадки в сети")
 		
 		QApplication::restoreOverrideCursor();
 		return;
 	}
 	
   qDebug() << "true";
-	m_ptxtSender ->append(QWidget::tr("Новые данные сервера POP доступны для чтения."));
+	ui.m_ptxtSender ->append(QWidget::tr("Новые данные сервера POP доступны для чтения."));
 	
 	str = in.readAll(); // чтение ответа сервера после QUIT
-	m_ptxtSender ->append(str); qDebug() << str;
+	ui.m_ptxtSender ->append(str); qDebug() << str;
 	
 	m_pSocketPOP ->abort();
 	QApplication::restoreOverrideCursor();
@@ -882,7 +882,7 @@ void Post::slotReadyReadSMTP()
 {
   //if (m_pSocketSMTP ->isEncrypted()) {qDebug() << "isEncrypted()"; qDebug() << "sessionCipher()" << m_pSocketSMTP ->sessionCipher();}
   
-	m_ptxtSender ->append(QWidget::tr("Новые данные сервера SMTP доступны для чтения."));
+	ui.m_ptxtSender ->append(QWidget::tr("Новые данные сервера SMTP доступны для чтения."));
 	
 	QTextStream in (m_pSocketSMTP);
 	QTextStream out(m_pSocketSMTP);
@@ -892,11 +892,11 @@ void Post::slotReadyReadSMTP()
 	in >> i;
 	QString str = QString::number(i) + in.readAll();
 	
-    m_ptxtSender ->append(str);
+    ui.m_ptxtSender ->append(str);
 
 //* если галка не стоит, то автоматический ввод команд.........................................
 
-if (m_pCheckBox ->checkState() != Qt::Checked)
+if (ui.m_pCheckBox ->checkState() != Qt::Checked)
 {
 		
 //...........................................................*/
@@ -907,7 +907,7 @@ if (m_pCheckBox ->checkState() != Qt::Checked)
 		m_pSocketSMTP ->abort();
 		flagErrorSend = 1;
 		if (m_c != 9) // если ошибка не в ответ на QUIT, то вывод сообщения 
-			outputInfo(m_pinfoSend, arrInfo[SEND_ERROR].strInfo + arrError[m_c - 1], arrInfo[SEND_ERROR].strSound, SEND_ERROR);
+			outputInfo(ui.m_pinfoSend, arrInfo[SEND_ERROR].strInfo + arrError[m_c - 1], arrInfo[SEND_ERROR].strSound, SEND_ERROR);
 		
 		QApplication::restoreOverrideCursor();
 		return;
@@ -918,13 +918,13 @@ if (m_pCheckBox ->checkState() != Qt::Checked)
 	{   
 // вывод команды "MAIL FROM: <alsav22@rambler.ru>" //(оставляем от from часть, начиная с '<')                 
 		if (m_c == 4) 
-		    outputCommands(m_ptxtSender, vectorCommands[m_c], out);
+		    outputCommands(ui.m_ptxtSender, vectorCommands[m_c], out);
 		
 	    else if (m_c == 5) // вывод команды "RCPT TO: <alsav22@rambler.ru>"
-		         outputCommands(m_ptxtSender, vectorCommands[m_c], out);
+		         outputCommands(ui.m_ptxtSender, vectorCommands[m_c], out);
 		                                  
 			 
-			 else outputCommands(m_ptxtSender, vectorCommands[m_c], out);
+			 else outputCommands(ui.m_ptxtSender, vectorCommands[m_c], out);
 		
 		++m_c;
 		//qDebug() << "m_c = " << m_c;
@@ -943,11 +943,11 @@ if (m_pCheckBox ->checkState() != Qt::Checked)
 		<< RN + "." + RN;
 		
 		
-		m_ptxtSender ->append("From: "    + m_pcurrentMessage ->getfrom() + RN); 
-		m_ptxtSender ->append("To: "      + m_pcurrentMessage ->getto()      + RN);
-		m_ptxtSender ->append("Subject: " + m_pcurrentMessage ->getsubject() + RN + RN); 
+		ui.m_ptxtSender ->append("From: "    + m_pcurrentMessage ->getfrom() + RN); 
+		ui.m_ptxtSender ->append("To: "      + m_pcurrentMessage ->getto()      + RN);
+		ui.m_ptxtSender ->append("Subject: " + m_pcurrentMessage ->getsubject() + RN + RN); 
 		
-		m_ptxtSender ->append(m_pcurrentMessage ->gettext() + RN + "." + RN);
+		ui.m_ptxtSender ->append(m_pcurrentMessage ->gettext() + RN + "." + RN);
 		
 
 		++m_c;
@@ -957,14 +957,14 @@ if (m_pCheckBox ->checkState() != Qt::Checked)
 //-----------------------------------------------------------------------------------------	
 	if (m_c == 8) 
 	{
-	    outputCommands(m_ptxtSender, vectorCommands[m_c - 1], out); // вывод QUIT
+	    outputCommands(ui.m_ptxtSender, vectorCommands[m_c - 1], out); // вывод QUIT
 		
-		m_ptxtMessage ->clear();
+		ui.m_ptxtMessage ->clear();
 		
-		outputInfo(m_pinfoSend, arrInfo[SEND_DONE].strInfo, arrInfo[SEND_DONE].strSound, SEND_DONE); // успешно отправлено
+		outputInfo(ui.m_pinfoSend, arrInfo[SEND_DONE].strInfo, arrInfo[SEND_DONE].strSound, SEND_DONE); // успешно отправлено
 		flagErrorSend = 0;
 		
-		//undoselected(m_pListAddress); // сброс, если есть, выделения адреса
+		//undoselected(ui.m_pListAddress); // сброс, если есть, выделения адреса
 		QApplication::restoreOverrideCursor(); // возвращаем обычный курсор
 		
   //----------------------------------
@@ -973,7 +973,7 @@ if (m_pCheckBox ->checkState() != Qt::Checked)
 		m_pListMessageSend << m_pvectorMessageSend ->last(); // выводим письмо в список отправленных писем
 		
 		if (!writeObjectInFile(&m_pvectorMessageSend ->last(), PATH_SENDER)) // записываем в файл
-		          m_ptxtMessage ->append(QWidget::tr("Ошибка открытия файла для записи!"));
+		          ui.m_ptxtMessage ->append(QWidget::tr("Ошибка открытия файла для записи!"));
 		
   //-----------------------------------
 		m_c++;
@@ -984,7 +984,7 @@ if (m_pCheckBox ->checkState() != Qt::Checked)
 } // if () (ручной ввод команд)
 
 //} // if () isEncrypted()
-//else if (m_ptxtSender != NULL) m_ptxtSender ->append("isEncrypted() == false");
+//else if (ui.m_ptxtSender != NULL) ui.m_ptxtSender ->append("isEncrypted() == false");
 
 }
 
@@ -992,7 +992,7 @@ if (m_pCheckBox ->checkState() != Qt::Checked)
 
 void Post::slotReadyReadPOP()
 {
-	m_ptxtSender ->append(QWidget::tr("Новые данные сервера POP доступны для чтения."));
+	ui.m_ptxtSender ->append(QWidget::tr("Новые данные сервера POP доступны для чтения."));
 	//qDebug() << m_flagReadmessage << ' ' << m_c;
 	
 	QTextStream in (m_pSocketPOP);
@@ -1003,14 +1003,14 @@ void Post::slotReadyReadPOP()
 	QString Str;
 	QString List;
 
-if (m_pCheckBox ->checkState() == Qt::Checked) // ручной ввод команд
+if (ui.m_pCheckBox ->checkState() == Qt::Checked) // ручной ввод команд
 {
 	//if (m_pSocketPOP ->waitForReadyRead(1000)) qDebug() << "true";
 	//else qDebug() << "false";
 	in >> List;
 	Str = List + in.readAll(); // чтение сообщений сервера
 	
-	m_ptxtSender ->append(Str); // вывод сообщений сервера
+	ui.m_ptxtSender ->append(Str); // вывод сообщений сервера
 	
 }
 else // автоматический ввод команд
@@ -1018,16 +1018,16 @@ else // автоматический ввод команд
 	if (m_c <= 3)
 	{
 		Str = in.readAll(); // чтение сообщений сервера
-		m_ptxtSender ->append(Str); qDebug() << Str;
+		ui.m_ptxtSender ->append(Str); qDebug() << Str;
 	
 		if (Str[0] == '-') // если сервер выдал ошибку
 		{ 
 			m_pSocketPOP ->abort();
-			outputInfo(m_pinfoReceive, arrInfo[REC_ERROR].strInfo, arrInfo[REC_ERROR].strSound); // сообщение - ошибка
+			outputInfo(ui.m_pinfoReceive, arrInfo[REC_ERROR].strInfo, arrInfo[REC_ERROR].strSound); // сообщение - ошибка
 			return; 
 		}
 		
-		outputCommands(m_ptxtSender, vectorCommands[m_c], out); // отправка команд серверу
+		outputCommands(ui.m_ptxtSender, vectorCommands[m_c], out); // отправка команд серверу
 		m_c++;
 		
 		return;
@@ -1039,24 +1039,24 @@ else // автоматический ввод команд
 		if (List[0] == '-') 
 		{ 
 			Str = List + in.readAll(); 
-			m_ptxtSender ->append(Str); qDebug() << Str;
+			ui.m_ptxtSender ->append(Str); qDebug() << Str;
 			m_pSocketPOP ->abort();
-			outputInfo(m_pinfoReceive, arrInfo[REC_ERROR].strInfo, arrInfo[REC_ERROR].strSound); // сообщение - ошибка
+			outputInfo(ui.m_pinfoReceive, arrInfo[REC_ERROR].strInfo, arrInfo[REC_ERROR].strSound); // сообщение - ошибка
 			return; 
 		}
 		
 		in >> m_number; // чтение количества писем
 		Str = List + " " + QString::number(m_number) + in.readAll(); // readAll() читает количество байтов
-		m_ptxtSender ->append(Str); qDebug() << Str;
+		ui.m_ptxtSender ->append(Str); qDebug() << Str;
 		
 		if (m_number == 0) // выход, если писем 0
 		{
 			m_pSocketPOP ->abort();
-			outputInfo(m_pinfoReceive, arrInfo[REC_INFO].strInfo, arrInfo[REC_INFO].strSound);
+			outputInfo(ui.m_pinfoReceive, arrInfo[REC_INFO].strInfo, arrInfo[REC_INFO].strSound);
 			return; 
 		}
 		
-		outputCommands(m_ptxtSender, vectorCommands[m_c] + QString::number(++m_k), out); // вывод RETR
+		outputCommands(ui.m_ptxtSender, vectorCommands[m_c] + QString::number(++m_k), out); // вывод RETR
 		m_c++;
 		
 		return;
@@ -1068,12 +1068,12 @@ else // автоматический ввод команд
 		if (m_flagReadmessage == 0)
 		{
 			List = in.readLine(); // чтение ответа сервера после RETR
-			m_ptxtSender ->append(List); qDebug() << List; qDebug() << "in.atEnd() = " << in.atEnd();
+			ui.m_ptxtSender ->append(List); qDebug() << List; qDebug() << "in.atEnd() = " << in.atEnd();
 			
 			if (List[0] == '-') 
 			{ 
 				m_pSocketPOP ->abort();
-				outputInfo(m_pinfoReceive, arrInfo[REC_ERROR].strInfo, arrInfo[REC_ERROR].strSound);
+				outputInfo(ui.m_pinfoReceive, arrInfo[REC_ERROR].strInfo, arrInfo[REC_ERROR].strSound);
 				return; 
 			}
 			if (m_pSocketPOP ->peerName() != "pop.gmail.com")
@@ -1091,14 +1091,14 @@ else // автоматический ввод команд
 			//qDebug() << in.device() ->bytesAvailable();
 	  
 			//чтение письма, извлечение нужных данных, форматирование, сохранение и вывод обработанного письма
-			m_pvectorMessageReceived ->push_back(formatMessage(readMessagePOP(/*m_pSocketPOP, */in, m_ptxtSender, m_ptxtReceiver, m_k)));
+			m_pvectorMessageReceived ->push_back(formatMessage(readMessagePOP(/*m_pSocketPOP, */in, ui.m_ptxtSender, ui.m_ptxtReceiver, m_k)));
 
-			m_ptxtReceiver << m_pvectorMessageReceived ->last(); // вывод письма в поле Получение 
+			ui.m_ptxtReceiver << m_pvectorMessageReceived ->last(); // вывод письма в поле Получение 
 
 			if (!writeObjectInFile(&m_pvectorMessageReceived ->last(), PATH_RECEIVER)) // записываем письмо в файл
-						m_ptxtMessage ->append(QWidget::tr("Ошибка открытия файла для записи!"));
+						ui.m_ptxtMessage ->append(QWidget::tr("Ошибка открытия файла для записи!"));
 		
-			outputCommands(m_ptxtSender, vectorCommands[m_c] + QString::number(m_k), out); // вывод DELE 1
+			outputCommands(ui.m_ptxtSender, vectorCommands[m_c] + QString::number(m_k), out); // вывод DELE 1
 			m_c++;
 			
 		return;
@@ -1108,11 +1108,11 @@ else // автоматический ввод команд
 	if (m_c == 6) 
 	{
 		Str = List + in.readAll(); // чтение ответа сервера после DELE
-		m_ptxtSender ->append(Str); qDebug() << Str;
+		ui.m_ptxtSender ->append(Str); qDebug() << Str;
 		if (List[0] == '-') 
 		{ 
 			m_pSocketPOP ->abort();
-			outputInfo(m_pinfoReceive, arrInfo[REC_ERROR].strInfo, arrInfo[REC_ERROR].strSound);
+			outputInfo(ui.m_pinfoReceive, arrInfo[REC_ERROR].strInfo, arrInfo[REC_ERROR].strSound);
 			return; 
 		}
 		
@@ -1120,16 +1120,16 @@ else // автоматический ввод команд
 		
 		if (m_k > m_number) // если письма все прочитаны
 		{
-			outputInfo(m_pinfoReceive, arrInfo[REC_DONE].strInfo, arrInfo[REC_DONE].strSound); // сообщение - новая почта
+			outputInfo(ui.m_pinfoReceive, arrInfo[REC_DONE].strInfo, arrInfo[REC_DONE].strSound); // сообщение - новая почта
 			
-			outputCommands(m_ptxtSender, vectorCommands[m_c], out); // вывод QUIT
+			outputCommands(ui.m_ptxtSender, vectorCommands[m_c], out); // вывод QUIT
 			m_c++;
 		    return;
 		}
 		else
 		{
 			m_c -= 2;
-			outputCommands(m_ptxtSender, vectorCommands[m_c] + QString::number(m_k), out); // вывод RETR m_k
+			outputCommands(ui.m_ptxtSender, vectorCommands[m_c] + QString::number(m_k), out); // вывод RETR m_k
 			m_c++;
 			m_flagReadmessage = 0;
 			
@@ -1138,7 +1138,7 @@ else // автоматический ввод команд
 	}
 		
 	Str = List + in.readAll(); // чтение ответа сервера после QUIT
-	m_ptxtSender ->append(Str); qDebug() << Str;
+	ui.m_ptxtSender ->append(Str); qDebug() << Str;
 
 	m_pSocketPOP ->abort();
  
@@ -1151,14 +1151,14 @@ else // автоматический ввод команд
 
 void Post::slotConnectedSMTP()
 {
-	m_ptxtSender ->append(QWidget::tr("Соединения с сервером SMTP установлено."));
+	ui.m_ptxtSender ->append(QWidget::tr("Соединения с сервером SMTP установлено."));
 }
 
 //----------------------------------------------------------------------------------
 
 void Post::slotConnectedPOP()
 {
-     m_ptxtSender ->append(QWidget::tr("Соединение с сервером POP установлено."));
+     ui.m_ptxtSender ->append(QWidget::tr("Соединение с сервером POP установлено."));
 }
 
 //----------------------------------------------------------------------
@@ -1166,7 +1166,7 @@ void Post::slotConnectedPOP()
 void Post::slotErrorSMTP(QAbstractSocket::SocketError err)
 {
   if (err == QAbstractSocket::HostNotFoundError/* || QAbstractSocket::UnknownSocketError*/)
-         outputInfo(m_pinfoSend, arrInfo[SEND_ERROR].strInfo + "\nПроверьте соединение с интернетом.", arrInfo[SEND_ERROR].strSound);
+         outputInfo(ui.m_pinfoSend, arrInfo[SEND_ERROR].strInfo + "\nПроверьте соединение с интернетом.", arrInfo[SEND_ERROR].strSound);
 		                                                        
     QString strError = 
         QWidget::tr("Ошибка: ") + (err == QAbstractSocket::HostNotFoundError ? 
@@ -1178,7 +1178,7 @@ void Post::slotErrorSMTP(QAbstractSocket::SocketError err)
                      QString(m_pSocketSMTP ->errorString())
                     );
     
-		m_ptxtSender ->append(strError);
+		ui.m_ptxtSender ->append(strError);
 		
 		QApplication::restoreOverrideCursor(); // возвращаем обычный курсор
 		
@@ -1189,7 +1189,7 @@ void Post::slotErrorSMTP(QAbstractSocket::SocketError err)
 void Post::slotErrorPOP(QAbstractSocket::SocketError err)
 {
     if (err == QAbstractSocket::HostNotFoundError/* || QAbstractSocket::UnknownSocketError*/)
-         outputInfo(m_pinfoReceive, arrInfo[REC_ERROR].strInfo + "\nПроверьте соединение с интернетом.", arrInfo[REC_ERROR].strSound);
+         outputInfo(ui.m_pinfoReceive, arrInfo[REC_ERROR].strInfo + "\nПроверьте соединение с интернетом.", arrInfo[REC_ERROR].strSound);
    
     QString strError = 
         "Error: " + (err == QAbstractSocket::HostNotFoundError ? 
@@ -1201,7 +1201,7 @@ void Post::slotErrorPOP(QAbstractSocket::SocketError err)
                      QString(m_pSocketPOP ->errorString())
                     );
     
-		m_ptxtSender ->append(strError);
+		ui.m_ptxtSender ->append(strError);
 
 		QApplication::restoreOverrideCursor(); // возвращаем обычный курсор
 }
@@ -1209,8 +1209,8 @@ void Post::slotErrorPOP(QAbstractSocket::SocketError err)
 
 void Post::slotCreateAccount()
 {
-	m_pinfoSend    ->clear();
-	//m_pinfoReceive ->clear();
+	ui.m_pinfoSend    ->clear();
+	//ui.m_pinfoReceive ->clear();
 	
 	QString strsender;
 	if (m_pcurrentAccount == NULL) // если первое создание ящика
@@ -1294,7 +1294,7 @@ begin :
 		// заполнение векторов командами для серверов	
 			//setcommands(m_pcurrentAccount);
 		    
-			m_pAccountInfo ->setText(m_pcurrentAccount ->gete_mail()); // вывод e-mail ящика в поле Ящик
+			ui.m_pAccountInfo ->setText(m_pcurrentAccount ->gete_mail()); // вывод e-mail ящика в поле Ящик
 		
             m_flagExistAccount = 1; // ящик существует
 
@@ -1320,8 +1320,8 @@ void Post::slotCreateAddress()
 		return;
 	}
 	
-	m_pinfoSend    ->clear();
-	//m_pinfoReceive ->clear();
+	ui.m_pinfoSend    ->clear();
+	//ui.m_pinfoReceive ->clear();
 
 	CreateAddress *pCreateAddress = new CreateAddress; // окно диалога
 
@@ -1355,7 +1355,7 @@ begin :
 		writeObjectInFile(newaddress, PATH_ADDRESS); // запись адреса в файл
 		
 	// вывод нового адреса в поле Адреса
-		m_pListAddress << *newaddress;
+		ui.m_pListAddress << *newaddress;
 
 		delete newaddress;
 		QMessageBox::information(0, QWidget::tr("Сообщение"), QWidget::tr("Адрес успешно создан!"));
@@ -1369,7 +1369,7 @@ begin :
 
 void Post::slotChoiceAddress(QListWidgetItem *plistwidgetitem)
 {
-	//qDebug() << m_pListAddress ->row(plistwidgetitem);
+	//qDebug() << ui.m_pListAddress ->row(plistwidgetitem);
 	
 	if (this ->m_flagExistAccount == 0) // если ящика не существует
 	{
@@ -1378,13 +1378,13 @@ void Post::slotChoiceAddress(QListWidgetItem *plistwidgetitem)
 		return;
 	}
 	
-	m_pinfoSend    ->clear();
-    //m_ptxtMessage ->clear();
-	//m_pinfoReceive ->clear();
+	ui.m_pinfoSend    ->clear();
+    //ui.m_ptxtMessage ->clear();
+	//ui.m_pinfoReceive ->clear();
 
-	*m_pcurrentAddress = (*m_pvectorAddress)[m_pListAddress ->row(plistwidgetitem)]; // поиск в векторе по номеру в списке
+	*m_pcurrentAddress = (*m_pvectorAddress)[ui.m_pListAddress ->row(plistwidgetitem)]; // поиск в векторе по номеру в списке
 	
-    m_pTo ->setText(m_pcurrentAddress ->gete_mail()); // установка в поле Кому e-mail выбранного адреса
+    ui.m_pTo ->setText(m_pcurrentAddress ->gete_mail()); // установка в поле Кому e-mail выбранного адреса
 
 }
 
@@ -1400,8 +1400,8 @@ void Post::slotSettingsAddress()
 		return;
 	}
 	
-	m_pinfoSend    ->clear();
-	m_pinfoReceive ->clear();
+	ui.m_pinfoSend    ->clear();
+	ui.m_pinfoReceive ->clear();
 	
 	if (m_pvectorAddress ->isEmpty())
 	{
@@ -1452,11 +1452,11 @@ begin :
 				goto begin;
 			}
 			
-			m_pTo ->clear(); // очищаем поле Кому (возможно, там прописан старый адрес)
+			ui.m_pTo ->clear(); // очищаем поле Кому (возможно, там прописан старый адрес)
 			
 		// очищаем и заполняем поле Адреса
-			m_pListAddress ->clear(); 
-			readVectorInListWidget(m_pvectorAddress, m_pListAddress);
+			ui.m_pListAddress ->clear(); 
+			readVectorInListWidget(m_pvectorAddress, ui.m_pListAddress);
 		
 			delete newaddress;
 			QMessageBox::information(0, QWidget::tr("Сообщение"), QWidget::tr("Адрес успешно изменён!"));
@@ -1476,8 +1476,8 @@ begin :
 				goto begin;
 			}
 			
-			m_pListAddress ->clear(); // очищаем и заполняем поле Адреса
-			readVectorInListWidget(m_pvectorAddress, m_pListAddress);
+			ui.m_pListAddress ->clear(); // очищаем и заполняем поле Адреса
+			readVectorInListWidget(m_pvectorAddress, ui.m_pListAddress);
 		    
 			QMessageBox::information(0, QWidget::tr("Сообщение"), QWidget::tr("Адрес успешно удалён!"));
 		}
@@ -1497,15 +1497,15 @@ void Post::slotSettings()
 		return;
 	}
 
-	m_pinfoSend    ->clear();
-	//m_pinfoReceive ->clear();
+	ui.m_pinfoSend    ->clear();
+	//ui.m_pinfoReceive ->clear();
 }
 
 //..........................................................................
 
 void Post::slottextChanged(const QString &text)
 {
-	m_pinfoSend ->clear();
+	ui.m_pinfoSend ->clear();
 	if (sender() ->objectName() == "m_pTo") // если изменение в поле Кому
 	{	
 		if (!m_pvectorAddress ->isEmpty()) // если адреса есть
@@ -1515,11 +1515,11 @@ void Post::slottextChanged(const QString &text)
 		
 			// если адрес с таким e_mail есть, то выделяем в списке
 			if (index != -1)
-				m_pListAddress     ->setCurrentRow(index);
+				ui.m_pListAddress     ->setCurrentRow(index);
 		
 			else // если нет в списке
 			{
-				undoselected(m_pListAddress); // если что-то выделено, то снимаем выделение
+				undoselected(ui.m_pListAddress); // если что-то выделено, то снимаем выделение
 				
 				// создаём пустой адрес и присваиваем его текущему (делаем текущий пустым)
 				Address empty;
@@ -1550,7 +1550,7 @@ void Post::slotOutMessage()
 		return;
 	}
 	
-	m_pinfoSend    ->clear();
+	ui.m_pinfoSend    ->clear();
 	
 	if (sender() ->objectName() == "buttonReceived")
 	{
@@ -1561,11 +1561,11 @@ void Post::slotOutMessage()
 		}
 		
 
-		m_pinfoReceive ->clear();
-		m_ptxtReceiver ->clear();
+		ui.m_pinfoReceive ->clear();
+		ui.m_ptxtReceiver ->clear();
 
 		QApplication::setOverrideCursor(QCursor(Qt::WaitCursor)); // песочные часы
-		readVectorInEdit(m_pvectorMessageReceived, m_ptxtReceiver);
+		readVectorInEdit(m_pvectorMessageReceived, ui.m_ptxtReceiver);
 		QApplication::restoreOverrideCursor(); // возвращаем обычный курсор
 
 		m_pListMessageReceived ->resize(700, 600);
@@ -1582,10 +1582,10 @@ void Post::slotOutMessage()
 			QMessageBox::warning(0, QWidget::tr("Внимание!"), QWidget::tr("Отправленных писем нет!"));
 			return;
 		}
-		m_ptxtMessage ->clear();
+		ui.m_ptxtMessage ->clear();
 
 		QApplication::setOverrideCursor(QCursor(Qt::WaitCursor)); // песочные часы
-		readVectorInEdit(m_pvectorMessageSend, m_ptxtMessage);
+		readVectorInEdit(m_pvectorMessageSend, ui.m_ptxtMessage);
 		QApplication::restoreOverrideCursor(); // возвращаем обычный курсор
 
 		m_pListMessageSend ->resize(700, 600);
@@ -1599,15 +1599,15 @@ void Post::slotClear()
 {
 	if (sender() ->objectName() == "pcmd_clearreceive")
 	{
-		m_pinfoReceive ->clear();
-		m_ptxtReceiver ->clear();
-		m_ptxtSender   ->clear();
+		ui.m_pinfoReceive ->clear();
+		ui.m_ptxtReceiver ->clear();
+		ui.m_ptxtSender   ->clear();
 	}
 
 	if (sender() ->objectName() == "pcmd_clearsend")
 	{
-		m_pinfoSend    ->clear();
-		m_ptxtMessage  ->clear();
+		ui.m_pinfoSend    ->clear();
+		ui.m_ptxtMessage  ->clear();
 	}
 }
 
@@ -1620,9 +1620,9 @@ void Post::slotSendToServer()
 		out.setDevice(m_pSocketSMTP);
 	else out.setDevice(m_pSocketPOP);
 	
-	QString str = m_pinput_comServer ->text();
+	QString str = ui.m_pinput_comServer ->text();
 
-	m_ptxtSender ->append(str + RN);
+	ui.m_ptxtSender ->append(str + RN);
     out << str + RN;
 }
 
@@ -1688,25 +1688,25 @@ void Post::receiveMessage()
 		{
 			qDebug() << "false";
 			m_pSocketPOP ->abort();
-			outputInfo(m_pinfoReceive, arrInfo[REC_ERROR].strInfo + arrError[7], arrInfo[REC_ERROR].strSound); // сообщение - ошибка ("Неполадки в сети")
+			outputInfo(ui.m_pinfoReceive, arrInfo[REC_ERROR].strInfo + arrError[7], arrInfo[REC_ERROR].strSound); // сообщение - ошибка ("Неполадки в сети")
 			return;
 		}
 	
 	qDebug() << "true";
-		m_ptxtSender ->append(QWidget::tr("Новые данные сервера POP доступны для чтения."));
+		ui.m_ptxtSender ->append(QWidget::tr("Новые данные сервера POP доступны для чтения."));
 	
 		in >> word;
 		str = word + in.readAll(); // чтение сообщений сервера
-		m_ptxtSender ->append(str); // вывод сообщений сервера
+		ui.m_ptxtSender ->append(str); // вывод сообщений сервера
 
 		if (str[0] == '-') // если сервер выдал ошибку
 		{ 
 			m_pSocketPOP ->abort();
-			outputInfo(m_pinfoReceive, arrInfo[REC_ERROR].strInfo + arrError[m_c], arrInfo[REC_ERROR].strSound); // сообщение - ошибка
+			outputInfo(ui.m_pinfoReceive, arrInfo[REC_ERROR].strInfo + arrError[m_c], arrInfo[REC_ERROR].strSound); // сообщение - ошибка
 			return; 
 		}
 		
-		outputCommands(m_ptxtSender, vectorCommands[m_c], out); // отправка команд серверу
+		outputCommands(ui.m_ptxtSender, vectorCommands[m_c], out); // отправка команд серверу
 		m_c++;
 		
 	}
@@ -1715,31 +1715,31 @@ void Post::receiveMessage()
 	{
 		qDebug() << "false";
 		m_pSocketPOP ->abort();
-		outputInfo(m_pinfoReceive, arrInfo[REC_ERROR].strInfo + arrError[7], arrInfo[REC_ERROR].strSound); // сообщение - ошибка ("Неполадки в сети")
+		outputInfo(ui.m_pinfoReceive, arrInfo[REC_ERROR].strInfo + arrError[7], arrInfo[REC_ERROR].strSound); // сообщение - ошибка ("Неполадки в сети")
 		return;
 	}
 	 
   qDebug() << "true";
-	m_ptxtSender ->append(QWidget::tr("Новые данные сервера POP доступны для чтения."));
+	ui.m_ptxtSender ->append(QWidget::tr("Новые данные сервера POP доступны для чтения."));
 
 	in >> word;        // чтение ответа сервера после STAT
 	if (word[0] == '-') 
 	{ 
 		str = word + in.readAll(); 
-		m_ptxtSender ->append(str); qDebug() << str;
+		ui.m_ptxtSender ->append(str); qDebug() << str;
 		m_pSocketPOP ->abort();
-		outputInfo(m_pinfoReceive, arrInfo[REC_ERROR].strInfo + arrError[m_c], arrInfo[REC_ERROR].strSound); // сообщение - ошибка
+		outputInfo(ui.m_pinfoReceive, arrInfo[REC_ERROR].strInfo + arrError[m_c], arrInfo[REC_ERROR].strSound); // сообщение - ошибка
 		return; 
 	}
 		
 	in >> m_number; // чтение количества писем
 	str = word + " " + QString::number(m_number) + in.readAll(); // readAll() читает количество байтов
-	m_ptxtSender ->append(str); qDebug() << str;
+	ui.m_ptxtSender ->append(str); qDebug() << str;
 		
 	if (m_number == 0) // выход, если писем 0
 	{
 		m_pSocketPOP ->abort();
-		outputInfo(m_pinfoReceive, arrInfo[REC_INFO].strInfo, arrInfo[REC_INFO].strSound);
+		outputInfo(ui.m_pinfoReceive, arrInfo[REC_INFO].strInfo, arrInfo[REC_INFO].strSound);
 		return; 
 	}
 	
@@ -1747,16 +1747,16 @@ void Post::receiveMessage()
 	m_k++;
 	for (uint i = 0; i < m_number; i++)
 	{	
-		outputCommands(m_ptxtSender, vectorCommands[m_c] + QString::number(m_k), out); // вывод RETR m_k
+		outputCommands(ui.m_ptxtSender, vectorCommands[m_c] + QString::number(m_k), out); // вывод RETR m_k
 		m_c++;
 
 	    QVector <QString> vecstr;
 
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>		
-		if (!reedTextMessage(m_pSocketPOP, in, m_ptxtSender, vecstr)) // чтение текста письма в vecstr
+		if (!reedTextMessage(m_pSocketPOP, in, ui.m_ptxtSender, vecstr)) // чтение текста письма в vecstr
 		{
 			m_pSocketPOP ->abort();
-			outputInfo(m_pinfoReceive, arrInfo[REC_ERROR].strInfo + arrError[7], arrInfo[REC_ERROR].strSound); // сообщение - ошибка
+			outputInfo(ui.m_pinfoReceive, arrInfo[REC_ERROR].strInfo + arrError[7], arrInfo[REC_ERROR].strSound); // сообщение - ошибка
 			return; 
 		}  
 		
@@ -1768,13 +1768,13 @@ void Post::receiveMessage()
 			fullstr += vecstr[i];
 		//	fullstr += '\n';
 		}
-		m_ptxtSender ->append(fullstr); // вывод данных письма
+		ui.m_ptxtSender ->append(fullstr); // вывод данных письма
 		qDebug() << fullstr;
 		
 		if (vecstr[0][0] == '-') // проверка ответа сервера после RETR
 		{
 			m_pSocketPOP ->abort();
-			outputInfo(m_pinfoReceive, arrInfo[REC_ERROR].strInfo + arrError[m_c], arrInfo[REC_ERROR].strSound); // сообщение - ошибка
+			outputInfo(ui.m_pinfoReceive, arrInfo[REC_ERROR].strInfo + arrError[m_c], arrInfo[REC_ERROR].strSound); // сообщение - ошибка
 			return; 
 	    }
 
@@ -1782,7 +1782,7 @@ void Post::receiveMessage()
 		if ( vecstr.last().size() >= 5 && vecstr.last().right(5) != (RN + "." + RN))
 		{
 			m_pSocketPOP ->abort();
-			outputInfo(m_pinfoReceive, arrInfo[REC_ERROR].strInfo + arrError[m_c], arrInfo[REC_ERROR].strSound); // сообщение - ошибка
+			outputInfo(ui.m_pinfoReceive, arrInfo[REC_ERROR].strInfo + arrError[m_c], arrInfo[REC_ERROR].strSound); // сообщение - ошибка
 			return; 
 		}
 	
@@ -1790,33 +1790,33 @@ void Post::receiveMessage()
 		//чтение письма, извлечение нужных данных в Message, форматирование и сохранение в векторе
 		m_pvectorMessageReceived ->push_back(formatMessage(extractfromString(fullstr)));
 
-		m_ptxtReceiver << m_pvectorMessageReceived ->last(); // вывод письма в поле Получение 
+		ui.m_ptxtReceiver << m_pvectorMessageReceived ->last(); // вывод письма в поле Получение 
 
 		if (!writeObjectInFile(&m_pvectorMessageReceived ->last(), PATH_RECEIVER)) // записываем письмо в файл
-					m_ptxtMessage ->append(QWidget::tr("Ошибка открытия файла для записи!"));
+					ui.m_ptxtMessage ->append(QWidget::tr("Ошибка открытия файла для записи!"));
 	//>>>>>>>>>>>>>>>>>>>>>>>>>>>	
 		
-		outputCommands(m_ptxtSender, vectorCommands[m_c] + QString::number(m_k), out); // вывод DELE m_k
+		outputCommands(ui.m_ptxtSender, vectorCommands[m_c] + QString::number(m_k), out); // вывод DELE m_k
 		m_c++;
 		
 		if (!m_pSocketPOP ->waitForReadyRead()) // если нет данных бельше, чем 30 сек.
 		{
 			qDebug() << "false";
 			m_pSocketPOP ->abort();
-			outputInfo(m_pinfoReceive, arrInfo[REC_ERROR].strInfo + arrError[7], arrInfo[REC_ERROR].strSound); // сообщение - ошибка ("Неполадки в сети")
+			outputInfo(ui.m_pinfoReceive, arrInfo[REC_ERROR].strInfo + arrError[7], arrInfo[REC_ERROR].strSound); // сообщение - ошибка ("Неполадки в сети")
 			return;
 		}
 		
 	qDebug() << "true";
-		m_ptxtSender ->append(QWidget::tr("Новые данные сервера POP доступны для чтения."));
+		ui.m_ptxtSender ->append(QWidget::tr("Новые данные сервера POP доступны для чтения."));
 
 		str = in.readAll(); // чтение ответа сервера после DELE
-		m_ptxtSender ->append(str); qDebug() << str;
+		ui.m_ptxtSender ->append(str); qDebug() << str;
 		
 		if (str[0] == '-') 
 		{ 
 			m_pSocketPOP ->abort();
-			outputInfo(m_pinfoReceive, arrInfo[REC_ERROR].strInfo + arrError[m_c], arrInfo[REC_ERROR].strSound);
+			outputInfo(ui.m_pinfoReceive, arrInfo[REC_ERROR].strInfo + arrError[m_c], arrInfo[REC_ERROR].strSound);
 			return; 
 		}
 		
@@ -1826,9 +1826,9 @@ void Post::receiveMessage()
 		{
 			QString str = numbermessage(m_k - 1);
 			
-			outputInfo(m_pinfoReceive, arrInfo[REC_DONE].strInfo + str, arrInfo[REC_DONE].strSound); // сообщение - новая почта
+			outputInfo(ui.m_pinfoReceive, arrInfo[REC_DONE].strInfo + str, arrInfo[REC_DONE].strSound); // сообщение - новая почта
 			
-			outputCommands(m_ptxtSender, vectorCommands[m_c], out); // вывод QUIT
+			outputCommands(ui.m_ptxtSender, vectorCommands[m_c], out); // вывод QUIT
 		}
 		else m_c -= 2;
 		
@@ -1838,15 +1838,15 @@ void Post::receiveMessage()
 	{
 		qDebug() << "false";
 		m_pSocketPOP ->abort();
-		outputInfo(m_pinfoReceive, arrInfo[REC_ERROR].strInfo + arrError[7], arrInfo[REC_ERROR].strSound); // сообщение - ошибка ("Неполадки в сети")
+		outputInfo(ui.m_pinfoReceive, arrInfo[REC_ERROR].strInfo + arrError[7], arrInfo[REC_ERROR].strSound); // сообщение - ошибка ("Неполадки в сети")
 		return;
 	}
 	
   qDebug() << "true";
-	m_ptxtSender ->append(QWidget::tr("Новые данные сервера POP доступны для чтения."));
+	ui.m_ptxtSender ->append(QWidget::tr("Новые данные сервера POP доступны для чтения."));
 	
 	str = in.readAll(); // чтение ответа сервера после QUIT
-	m_ptxtSender ->append(str); qDebug() << str;
+	ui.m_ptxtSender ->append(str); qDebug() << str;
 	
 	m_pSocketPOP ->abort();
 }
