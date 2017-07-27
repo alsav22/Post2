@@ -56,7 +56,7 @@ public:
     QLabel *m_pinfoReceive;
     QLabel *plblMessage;
     QLabel *to;
-    QLabel *to_2;
+    QLabel *subject;
 
     void setupUi(QWidget *PostClass)
     {
@@ -119,7 +119,7 @@ public:
         m_ptxtReceiver->setReadOnly(true);
         m_ptxtSender = new QTextEdit(PostClass);
         m_ptxtSender->setObjectName(QString::fromUtf8("m_ptxtSender"));
-        m_ptxtSender->setGeometry(QRect(25, 455, 700, 216));
+        m_ptxtSender->setGeometry(QRect(25, 455, 700, 221));
         m_ptxtSender->setMinimumSize(QSize(700, 0));
         m_ptxtSender->setStyleSheet(QString::fromUtf8("font: 9pt Arial; color: black;"));
         m_ptxtSender->setFrameShape(QFrame::WinPanel);
@@ -128,7 +128,7 @@ public:
         m_ptxtSender->setReadOnly(true);
         m_pinput_comServer = new QLineEdit(PostClass);
         m_pinput_comServer->setObjectName(QString::fromUtf8("m_pinput_comServer"));
-        m_pinput_comServer->setGeometry(QRect(25, 745, 436, 35));
+        m_pinput_comServer->setGeometry(QRect(25, 695, 436, 35));
         m_pinput_comServer->setStyleSheet(QString::fromUtf8("font: 12pt Times; color: black;"));
         m_pTo = new QLineEdit(PostClass);
         m_pTo->setObjectName(QString::fromUtf8("m_pTo"));
@@ -140,7 +140,7 @@ public:
         m_pSubject->setStyleSheet(QString::fromUtf8("font: bold oblique 13pt Times; color: black;"));
         m_ptxtMessage = new QTextEdit(PostClass);
         m_ptxtMessage->setObjectName(QString::fromUtf8("m_ptxtMessage"));
-        m_ptxtMessage->setGeometry(QRect(740, 195, 550, 546));
+        m_ptxtMessage->setGeometry(QRect(740, 195, 550, 536));
         QSizePolicy sizePolicy1(QSizePolicy::Expanding, QSizePolicy::Expanding);
         sizePolicy1.setHorizontalStretch(0);
         sizePolicy1.setVerticalStretch(0);
@@ -242,11 +242,11 @@ public:
         pbuttonSend->setFlat(true);
         m_pCheckBox = new QCheckBox(PostClass);
         m_pCheckBox->setObjectName(QString::fromUtf8("m_pCheckBox"));
-        m_pCheckBox->setGeometry(QRect(480, 745, 231, 23));
+        m_pCheckBox->setGeometry(QRect(480, 700, 231, 23));
         m_pCheckBox->setStyleSheet(QString::fromUtf8("font: 11pt Times; color: black;"));
         m_pinfoSend = new QLabel(PostClass);
         m_pinfoSend->setObjectName(QString::fromUtf8("m_pinfoSend"));
-        m_pinfoSend->setGeometry(QRect(740, 750, 546, 41));
+        m_pinfoSend->setGeometry(QRect(740, 745, 546, 46));
         m_pinfoSend->setStyleSheet(QString::fromUtf8(""));
         m_pinfoSend->setFrameShape(QFrame::WinPanel);
         m_pinfoSend->setFrameShadow(QFrame::Raised);
@@ -255,7 +255,7 @@ public:
         m_pinfoSend->setMargin(3);
         plblSender = new QLabel(PostClass);
         plblSender->setObjectName(QString::fromUtf8("plblSender"));
-        plblSender->setGeometry(QRect(25, 405, 491, 40));
+        plblSender->setGeometry(QRect(25, 405, 701, 40));
         sizePolicy.setHeightForWidth(plblSender->sizePolicy().hasHeightForWidth());
         plblSender->setSizePolicy(sizePolicy);
         plblSender->setStyleSheet(QString::fromUtf8("font: bold oblique 12pt Times; color: blue;"));
@@ -265,7 +265,7 @@ public:
         plblSender->setAlignment(Qt::AlignCenter);
         m_pinfoReceive = new QLabel(PostClass);
         m_pinfoReceive->setObjectName(QString::fromUtf8("m_pinfoReceive"));
-        m_pinfoReceive->setGeometry(QRect(25, 690, 696, 41));
+        m_pinfoReceive->setGeometry(QRect(25, 750, 696, 41));
         sizePolicy.setHeightForWidth(m_pinfoReceive->sizePolicy().hasHeightForWidth());
         m_pinfoReceive->setSizePolicy(sizePolicy);
         m_pinfoReceive->setStyleSheet(QString::fromUtf8("font: bold oblique 13pt Times; color: red;"));
@@ -294,16 +294,16 @@ public:
         to->setFrameShadow(QFrame::Raised);
         to->setLineWidth(6);
         to->setAlignment(Qt::AlignCenter);
-        to_2 = new QLabel(PostClass);
-        to_2->setObjectName(QString::fromUtf8("to_2"));
-        to_2->setGeometry(QRect(1025, 85, 256, 40));
-        sizePolicy.setHeightForWidth(to_2->sizePolicy().hasHeightForWidth());
-        to_2->setSizePolicy(sizePolicy);
-        to_2->setStyleSheet(QString::fromUtf8("font: bold oblique 12pt Times; color: black;"));
-        to_2->setFrameShape(QFrame::WinPanel);
-        to_2->setFrameShadow(QFrame::Raised);
-        to_2->setLineWidth(6);
-        to_2->setAlignment(Qt::AlignCenter);
+        subject = new QLabel(PostClass);
+        subject->setObjectName(QString::fromUtf8("subject"));
+        subject->setGeometry(QRect(1025, 85, 256, 40));
+        sizePolicy.setHeightForWidth(subject->sizePolicy().hasHeightForWidth());
+        subject->setSizePolicy(sizePolicy);
+        subject->setStyleSheet(QString::fromUtf8("font: bold oblique 12pt Times; color: black;"));
+        subject->setFrameShape(QFrame::WinPanel);
+        subject->setFrameShadow(QFrame::Raised);
+        subject->setLineWidth(6);
+        subject->setAlignment(Qt::AlignCenter);
 
         retranslateUi(PostClass);
         QObject::connect(m_pListAddress, SIGNAL(currentItemChanged(QListWidgetItem*,QListWidgetItem*)), PostClass, SLOT(slotChoiceAddress(QListWidgetItem*)));
@@ -350,7 +350,7 @@ public:
         m_pinfoReceive->setText(QString());
         plblMessage->setText(QApplication::translate("PostClass", "\320\235\320\276\320\262\320\276\320\265 \320\277\320\270\321\201\321\214\320\274\320\276", 0, QApplication::UnicodeUTF8));
         to->setText(QApplication::translate("PostClass", "\320\220\320\264\321\200\320\265\321\201", 0, QApplication::UnicodeUTF8));
-        to_2->setText(QApplication::translate("PostClass", "\320\242\320\265\320\274\320\260", 0, QApplication::UnicodeUTF8));
+        subject->setText(QApplication::translate("PostClass", "\320\242\320\265\320\274\320\260", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };

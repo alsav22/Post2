@@ -193,7 +193,7 @@ Post::Post(QWidget *pwgt /*= 0*/) : QWidget(pwgt)
 //	QPushButton* pcmd_receive = new QPushButton(QWidget::tr("Получить"));
 //	pcmd_receive ->setStyleSheet("font: bold oblique 11pt Times; color: black;");
 //    pcmd_receive ->setCursor(*m_pCursor);
-//	pcmd_receive ->setObjectName("pcmd_clear");
+//	pcmd_receive ->setObjectName("pcmd_clear"); // зачем такое имя? По-новому: pcmd_receive
 //
 //	connect(pcmd_receive, SIGNAL(clicked()), SLOT(slotReceiveMessage()));
 //
@@ -483,7 +483,8 @@ Post::Post(QWidget *pwgt /*= 0*/) : QWidget(pwgt)
 			                                                           // в поле Текущий ящик
 			file.close();
     }
-	else  m_flagExistAccount = 0;  // если файла нет
+	else  
+		m_flagExistAccount = 0;  // если файла нет
 
 	m_pvectorMessageSend     = new QList<Message>; // массив писем отправленных
 	m_pvectorMessageReceived = new QList<Message>; // массив писем полученных
@@ -1216,7 +1217,7 @@ void Post::slotCreateAccount()
 	if (m_pcurrentAccount == NULL) // если первое создание ящика
 	{ 
 		m_pcurrentAccount = new Account;
-		strsender = "buttonCreateAccount";
+		strsender = "pbuttonCreateAccount";
 	}
 	else strsender = sender() ->objectName(); // если ящик уже есть, то в зависимости от кнопки
 	
@@ -1225,7 +1226,7 @@ void Post::slotCreateAccount()
 begin : 
   
   // если ящик существует и нажата Изменить ящик
-	if (m_pcurrentAccount != NULL && strsender == "buttonSettingsAccount")
+	if (m_pcurrentAccount != NULL && strsender == "pbuttonSettingsAccount")
 	{
 		m_pсreateAccount ->setname    (m_pcurrentAccount ->getname());
 		m_pсreateAccount ->setlogin   (m_pcurrentAccount ->getlogin());
@@ -1276,9 +1277,9 @@ begin :
 				*m_pcurrentAccount = temp; // возвращаем старый ящик
 				//delete m_pсreateAccount;
 				
-				if(strsender == "buttonCreateAccount")
+				if(strsender == "pbuttonCreateAccount")
 					QMessageBox::critical(0, QWidget::tr("Ошибка!"), QWidget::tr("Ошибка при создании ящика!\nЯщик не сохранён."));
-				if(strsender == "buttonSettingsAccount")
+				if(strsender == "pbuttonSettingsAccount")
 					QMessageBox::critical(0, QWidget::tr("Ошибка!"), QWidget::tr("Ошибка при изменении ящика!\nЯщик не сохранён."));
 				
 				goto begin;
@@ -1298,10 +1299,10 @@ begin :
 		
             m_flagExistAccount = 1; // ящик существует
 
-			if(strsender == "buttonCreateAccount")
+			if(strsender == "pbuttonCreateAccount")
 				QMessageBox::information(0, QWidget::tr("Сообщение"), QWidget::tr("Ящик успешно создан!"));
 			
-			if(strsender == "buttonSettingsAccount")
+			if(strsender == "pbuttonSettingsAccount")
 				QMessageBox::information(0, QWidget::tr("Сообщение"), QWidget::tr("Ящик успешно изменён!"));
 		
 		}
@@ -1552,7 +1553,7 @@ void Post::slotOutMessage()
 	
 	ui.m_pinfoSend    ->clear();
 	
-	if (sender() ->objectName() == "buttonReceived")
+	if (sender() ->objectName() == "pbuttonReceived")
 	{
 		if (m_pvectorMessageReceived ->isEmpty())
 		{
@@ -1575,7 +1576,7 @@ void Post::slotOutMessage()
 		m_pListMessageReceived ->show();
 	}
 	
-	if (sender() ->objectName() == "buttonSend")
+	if (sender() ->objectName() == "pbuttonSend")
 	{
 		if (m_pvectorMessageSend ->isEmpty())
 		{
