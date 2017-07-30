@@ -11,6 +11,7 @@ static inline bool is_base64(unsigned char c)
   return (isalnum(c) || (c == '+') || (c == '/'));
 }
 
+// коструктор нигде не применяется?
 Account::Account(QString name,     QString login, 
                  QString password, QString e_mail,
 				 QString HostSMTP, QString HostPOP,
@@ -19,9 +20,9 @@ Account::Account(QString name,     QString login,
 {
 	m_name           = name;
 	m_login          = login;
-	m_loginBase64    = base64_encode(login, login.size());
+	m_loginBase64    = QByteArray(login.toStdString().c_str()).toBase64();//base64_encode(login, login.size());
 	m_password       = password;
-	m_passwordBase64 = base64_encode(password, password.size());
+	m_passwordBase64 = QByteArray(password.toStdString().c_str()).toBase64();//base64_encode(password, password.size());
 	m_e_mail         = e_mail;
 	m_HostSMTP       = HostSMTP;
 	m_HostPOP        = HostPOP;

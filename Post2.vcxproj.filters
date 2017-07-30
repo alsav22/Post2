@@ -71,6 +71,15 @@
     <ClCompile Include="message.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="smtp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_smtp.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_smtp.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="post.h">
@@ -83,6 +92,9 @@
       <Filter>Resource Files</Filter>
     </CustomBuild>
     <CustomBuild Include="dialog.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="smtp.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
   </ItemGroup>
@@ -108,5 +120,9 @@
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Post2.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="smtp.pro" />
+    <None Include="smtp.pro.user" />
   </ItemGroup>
 </Project>
