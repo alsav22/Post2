@@ -18,6 +18,34 @@ extern QString arrCommandsPOP_USER[7];
 extern uint OK_code;
 //extern enum OK;
 enum INFO { SEND_DONE, SEND_ERROR, REC_DONE, REC_ERROR, REC_INFO };
+
+// форматирование данных для отправки на SMTP сервер
+void formatMessageForSMTP(QString& letter, const Post* post, const QTextCodec* codec)
+{
+	QString charset("=?" + codec ->name() + "?");
+	QString beg("B?");
+	QString end("?= ");
+	letter.append("From: " + charset + beg +
+			        codec ->fromUnicode(post ->m_pcurrentAccount ->getname()).toBase64() + 
+					end + '<' + post ->m_pcurrentAccount ->gete_mail() + '>' + RN); 
+		
+	letter.append("To: " + charset + beg +
+					codec ->fromUnicode(post ->m_pcurrentAddress ->getname()).toBase64() +
+					end + '<' + post ->m_pcurrentAddress ->gete_mail() + '>' + RN);
+		
+	letter.append("Subject: " + charset + beg +
+					codec ->fromUnicode(post ->m_pcurrentMessage ->getsubject()).toBase64() + 
+					end + RN);
+
+	letter.append("MIME-Version: 1.0" + RN );
+	letter.append("Content-Type: text/plain; charset=" + codec ->name() + RN);
+	letter.append("Content-Transfer-Encoding: 8bit" + RN); // без этого в оригинале письма будет quoted-printable
+
+	letter.append(RN); // отделяем заголовки от тела письма
+	letter.append(post ->m_pcurrentMessage ->gettext()); // тело письма
+	letter.append(QString(RN + "." + RN)); // признак конца данных
+}
+
 // вывод команд для серверов на поле Служебная информация и вывод в сокет......................................................................................
 
 void outputCommands(QTextEdit *m_ptxtSender, const QString commands, QTextStream &out)

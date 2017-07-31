@@ -94,6 +94,9 @@ public :
 	
 	void receiveMessage(); // получение письма
 	
+	// форматирование данных для отправки на SMTP сервер
+    friend void formatMessageForSMTP(QString& data, const Post* post, const QTextCodec* codec);
+	
 	uint m_flagExistAccount; // флаг установлен, если хотя бы один ящик был создан
 
 public slots :
@@ -123,6 +126,9 @@ public slots :
 	void slotReadySSL       (QListWidgetItem *           );
 
 };
+
+// форматирование данных для отправки на SMTP сервер
+void formatMessageForSMTP(QString& data, const Post* post, const QTextCodec* codec);
 
 bool reedTextMessage                 (QSslSocket *m_pSocketPOP, QTextStream &in, 
                                       QTextEdit  *m_ptxtSender, QVector <QString> &vecstr);

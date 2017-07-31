@@ -24,6 +24,8 @@ int main(int argc, char *argv[])
 	QSplashScreen splash(QPixmap("icon1.png"));
 	splash.show();
 	
+	QTextCodec::setCodecForTr(LocalCodec);
+	
 	//QTextCodec *codec = QTextCodec::codecForName("ISO-8859-1");
  //   QString str = "Êîãäà ÿ íà ïî÷òå.";
 	////str = codec->toUnicode(str.toAscii());
@@ -37,7 +39,8 @@ int main(int argc, char *argv[])
 	//QTextCodec *codec = QTextCodec::codecForName("CP1251");
 	//QTextCodec::setCodecForTr(codec);
 	
-	QTextCodec::setCodecForTr(LocalCodec);
+	
+	//QTextCodec::setCodecForTr(QTextCodec::codecForName("UTF-8"));
 
 	//QTextCodec *codec = QTextCodec::codecForName(/*"UTF-8"*/"ISO-8859-1"/*"KOI8-R"*/);
 	//qDebug() << codec ->aliases();

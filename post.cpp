@@ -492,42 +492,48 @@ Post::Post(QWidget *pwgt /*= 0*/) : QWidget(pwgt)
 
 	m_pcurrentAddress        = new Address;          // текущий адрес
 	m_pcurrentMessage        = new Message;          // текущее письмо
-		
+
+
+
   // чтение из файлов в массивы всех адресов, отправленных и полученных писем
 	if (QFile::exists(PATH_ADDRESS))
 	{
 		readFileInVector(m_pvectorAddress, PATH_ADDRESS, S);
 		readVectorInListWidget(m_pvectorAddress, ui.m_pListAddress); // заполняем поле Адреса
 	}
-			
-	if (QFile::exists(PATH_SENDER))
-		readFileInVector(m_pvectorMessageSend, PATH_SENDER, S); // нужно?
-			
-	if (QFile::exists(PATH_RECEIVER))
-		readFileInVector(m_pvectorMessageReceived, PATH_RECEIVER, S); // нужно?
 
-  // заполнение списков отправленных и полученных писем
-	readVectorInListWidget(m_pvectorMessageSend,     m_pListMessageSend    ); // заполняем список отправленных писем
-    readVectorInListWidget(m_pvectorMessageReceived, m_pListMessageReceived); // заполняем список полученных писем
+// Блок, который задерживает загрузку программы - оптимизировать
+//===========================================================================================
+
+	//if (QFile::exists(PATH_SENDER))
+	//	readFileInVector(m_pvectorMessageSend, PATH_SENDER, S); // нужно?
+	//		
+	//if (QFile::exists(PATH_RECEIVER))
+	//	readFileInVector(m_pvectorMessageReceived, PATH_RECEIVER, S); // нужно?
+
+ //  // заполнение списков отправленных и полученных писем
+	//readVectorInListWidget(m_pvectorMessageSend,     m_pListMessageSend    ); // заполняем список отправленных писем
+ //   readVectorInListWidget(m_pvectorMessageReceived, m_pListMessageReceived); // заполняем список полученных писем
 
 //=========================================================================================		 
-    QString extract = "=D0=9F=D1=80=D0=BE=D0=B2=D0=B5=D1=80=D0=BA=D0=B0 =D1=81=D0=B2=D1=8F=D0=B7=D0=B8!";
-	decodeQuotedPrintable(extract);
-	QString str = QString::fromUtf8(extract.toStdString().c_str());
-	setlocale(0, "");
-	std::string temp = str.toAscii();
-	std::cout << temp;
-	//QTextCodec* codec = QTextCodec::codecForName("CP866");
-	//qDebug() << codec ->;//extract;
-	QString s = "Проверка связи!";
-	QString s2 = "Pz8/Pz8/Pz8/Pz8/Pw==";
-	qDebug() << base64_encode(s.toUtf8(), s.size());
-	//QString s = "UGFjaWZpYyBPY2Vhbg==";
-	qDebug() << "base64_decode" << base64_decode(s);
-	s2 = base64_decode(s2);
-	qDebug() << "base64_decode" << s2;
-	qDebug() << "base64_decode" << QString::fromLocal8Bit(s2.toStdString().c_str());
-	//qDebug() << base64_encode(s, s.size());
+ 
+	//   QString extract = "=D0=9F=D1=80=D0=BE=D0=B2=D0=B5=D1=80=D0=BA=D0=B0 =D1=81=D0=B2=D1=8F=D0=B7=D0=B8!";
+	//decodeQuotedPrintable(extract);
+	//QString str = QString::fromUtf8(extract.toStdString().c_str());
+	//setlocale(0, "");
+	//std::string temp = str.toAscii();
+	//std::cout << temp;
+	////QTextCodec* codec = QTextCodec::codecForName("CP866");
+	////qDebug() << codec ->;//extract;
+	//QString s = "Проверка связи!";
+	//QString s2 = "Pz8/Pz8/Pz8/Pz8/Pw==";
+	//qDebug() << base64_encode(s.toUtf8(), s.size());
+	////QString s = "UGFjaWZpYyBPY2Vhbg==";
+	//qDebug() << "base64_decode" << base64_decode(s);
+	//s2 = base64_decode(s2);
+	//qDebug() << "base64_decode" << s2;
+	//qDebug() << "base64_decode" << QString::fromLocal8Bit(s2.toStdString().c_str());
+	////qDebug() << base64_encode(s, s.size());
 }
 
 
@@ -942,32 +948,49 @@ if (ui.m_pCheckBox ->checkState() != Qt::Checked)
 	if (m_c == 7)  
 	{
 		QString letter; // строка под письмо
-
-		letter.append("From: "    + m_pcurrentMessage ->getfrom()    + RN); 
-		letter.append("To: "      + m_pcurrentMessage ->getto()      + RN);
-		letter.append("Subject: " + m_pcurrentMessage ->getsubject() + RN);
-		letter.append("MIME-Version: 1.0" + RN );
-		letter.append("Content-Type: text/plain; charset=UTF-8" + RN);
-        //letter.append("Content-Transfer-Encoding: quoted-printable" + RN ;
-		//letter.append("Content-Transfer-Encoding: 7bit" + RN);
+		QTextCodec* codec = QTextCodec::codecForName("UTF-8");
 		
-		letter.append(RN); // отделяем заголовки от тела письма
-		letter.append(m_pcurrentMessage ->gettext()); // тело письма
-		letter.append(QString(RN + "." + RN)); // признак конца данных
+		formatMessageForSMTP(letter, this, codec);
 		
-		out.setCodec("UTF-8"); // письмо будет отправляться на сервер в кодировке UTF-8
-		
+		out.setCodec(codec); // установка для потока кодировки 
+		                     // (в этой кодировке письмо будет отправлено на сервер SMTP)
 		out << letter; // отправка письма на сервер SMTP
+
+//================================================================================		
+		//letter.append("From: " + m_pcurrentMessage ->getfrom() + RN); 
+		//letter.append("To: "      + m_pcurrentMessage ->getto()      + RN);
+		//letter.append("Subject: " + m_pcurrentMessage ->getsubject() + RN);
+		
+		//letter.append("Content-Type: text/plain; charset=" + codec ->name() + RN);
+        //letter.append("Content-Transfer-Encoding: 8bit" + RN);
+
+		//// Content-Transfer-Encoding: quoted-printable
+        //// Content-Type: text/plain; charset="utf-8"; format="flowed"
+
+		//letter.append("MIME-Version: 1.0" + RN );
+		//letter.append("Content-Type: text/plain; charset=" + codec ->name() + RN);
+		//letter.append("Content-Transfer-Encoding: 8bit" + RN); // без этого в оригинале письма будет quoted-printable
+
+		//letter.append(RN); // отделяем заголовки от тела письма
+		//letter.append(post ->m_pcurrentMessage ->gettext()); // тело письма
+		//letter.append(QString(RN + "." + RN)); // признак конца данных
+
+        /*QByteArray arr("Алексей");
+		QString s(QWidget::tr("AlekceiАлексей"));
+		QTextCodec* codec = QTextCodec::codecForName("Windows-1251");
+		QByteArray arr2 = codec ->fromUnicode(s);
+		QByteArray sub = arr2.toBase64();*/
+//================================================================================
 		
 		ui.m_ptxtSender ->append(letter); // вывод письма (в Юникоде) в поле служебной информации
 
 #ifdef DEBUG		
-		// запись письма в файл в кодировке UTF-8,
+		// запись письма в файл в той же кодировке, что и при отправке на сервер
 		// для проверки: в каком виде письмо отправляется на сервер
 		QFile file("outfile.txt");
 		file.open(QIODevice::WriteOnly);
 		QTextStream outfile(&file);
-		outfile.setCodec("UTF-8");
+		outfile.setCodec(codec);
 		outfile << letter;
 		file.close();
 #endif
