@@ -4,6 +4,8 @@
 #include <Windows.h>
 #include "post.h"
 
+#include <iostream>
+
 QTextCodec *LocalCodec = QTextCodec::codecForName(QTextCodec::codecForLocale() ->name()/*"Windows-1251"*/);
 
 int messageAccount();
@@ -25,7 +27,16 @@ int main(int argc, char *argv[])
 	splash.show();
 	
 	QTextCodec::setCodecForTr(LocalCodec);
+	//QTextCodec::setCodecForCStrings(LocalCodec);
+	//QString str = QWidget::tr("Когда я на почте.");
+	QString str;//("Когда я на почте.");
+	QTextDecoder dec(LocalCodec);
+	dec.toUnicode(&str, "Когда я на почте.", strlen("Когда я на почте."));
 	
+	bool flag = LocalCodec ->canEncode(str);
+	//QByteArray arr = str.toAscii();
+	std::cout << str.toLocal8Bit().data() << std::endl;
+	int a = 4;
 	//QTextCodec *codec = QTextCodec::codecForName("ISO-8859-1");
  //   QString str = "Êîãäà ÿ íà ïî÷òå.";
 	////str = codec->toUnicode(str.toAscii());
@@ -62,7 +73,7 @@ int main(int argc, char *argv[])
 
 	post.resize(1700, 850);
 	post.setMinimumHeight(850);
-	post.move(200, 40);
+	post.move(50, 40);
 	
     post.show();
     splash.finish(&post);

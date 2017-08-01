@@ -47,7 +47,6 @@ void formatMessageForSMTP(QString& letter, const Post* post, const QTextCodec* c
 }
 
 // вывод команд для серверов на поле Служебная информация и вывод в сокет......................................................................................
-
 void outputCommands(QTextEdit *m_ptxtSender, const QString commands, QTextStream &out)
 {
 	m_ptxtSender ->append(commands);

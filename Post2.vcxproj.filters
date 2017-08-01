@@ -85,9 +85,6 @@
     <CustomBuild Include="post.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
-    <CustomBuild Include="post.ui">
-      <Filter>Form Files</Filter>
-    </CustomBuild>
     <CustomBuild Include="post.qrc">
       <Filter>Resource Files</Filter>
     </CustomBuild>
@@ -97,11 +94,11 @@
     <CustomBuild Include="smtp.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
+    <CustomBuild Include="post4.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GeneratedFiles\ui_post.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
     <ClInclude Include="account.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -116,6 +113,9 @@
     </ClInclude>
     <ClInclude Include="message.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_post4.h">
+      <Filter>Generated Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
