@@ -1,3 +1,4 @@
+#include <QtGui>
 #include "functions.h"
 #include "message.h"
 //#include "account.h"
@@ -7,17 +8,27 @@
 //#include "data.h"
 //#include <QFile>
 //#include <QTextStream>
-#include <QtGui>
 #include <QtNetwork>
-//#include <QString>
+#include "data.h"
 
-extern QVector <QString> vectorCommands;
-extern QString arrCommandsSMTP[8];
-extern QString arrCommandsPOP_AUTH_LOGIN[7];
-extern QString arrCommandsPOP_USER[7];
-extern uint OK_code;
-//extern enum OK;
-enum INFO { SEND_DONE, SEND_ERROR, REC_DONE, REC_ERROR, REC_INFO };
+void initData()
+{
+	Info tempInfo[5] = { {"Письмо успешно отправлено!"  , "sound/send_done.wav"  },
+                         {"Ошибка при отправке письма!" , "sound/send_error.wav" },
+                         {"У вас новая почта!"          , "sound/rec_done.wav"   },
+                         {"Ошибка при получении писем!" , "sound/rec_error.wav"  },
+                         {"Нет новых писем!" ,            "sound/rec_info2.wav"  } }; 
+	for (int i = 0; i < sizeof(tempInfo) / sizeof(Info); ++i)
+		arrInfo[i] = tempInfo[i];
+	
+	QString tempError[8] = {"\nОшибка приветствия сервера.",       "\nЗапрос на аутентификацию не прошёл.", 
+                            "\nПроверьте логин или пароль.",       "\nПроверьте логин или пароль.",
+			                "\nПроверьте Ящик.",                   "\nПроверьте Адрес.", 
+				            "\nНеполадки в сети или на сервере.",  "\nНеполадки в сети или на сервере."};
+
+	for (int i = 0; i < sizeof(tempError) / sizeof(tempError[0]); ++i)
+		arrError[i] = tempError[i];
+}
 
 // форматирование данных для отправки на SMTP сервер
 void formatMessageForSMTP(QString& letter, const Post* post, const QTextCodec* codec)

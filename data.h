@@ -3,6 +3,21 @@
 #include <qglobal.h>
 #include <qstring.h>
 #include <qvector.h>
+#include <qtextcodec.h>
+
+extern const QString RN;
+extern const QString N;
+extern const QString R;
+extern const QString S; // строка-разделитель
+
+extern const QString PATH_ACCOUNT;
+extern const QString PATH_ADDRESS;
+extern const QString PATH_SENDER;
+extern const QString PATH_RECEIVER;
+extern const QString PATH_ATTACHMENT;
+
+extern QString *pPathAttachment;
+extern QTextCodec *LocalCodec;
 
 enum OK {OK220 = 220, OK221 = 221, OK235 = 235, OK250 = 250, OK334 = 334,  OK354 = 354};
 
@@ -14,17 +29,17 @@ extern QVector <QString> vectorCommands;
 
 struct Info
 {
-	//QString strInfo;
-	//QString strSound;
-	const char* strInfo;
-	const char* strSound;
+	QString strInfo;
+	QString strSound;
+	//const char* strInfo;
+	//const char* strSound;
 };
 
 enum INFO { SEND_DONE, SEND_ERROR, REC_DONE, REC_ERROR, REC_INFO };
 
 extern Info arrInfo[5];
 				 
-extern const char* arrError[8];
+extern QString arrError[8];
 					  
 enum HEADER {DATE, FROM, TO, SUBJECT};
 

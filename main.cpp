@@ -4,10 +4,11 @@
 //#include <Windows.h>
 #include "data.h"
 #include "post.h"
+#include "functions.h"
 
 #include <iostream>
 
-QTextCodec *LocalCodec = QTextCodec::codecForName(QTextCodec::codecForLocale() ->name()/*"Windows-1251"*/);
+
 
 int messageAccount();
 
@@ -34,6 +35,9 @@ int main(int argc, char *argv[])
 	
 	QTextCodec::setCodecForTr(LocalCodec);
 	QTextCodec::setCodecForCStrings(LocalCodec); // кодек для Си-строк и QByteArray
+	
+	initData(); // инициализация глобальных данных (после установки нужно кодека)
+	
 	QString arr[] = {"Ошибка при отправке письма!"};
 	//QString str = QWidget::tr("Когда я на почте.");
 	QString str;//(arr[0] + "Когда я на почте.");

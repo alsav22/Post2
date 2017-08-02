@@ -1,5 +1,20 @@
 #include "data.h"
 
+extern const QString RN = "\r\n";
+extern const QString N  = "\n";
+extern const QString R  = "\r";
+extern const QString S  = "#"; // строка-разделитель
+
+extern const QString PATH_ACCOUNT    = "./Account/account.txt";
+extern const QString PATH_ADDRESS    = "./Address/address.txt";
+extern const QString PATH_SENDER     = "./Sender/sender.txt";
+extern const QString PATH_RECEIVER   = "./Receiver/receiver.txt";
+extern const QString PATH_ATTACHMENT = "./Attachment/";
+
+QString *pPathAttachment = NULL;
+
+QTextCodec *LocalCodec = QTextCodec::codecForName(QTextCodec::codecForLocale() ->name()/*"Windows-1251"*/);
+
 uint OK_code[] = {OK220, OK250, OK334, OK334, OK235, OK250, OK250, OK354, OK250, OK221};
 
 QString arrCommandsSMTP[8] = {"EHLO ",       "AUTH LOGIN", "",      "",
@@ -16,16 +31,16 @@ QString arrCommandsPOP_USER      [7] = {"USER ", "PASS ",  "NOOP",
 						                      
 QVector <QString> vectorCommands;
 
-Info arrInfo[] = { {"Письмо успешно отправлено!"  , "sound/send_done.wav"  },
+Info arrInfo[5]; /*= { {"Письмо успешно отправлено!"  , "sound/send_done.wav"  },
                    {"Ошибка при отправке письма!" , "sound/send_error.wav" },
                    {"У вас новая почта!"          , "sound/rec_done.wav"   },
                    {"Ошибка при получении писем!" , "sound/rec_error.wav"  },
-                   {"Нет новых писем!" ,            "sound/rec_info2.wav"  } }; 
+                   {"Нет новых писем!" ,            "sound/rec_info2.wav"  } }; */
 				 
-const char* arrError[] =  {"\nОшибка приветствия сервера.",       "\nЗапрос на аутентификацию не прошёл.", 
+QString arrError[8]; /*=  {"\nОшибка приветствия сервера.",       "\nЗапрос на аутентификацию не прошёл.", 
                        "\nПроверьте логин или пароль.",       "\nПроверьте логин или пароль.",
 			           "\nПроверьте Ящик.",                   "\nПроверьте Адрес.", 
-				       "\nНеполадки в сети или на сервере.",  "\nНеполадки в сети или на сервере."};
+				       "\nНеполадки в сети или на сервере.",  "\nНеполадки в сети или на сервере."};*/
 					  
 QString  arrHEADER[] = {"Date: ", "From: ", "To: ", "Subject: "};
 

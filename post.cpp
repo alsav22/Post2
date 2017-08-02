@@ -31,20 +31,6 @@
 //#include <fstream>
 //using namespace std;
 
-extern QTextCodec *LocalCodec;
-
-const QString RN = "\r\n";
-const QString N  = "\n";
-const QString R  = "\r";
-const QString S  = "#"; // строка-разделитель
-
-const QString PATH_ACCOUNT    = "./Account/account.txt";
-const QString PATH_ADDRESS    = "./Address/address.txt";
-const QString PATH_SENDER     = "./Sender/sender.txt";
-const QString PATH_RECEIVER   = "./Receiver/receiver.txt";
-const QString PATH_ATTACHMENT = "./Attachment/";
-
-QString *pPathAttachment = NULL;
 
 // конструктор ======================================================================
 
@@ -214,7 +200,7 @@ void Post::slotSendMessage()
 	// или в slotChoiceAddress, или в slottextChanged
 	if (ui.m_pTo ->text().isEmpty()) 
 	{
-		outputInfo(ui.m_pinfoSend, arrInfo[SEND_ERROR].strInfo + QString("\n¬ведите или выберите адрес."), arrInfo[SEND_ERROR].strSound, 1);
+		outputInfo(ui.m_pinfoSend, arrInfo[SEND_ERROR].strInfo + "\n¬ведите или выберите адрес.", arrInfo[SEND_ERROR].strSound, 1);
 		return;
 	}
 

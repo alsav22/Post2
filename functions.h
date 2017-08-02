@@ -34,6 +34,7 @@ extern const QString PATH_SENDER;
 extern const QString PATH_RECEIVER;
 extern const QString PATH_ATTACHMENT;
 
+void initData(); // инициализация глобальных данных
 
 // создание сообщения, если текущего ящика нет
 int messageAccount(); 
