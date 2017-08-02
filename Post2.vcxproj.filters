@@ -80,6 +80,9 @@
     <ClCompile Include="GeneratedFiles\Release\moc_smtp.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
+    <ClCompile Include="data.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="post.h">

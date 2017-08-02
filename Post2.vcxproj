@@ -79,6 +79,7 @@
   <ItemGroup>
     <ClCompile Include="account.cpp" />
     <ClCompile Include="address.cpp" />
+    <ClCompile Include="data.cpp" />
     <ClCompile Include="dialog.cpp" />
     <ClCompile Include="functions.cpp" />
     <ClCompile Include="GeneratedFiles\Debug\moc_dialog.cpp">
