@@ -2,7 +2,7 @@
 #include <QtGui>
 #include <QApplication>
 //#include <Windows.h>
-#include "data.h"
+//#include "data.h"
 #include "post.h"
 #include "functions.h"
 
@@ -33,22 +33,21 @@ int main(int argc, char *argv[])
 	QSplashScreen splash(QPixmap("icon1.png"));
 	splash.show();
 	
-	QTextCodec::setCodecForTr(LocalCodec);
-	QTextCodec::setCodecForCStrings(LocalCodec); // кодек для Си-строк и QByteArray
+	
 	
 	initData(); // инициализация глобальных данных (после установки нужно кодека)
 	
-	QString arr[] = {"Ошибка при отправке письма!"};
-	//QString str = QWidget::tr("Когда я на почте.");
-	QString str;//(arr[0] + "Когда я на почте.");
-	foo(str);
-	QTextDecoder dec(LocalCodec);
-	dec.toUnicode(&str, "Когда я на почте.", strlen("Когда я на почте."));
-	
-	bool flag = LocalCodec ->canEncode(str);
-	//QByteArray arr = str.toAscii();
-	std::cout << str.toLocal8Bit().data() << std::endl;
-	int a = 4;
+	//QString arr[] = {"Ошибка при отправке письма!"};
+	////QString str = QWidget::tr("Когда я на почте.");
+	//QString str;//(arr[0] + "Когда я на почте.");
+	//foo(str);
+	//QTextDecoder dec(LocalCodec);
+	//dec.toUnicode(&str, "Когда я на почте.", strlen("Когда я на почте."));
+	//
+	//bool flag = LocalCodec ->canEncode(str);
+	////QByteArray arr = str.toAscii();
+	//std::cout << str.toLocal8Bit().data() << std::endl;
+	//int a = 4;
 	//QTextCodec *codec = QTextCodec::codecForName("ISO-8859-1");
  //   QString str = "Êîãäà ÿ íà ïî÷òå.";
 	////str = codec->toUnicode(str.toAscii());

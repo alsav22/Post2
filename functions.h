@@ -12,28 +12,6 @@
 //#include <QSound>
 #include <QtGui>
 
-//extern QVector <QString> vectorCommSMTP;
-//extern QVector <QString> vectorCommPOP;
-//extern QString arrCommandsSMTP[8];
-//extern QString arrCommandsPOP_AUTH_LOGIN[7];
-//extern QString arrCommandsPOP_USER[7];
-//extern uint OK_code;
-//extern enum OK;
-
-
-//class QSslSocket;
-
-extern const QString RN;
-extern const QString N;
-extern const QString R;
-extern const QString S;
-
-extern const QString PATH_ACCOUNT;
-extern const QString PATH_ADDRESS;
-extern const QString PATH_SENDER;
-extern const QString PATH_RECEIVER;
-extern const QString PATH_ATTACHMENT;
-
 void initData(); // инициализация глобальных данных
 
 // создание сообщения, если текущего ящика нет

@@ -13,6 +13,9 @@
 
 void initData()
 {
+	QTextCodec::setCodecForTr(LocalCodec);
+	QTextCodec::setCodecForCStrings(LocalCodec); // кодек для Си-строк и QByteArray
+	
 	Info tempInfo[5] = { {"Письмо успешно отправлено!"  , "sound/send_done.wav"  },
                          {"Ошибка при отправке письма!" , "sound/send_error.wav" },
                          {"У вас новая почта!"          , "sound/rec_done.wav"   },

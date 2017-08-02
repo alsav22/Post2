@@ -122,10 +122,9 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="Post2.rc" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="smtp.pro" />
     <None Include="smtp.pro.user" />
+    <None Include="icon1.ico" />
+    <None Include="Post2.ico" />
   </ItemGroup>
 </Project>

@@ -31,8 +31,6 @@ struct Info
 {
 	QString strInfo;
 	QString strSound;
-	//const char* strInfo;
-	//const char* strSound;
 };
 
 enum INFO { SEND_DONE, SEND_ERROR, REC_DONE, REC_ERROR, REC_INFO };
