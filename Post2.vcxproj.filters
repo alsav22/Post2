@@ -94,7 +94,7 @@
     <CustomBuild Include="smtp.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
-    <CustomBuild Include="post4.ui">
+    <CustomBuild Include="post3_1.ui">
       <Filter>Form Files</Filter>
     </CustomBuild>
   </ItemGroup>
@@ -114,7 +114,7 @@
     <ClInclude Include="message.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="GeneratedFiles\ui_post4.h">
+    <ClInclude Include="GeneratedFiles\ui_post3_1.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -71,9 +71,9 @@ int main(int argc, char *argv[])
 	Post post;
 	post.setObjectName("post");
 
-	post.resize(1700, 850);
-	post.setMinimumHeight(850);
-	post.move(50, 40);
+	//post.resize(1700, 850);
+	//post.setMinimumHeight(850);
+	//post.move(50, 40);
 	
     post.show();
     splash.finish(&post);

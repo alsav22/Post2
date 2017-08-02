@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'post4.ui'
+** Form generated from reading UI file 'post3_1.ui'
 **
 ** Created by: Qt User Interface Compiler version 4.8.5
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef UI_POST4_H
-#define UI_POST4_H
+#ifndef UI_POST3_1_H
+#define UI_POST3_1_H
 
 #include <QtCore/QVariant>
 #include <QtGui/QAction>
@@ -45,7 +45,6 @@ public:
     QPushButton *pcmd_receive;
     QPushButton *pcmd_clearreceive;
     QSpacerItem *horizontalSpacer_2;
-    QVBoxLayout *verticalLayout_5;
     QVBoxLayout *verticalLayout_4;
     QLabel *plblMessage;
     QGridLayout *gridLayout;
@@ -79,18 +78,18 @@ public:
     {
         if (PostClass->objectName().isEmpty())
             PostClass->setObjectName(QString::fromUtf8("PostClass"));
-        PostClass->resize(1951, 850);
-        PostClass->setMinimumSize(QSize(0, 850));
+        PostClass->resize(1331, 667);
+        PostClass->setMinimumSize(QSize(0, 0));
         PostClass->setCursor(QCursor(Qt::ArrowCursor));
         QIcon icon;
         icon.addFile(QString::fromUtf8("icon2.png"), QSize(), QIcon::Normal, QIcon::Off);
         PostClass->setWindowIcon(icon);
         horizontalLayout_4 = new QHBoxLayout(PostClass);
-        horizontalLayout_4->setSpacing(11);
+        horizontalLayout_4->setSpacing(6);
         horizontalLayout_4->setContentsMargins(11, 11, 11, 11);
         horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
         verticalLayout = new QVBoxLayout();
-        verticalLayout->setSpacing(11);
+        verticalLayout->setSpacing(6);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         plblRec = new QLabel(PostClass);
         plblRec->setObjectName(QString::fromUtf8("plblRec"));
@@ -99,7 +98,7 @@ public:
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(plblRec->sizePolicy().hasHeightForWidth());
         plblRec->setSizePolicy(sizePolicy);
-        plblRec->setMinimumSize(QSize(0, 100));
+        plblRec->setMinimumSize(QSize(0, 0));
         plblRec->setStyleSheet(QString::fromUtf8("font: bold oblique 14pt Times; color: blue;"));
         plblRec->setFrameShape(QFrame::WinPanel);
         plblRec->setFrameShadow(QFrame::Raised);
@@ -110,7 +109,9 @@ public:
 
         m_ptxtReceiver = new QTextEdit(PostClass);
         m_ptxtReceiver->setObjectName(QString::fromUtf8("m_ptxtReceiver"));
-        m_ptxtReceiver->setMinimumSize(QSize(700, 0));
+        sizePolicy.setHeightForWidth(m_ptxtReceiver->sizePolicy().hasHeightForWidth());
+        m_ptxtReceiver->setSizePolicy(sizePolicy);
+        m_ptxtReceiver->setMinimumSize(QSize(0, 0));
         m_ptxtReceiver->setStyleSheet(QString::fromUtf8("font: oblique 12pt Times; color: black;"));
         m_ptxtReceiver->setFrameShape(QFrame::WinPanel);
         m_ptxtReceiver->setFrameShadow(QFrame::Raised);
@@ -134,7 +135,9 @@ public:
 
         m_ptxtSender = new QTextEdit(PostClass);
         m_ptxtSender->setObjectName(QString::fromUtf8("m_ptxtSender"));
-        m_ptxtSender->setMinimumSize(QSize(700, 0));
+        sizePolicy.setHeightForWidth(m_ptxtSender->sizePolicy().hasHeightForWidth());
+        m_ptxtSender->setSizePolicy(sizePolicy);
+        m_ptxtSender->setMinimumSize(QSize(0, 0));
         m_ptxtSender->setStyleSheet(QString::fromUtf8("font: 9pt Arial; color: black;"));
         m_ptxtSender->setFrameShape(QFrame::WinPanel);
         m_ptxtSender->setFrameShadow(QFrame::Raised);
@@ -169,7 +172,6 @@ public:
         m_pinfoReceive->setObjectName(QString::fromUtf8("m_pinfoReceive"));
         sizePolicy.setHeightForWidth(m_pinfoReceive->sizePolicy().hasHeightForWidth());
         m_pinfoReceive->setSizePolicy(sizePolicy);
-        m_pinfoReceive->setMinimumSize(QSize(0, 40));
         m_pinfoReceive->setStyleSheet(QString::fromUtf8("font: bold oblique 13pt Times; color: red;"));
         m_pinfoReceive->setFrameShape(QFrame::WinPanel);
         m_pinfoReceive->setFrameShadow(QFrame::Raised);
@@ -210,17 +212,14 @@ public:
 
         horizontalLayout_4->addLayout(verticalLayout);
 
-        verticalLayout_5 = new QVBoxLayout();
-        verticalLayout_5->setSpacing(11);
-        verticalLayout_5->setObjectName(QString::fromUtf8("verticalLayout_5"));
         verticalLayout_4 = new QVBoxLayout();
-        verticalLayout_4->setSpacing(13);
+        verticalLayout_4->setSpacing(6);
         verticalLayout_4->setObjectName(QString::fromUtf8("verticalLayout_4"));
         plblMessage = new QLabel(PostClass);
         plblMessage->setObjectName(QString::fromUtf8("plblMessage"));
         sizePolicy.setHeightForWidth(plblMessage->sizePolicy().hasHeightForWidth());
         plblMessage->setSizePolicy(sizePolicy);
-        plblMessage->setMinimumSize(QSize(0, 55));
+        plblMessage->setMinimumSize(QSize(0, 0));
         plblMessage->setStyleSheet(QString::fromUtf8("font: bold oblique 16pt Times; color: blue;"));
         plblMessage->setFrameShape(QFrame::WinPanel);
         plblMessage->setFrameShadow(QFrame::Raised);
@@ -232,7 +231,7 @@ public:
         gridLayout = new QGridLayout();
         gridLayout->setSpacing(6);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
-        gridLayout->setVerticalSpacing(11);
+        gridLayout->setVerticalSpacing(9);
         to = new QLabel(PostClass);
         to->setObjectName(QString::fromUtf8("to"));
         sizePolicy.setHeightForWidth(to->sizePolicy().hasHeightForWidth());
@@ -249,7 +248,7 @@ public:
         m_pTo->setObjectName(QString::fromUtf8("m_pTo"));
         sizePolicy.setHeightForWidth(m_pTo->sizePolicy().hasHeightForWidth());
         m_pTo->setSizePolicy(sizePolicy);
-        m_pTo->setStyleSheet(QString::fromUtf8("font: bold oblique 13pt Times; color: black;"));
+        m_pTo->setStyleSheet(QString::fromUtf8("font: bold oblique 11pt Times; color: black;"));
 
         gridLayout->addWidget(m_pTo, 1, 0, 1, 1);
 
@@ -269,15 +268,12 @@ public:
         m_pSubject->setObjectName(QString::fromUtf8("m_pSubject"));
         sizePolicy.setHeightForWidth(m_pSubject->sizePolicy().hasHeightForWidth());
         m_pSubject->setSizePolicy(sizePolicy);
-        m_pSubject->setStyleSheet(QString::fromUtf8("font: bold oblique 13pt Times; color: black;"));
+        m_pSubject->setStyleSheet(QString::fromUtf8("font: bold oblique 11pt Times; color: black;"));
 
         gridLayout->addWidget(m_pSubject, 1, 1, 1, 1);
 
 
         verticalLayout_4->addLayout(gridLayout);
-
-
-        verticalLayout_5->addLayout(verticalLayout_4);
 
         m_ptxtMessage = new QTextEdit(PostClass);
         m_ptxtMessage->setObjectName(QString::fromUtf8("m_ptxtMessage"));
@@ -286,19 +282,16 @@ public:
         sizePolicy1.setVerticalStretch(0);
         sizePolicy1.setHeightForWidth(m_ptxtMessage->sizePolicy().hasHeightForWidth());
         m_ptxtMessage->setSizePolicy(sizePolicy1);
-        m_ptxtMessage->setMinimumSize(QSize(550, 0));
+        m_ptxtMessage->setMinimumSize(QSize(0, 0));
         m_ptxtMessage->setStyleSheet(QString::fromUtf8("font: oblique 14pt Times; color: black;"));
         m_ptxtMessage->setFrameShape(QFrame::WinPanel);
         m_ptxtMessage->setFrameShadow(QFrame::Raised);
         m_ptxtMessage->setLineWidth(7);
 
-        verticalLayout_5->addWidget(m_ptxtMessage);
+        verticalLayout_4->addWidget(m_ptxtMessage);
 
         m_pinfoSend = new QLabel(PostClass);
         m_pinfoSend->setObjectName(QString::fromUtf8("m_pinfoSend"));
-        sizePolicy.setHeightForWidth(m_pinfoSend->sizePolicy().hasHeightForWidth());
-        m_pinfoSend->setSizePolicy(sizePolicy);
-        m_pinfoSend->setMinimumSize(QSize(0, 40));
         m_pinfoSend->setStyleSheet(QString::fromUtf8(""));
         m_pinfoSend->setFrameShape(QFrame::WinPanel);
         m_pinfoSend->setFrameShadow(QFrame::Raised);
@@ -306,7 +299,7 @@ public:
         m_pinfoSend->setAlignment(Qt::AlignCenter);
         m_pinfoSend->setMargin(3);
 
-        verticalLayout_5->addWidget(m_pinfoSend);
+        verticalLayout_4->addWidget(m_pinfoSend);
 
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setSpacing(6);
@@ -324,6 +317,7 @@ public:
         pcmd_clearsend->setObjectName(QString::fromUtf8("pcmd_clearsend"));
         sizePolicy.setHeightForWidth(pcmd_clearsend->sizePolicy().hasHeightForWidth());
         pcmd_clearsend->setSizePolicy(sizePolicy);
+        pcmd_clearsend->setCursor(QCursor(Qt::PointingHandCursor));
         pcmd_clearsend->setStyleSheet(QString::fromUtf8("font: bold oblique 11pt Times; color: black;"));
 
         horizontalLayout->addWidget(pcmd_clearsend);
@@ -333,13 +327,13 @@ public:
         horizontalLayout->addItem(horizontalSpacer);
 
 
-        verticalLayout_5->addLayout(horizontalLayout);
+        verticalLayout_4->addLayout(horizontalLayout);
 
 
-        horizontalLayout_4->addLayout(verticalLayout_5);
+        horizontalLayout_4->addLayout(verticalLayout_4);
 
         verticalLayout_3 = new QVBoxLayout();
-        verticalLayout_3->setSpacing(11);
+        verticalLayout_3->setSpacing(6);
         verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
         plblAddress = new QLabel(PostClass);
         plblAddress->setObjectName(QString::fromUtf8("plblAddress"));
@@ -348,7 +342,7 @@ public:
         sizePolicy2.setVerticalStretch(0);
         sizePolicy2.setHeightForWidth(plblAddress->sizePolicy().hasHeightForWidth());
         plblAddress->setSizePolicy(sizePolicy2);
-        plblAddress->setMinimumSize(QSize(270, 100));
+        plblAddress->setMinimumSize(QSize(0, 82));
         plblAddress->setStyleSheet(QString::fromUtf8("font: bold oblique 14pt Times; color: blue;"));
         plblAddress->setFrameShape(QFrame::WinPanel);
         plblAddress->setFrameShadow(QFrame::Raised);
@@ -361,15 +355,10 @@ public:
         m_pListAddress->setObjectName(QString::fromUtf8("m_pListAddress"));
         sizePolicy.setHeightForWidth(m_pListAddress->sizePolicy().hasHeightForWidth());
         m_pListAddress->setSizePolicy(sizePolicy);
-        m_pListAddress->setMinimumSize(QSize(270, 0));
         m_pListAddress->viewport()->setProperty("cursor", QVariant(QCursor(Qt::PointingHandCursor)));
         m_pListAddress->setStyleSheet(QString::fromUtf8("font: oblique bold 13pt Times; color: black;"));
-        m_pListAddress->setFrameShape(QFrame::WinPanel);
-        m_pListAddress->setFrameShadow(QFrame::Raised);
-        m_pListAddress->setLineWidth(6);
         m_pListAddress->setIconSize(QSize(124, 152));
         m_pListAddress->setViewMode(QListView::IconMode);
-        m_pListAddress->setModelColumn(0);
 
         verticalLayout_3->addWidget(m_pListAddress);
 
@@ -377,13 +366,13 @@ public:
         horizontalLayout_4->addLayout(verticalLayout_3);
 
         verticalLayout_2 = new QVBoxLayout();
-        verticalLayout_2->setSpacing(11);
+        verticalLayout_2->setSpacing(12);
         verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
         plblSettings = new QLabel(PostClass);
         plblSettings->setObjectName(QString::fromUtf8("plblSettings"));
         sizePolicy.setHeightForWidth(plblSettings->sizePolicy().hasHeightForWidth());
         plblSettings->setSizePolicy(sizePolicy);
-        plblSettings->setMinimumSize(QSize(0, 100));
+        plblSettings->setMinimumSize(QSize(0, 0));
         QFont font;
         font.setFamily(QString::fromUtf8("Times"));
         font.setPointSize(14);
@@ -450,11 +439,8 @@ public:
 
         pbuttonReceived = new QPushButton(PostClass);
         pbuttonReceived->setObjectName(QString::fromUtf8("pbuttonReceived"));
-        QSizePolicy sizePolicy3(QSizePolicy::Minimum, QSizePolicy::Preferred);
-        sizePolicy3.setHorizontalStretch(0);
-        sizePolicy3.setVerticalStretch(0);
-        sizePolicy3.setHeightForWidth(pbuttonReceived->sizePolicy().hasHeightForWidth());
-        pbuttonReceived->setSizePolicy(sizePolicy3);
+        sizePolicy.setHeightForWidth(pbuttonReceived->sizePolicy().hasHeightForWidth());
+        pbuttonReceived->setSizePolicy(sizePolicy);
         pbuttonReceived->setCursor(QCursor(Qt::PointingHandCursor));
         pbuttonReceived->setStyleSheet(QString::fromUtf8("font: bold oblique 13pt Times; color: blue;"));
         pbuttonReceived->setFlat(true);
@@ -463,8 +449,8 @@ public:
 
         pbuttonSend = new QPushButton(PostClass);
         pbuttonSend->setObjectName(QString::fromUtf8("pbuttonSend"));
-        sizePolicy3.setHeightForWidth(pbuttonSend->sizePolicy().hasHeightForWidth());
-        pbuttonSend->setSizePolicy(sizePolicy3);
+        sizePolicy.setHeightForWidth(pbuttonSend->sizePolicy().hasHeightForWidth());
+        pbuttonSend->setSizePolicy(sizePolicy);
         pbuttonSend->setCursor(QCursor(Qt::PointingHandCursor));
         pbuttonSend->setStyleSheet(QString::fromUtf8("font: bold oblique 13pt Times; color: blue;"));
         pbuttonSend->setFlat(true);
@@ -540,7 +526,7 @@ public:
         pbuttonCreateAccount->setText(QApplication::translate("PostClass", "\320\241\320\276\320\267\320\264\320\260\321\202\321\214 \321\217\321\211\320\270\320\272", 0, QApplication::UnicodeUTF8));
         pbuttonSettingsAccount->setText(QApplication::translate("PostClass", "\320\235\320\260\321\201\321\202\321\200\320\276\320\270\321\202\321\214 \321\217\321\211\320\270\320\272", 0, QApplication::UnicodeUTF8));
         pbuttonCreateAddress->setText(QApplication::translate("PostClass", "\320\224\320\276\320\261\320\260\320\262\320\270\321\202\321\214 \320\260\320\264\321\200\320\265\321\201", 0, QApplication::UnicodeUTF8));
-        pbuttonSettingsAddress->setText(QApplication::translate("PostClass", "\320\230\320\267\320\274\320\265\320\275\320\270\321\202\321\214/\320\243\320\264\320\260\320\273\320\270\321\202\321\214 \320\260\320\264\321\200\320\265\321\201", 0, QApplication::UnicodeUTF8));
+        pbuttonSettingsAddress->setText(QApplication::translate("PostClass", "\320\230\320\267\320\274\320\265\320\275\320\270\321\202\321\214 \320\260\320\264\321\200\320\265\321\201", 0, QApplication::UnicodeUTF8));
         pbuttonSettings->setText(QApplication::translate("PostClass", "\320\235\320\260\321\201\321\202\321\200\320\276\320\271\320\272\320\270", 0, QApplication::UnicodeUTF8));
         pbuttonReceived->setText(QApplication::translate("PostClass", "\320\237\320\276\320\273\321\203\321\207\320\265\320\275\320\275\321\213\320\265", 0, QApplication::UnicodeUTF8));
         pbuttonSend->setText(QApplication::translate("PostClass", "\320\236\321\202\320\277\321\200\320\260\320\262\320\273\320\265\320\275\320\275\321\213\320\265", 0, QApplication::UnicodeUTF8));
@@ -556,4 +542,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // UI_POST4_H
+#endif // UI_POST3_1_H

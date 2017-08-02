@@ -3,7 +3,7 @@
 
 #include <QtGui/QWidget>
 #include <QAbstractSocket>
-#include "ui_post4.h"
+#include "ui_post3_1.h"
 
 //class Post : public QWidget
 //{
