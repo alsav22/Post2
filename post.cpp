@@ -214,7 +214,7 @@ void Post::slotSendMessage()
 	// или в slotChoiceAddress, или в slottextChanged
 	if (ui.m_pTo ->text().isEmpty()) 
 	{
-		outputInfo(ui.m_pinfoSend, arrInfo[SEND_ERROR].strInfo + "\nВведите или выберите адрес.", arrInfo[SEND_ERROR].strSound);
+		outputInfo(ui.m_pinfoSend, arrInfo[SEND_ERROR].strInfo + QString("\nВведите или выберите адрес."), arrInfo[SEND_ERROR].strSound, 1);
 		return;
 	}
 
@@ -337,7 +337,7 @@ void Post::slotReceiveMessage()
 		{
 			qDebug() << "false";
 			m_pSocketPOP ->abort();
-			outputInfo(ui.m_pinfoReceive, arrInfo[REC_ERROR].strInfo + arrError[7], arrInfo[REC_ERROR].strSound); // сообщение - ошибка ("Неполадки в сети")
+			outputInfo(ui.m_pinfoReceive, arrInfo[REC_ERROR].strInfo + QString(arrError[7]), arrInfo[REC_ERROR].strSound); // сообщение - ошибка ("Неполадки в сети")
 			
 			QApplication::restoreOverrideCursor();
 			return;
@@ -353,7 +353,7 @@ void Post::slotReceiveMessage()
 		if (str[0] == '-') // если сервер выдал ошибку
 		{ 
 			m_pSocketPOP ->abort();
-			outputInfo(ui.m_pinfoReceive, arrInfo[REC_ERROR].strInfo + arrError[m_c], arrInfo[REC_ERROR].strSound); // сообщение - ошибка
+			outputInfo(ui.m_pinfoReceive, arrInfo[REC_ERROR].strInfo + QString(arrError[m_c]), arrInfo[REC_ERROR].strSound); // сообщение - ошибка
 			
 			QApplication::restoreOverrideCursor();
 			return; 
@@ -368,7 +368,7 @@ void Post::slotReceiveMessage()
 	{
 		qDebug() << "false";
 		m_pSocketPOP ->abort();
-		outputInfo(ui.m_pinfoReceive, arrInfo[REC_ERROR].strInfo + arrError[7], arrInfo[REC_ERROR].strSound); // сообщение - ошибка ("Неполадки в сети")
+		outputInfo(ui.m_pinfoReceive, arrInfo[REC_ERROR].strInfo + QString(arrError[7]), arrInfo[REC_ERROR].strSound); // сообщение - ошибка ("Неполадки в сети")
 		
 		QApplication::restoreOverrideCursor();
 		return;
@@ -383,7 +383,7 @@ void Post::slotReceiveMessage()
 		str = word + in.readAll(); 
 		ui.m_ptxtSender ->append(str); qDebug() << str;
 		m_pSocketPOP ->abort();
-		outputInfo(ui.m_pinfoReceive, arrInfo[REC_ERROR].strInfo + arrError[m_c], arrInfo[REC_ERROR].strSound); // сообщение - ошибка
+		outputInfo(ui.m_pinfoReceive, arrInfo[REC_ERROR].strInfo + QString(arrError[m_c]), arrInfo[REC_ERROR].strSound); // сообщение - ошибка
 		
 		QApplication::restoreOverrideCursor();
 		return; 
@@ -416,7 +416,7 @@ void Post::slotReceiveMessage()
 		if (!reedTextMessage(m_pSocketPOP, in, ui.m_ptxtSender, vecstr)) // чтение текста письма в vecstr
 		{
 			m_pSocketPOP ->abort();
-			outputInfo(ui.m_pinfoReceive, arrInfo[REC_ERROR].strInfo + arrError[7], arrInfo[REC_ERROR].strSound); // сообщение - ошибка
+			outputInfo(ui.m_pinfoReceive, arrInfo[REC_ERROR].strInfo + QString(arrError[7]), arrInfo[REC_ERROR].strSound); // сообщение - ошибка
 			
 			QApplication::restoreOverrideCursor();
 
@@ -440,7 +440,7 @@ void Post::slotReceiveMessage()
 		if (vecstr[0][0] == '-') // проверка ответа сервера после RETR
 		{
 			m_pSocketPOP ->abort();
-			outputInfo(ui.m_pinfoReceive, arrInfo[REC_ERROR].strInfo + arrError[m_c], arrInfo[REC_ERROR].strSound); // сообщение - ошибка
+			outputInfo(ui.m_pinfoReceive, arrInfo[REC_ERROR].strInfo + QString(arrError[m_c]), arrInfo[REC_ERROR].strSound); // сообщение - ошибка
 			
 			QApplication::restoreOverrideCursor();
 
@@ -453,7 +453,7 @@ void Post::slotReceiveMessage()
 		if ( vecstr.last().size() >= 5 && vecstr.last().right(5) != (RN + "." + RN))
 		{
 			m_pSocketPOP ->abort();
-			outputInfo(ui.m_pinfoReceive, arrInfo[REC_ERROR].strInfo + arrError[m_c], arrInfo[REC_ERROR].strSound); // сообщение - ошибка
+			outputInfo(ui.m_pinfoReceive, arrInfo[REC_ERROR].strInfo + QString(arrError[m_c]), arrInfo[REC_ERROR].strSound); // сообщение - ошибка
 			
 			QApplication::restoreOverrideCursor();
 			
@@ -493,7 +493,7 @@ void Post::slotReceiveMessage()
 		{
 			qDebug() << "false";
 			m_pSocketPOP ->abort();
-			outputInfo(ui.m_pinfoReceive, arrInfo[REC_ERROR].strInfo + arrError[7], arrInfo[REC_ERROR].strSound); // сообщение - ошибка ("Неполадки в сети")
+			outputInfo(ui.m_pinfoReceive, arrInfo[REC_ERROR].strInfo + QString(arrError[7]), arrInfo[REC_ERROR].strSound); // сообщение - ошибка ("Неполадки в сети")
 			
 			QApplication::restoreOverrideCursor();
 			return;
@@ -508,7 +508,7 @@ void Post::slotReceiveMessage()
 		if (str[0] == '-') 
 		{ 
 			m_pSocketPOP ->abort();
-			outputInfo(ui.m_pinfoReceive, arrInfo[REC_ERROR].strInfo + arrError[m_c], arrInfo[REC_ERROR].strSound);
+			outputInfo(ui.m_pinfoReceive, arrInfo[REC_ERROR].strInfo + QString(arrError[m_c]), arrInfo[REC_ERROR].strSound);
 			
 			QApplication::restoreOverrideCursor();
 			return; 
@@ -532,7 +532,7 @@ void Post::slotReceiveMessage()
 	{
 		qDebug() << "false";
 		m_pSocketPOP ->abort();
-		outputInfo(ui.m_pinfoReceive, arrInfo[REC_ERROR].strInfo + arrError[7], arrInfo[REC_ERROR].strSound); // сообщение - ошибка ("Неполадки в сети")
+		outputInfo(ui.m_pinfoReceive, arrInfo[REC_ERROR].strInfo + QString(arrError[7]), arrInfo[REC_ERROR].strSound); // сообщение - ошибка ("Неполадки в сети")
 		
 		QApplication::restoreOverrideCursor();
 		return;
@@ -580,7 +580,7 @@ if (ui.m_pCheckBox ->checkState() != Qt::Checked)
 		m_pSocketSMTP ->abort();
 		flagErrorSend = 1;
 		if (m_c != 9) // если ошибка не в ответ на QUIT, то вывод сообщения 
-			outputInfo(ui.m_pinfoSend, arrInfo[SEND_ERROR].strInfo + arrError[m_c - 1], arrInfo[SEND_ERROR].strSound, SEND_ERROR);
+			outputInfo(ui.m_pinfoSend, arrInfo[SEND_ERROR].strInfo + QString(arrError[m_c - 1]), arrInfo[SEND_ERROR].strSound, SEND_ERROR);
 		
 		QApplication::restoreOverrideCursor();
 		return;
@@ -870,7 +870,7 @@ void Post::slotConnectedPOP()
 void Post::slotErrorSMTP(QAbstractSocket::SocketError err)
 {
   if (err == QAbstractSocket::HostNotFoundError/* || QAbstractSocket::UnknownSocketError*/)
-         outputInfo(ui.m_pinfoSend, arrInfo[SEND_ERROR].strInfo + "\nПроверьте соединение с интернетом.", arrInfo[SEND_ERROR].strSound);
+         outputInfo(ui.m_pinfoSend, arrInfo[SEND_ERROR].strInfo + QString("\nПроверьте соединение с интернетом."), arrInfo[SEND_ERROR].strSound);
 		                                                        
     QString strError = 
         QWidget::tr("Ошибка: ") + (err == QAbstractSocket::HostNotFoundError ? 
@@ -893,7 +893,7 @@ void Post::slotErrorSMTP(QAbstractSocket::SocketError err)
 void Post::slotErrorPOP(QAbstractSocket::SocketError err)
 {
     if (err == QAbstractSocket::HostNotFoundError/* || QAbstractSocket::UnknownSocketError*/)
-         outputInfo(ui.m_pinfoReceive, arrInfo[REC_ERROR].strInfo + "\nПроверьте соединение с интернетом.", arrInfo[REC_ERROR].strSound);
+         outputInfo(ui.m_pinfoReceive, arrInfo[REC_ERROR].strInfo + QString("\nПроверьте соединение с интернетом."), arrInfo[REC_ERROR].strSound);
    
     QString strError = 
         "Error: " + (err == QAbstractSocket::HostNotFoundError ? 
@@ -1392,7 +1392,7 @@ void Post::receiveMessage()
 		{
 			qDebug() << "false";
 			m_pSocketPOP ->abort();
-			outputInfo(ui.m_pinfoReceive, arrInfo[REC_ERROR].strInfo + arrError[7], arrInfo[REC_ERROR].strSound); // сообщение - ошибка ("Неполадки в сети")
+			outputInfo(ui.m_pinfoReceive, arrInfo[REC_ERROR].strInfo + QString(arrError[7]), arrInfo[REC_ERROR].strSound); // сообщение - ошибка ("Неполадки в сети")
 			return;
 		}
 	
@@ -1406,7 +1406,7 @@ void Post::receiveMessage()
 		if (str[0] == '-') // если сервер выдал ошибку
 		{ 
 			m_pSocketPOP ->abort();
-			outputInfo(ui.m_pinfoReceive, arrInfo[REC_ERROR].strInfo + arrError[m_c], arrInfo[REC_ERROR].strSound); // сообщение - ошибка
+			outputInfo(ui.m_pinfoReceive, arrInfo[REC_ERROR].strInfo + QString(arrError[m_c]), arrInfo[REC_ERROR].strSound); // сообщение - ошибка
 			return; 
 		}
 		
@@ -1419,7 +1419,7 @@ void Post::receiveMessage()
 	{
 		qDebug() << "false";
 		m_pSocketPOP ->abort();
-		outputInfo(ui.m_pinfoReceive, arrInfo[REC_ERROR].strInfo + arrError[7], arrInfo[REC_ERROR].strSound); // сообщение - ошибка ("Неполадки в сети")
+		outputInfo(ui.m_pinfoReceive, arrInfo[REC_ERROR].strInfo + QString(arrError[7]), arrInfo[REC_ERROR].strSound); // сообщение - ошибка ("Неполадки в сети")
 		return;
 	}
 	 
@@ -1432,7 +1432,7 @@ void Post::receiveMessage()
 		str = word + in.readAll(); 
 		ui.m_ptxtSender ->append(str); qDebug() << str;
 		m_pSocketPOP ->abort();
-		outputInfo(ui.m_pinfoReceive, arrInfo[REC_ERROR].strInfo + arrError[m_c], arrInfo[REC_ERROR].strSound); // сообщение - ошибка
+		outputInfo(ui.m_pinfoReceive, arrInfo[REC_ERROR].strInfo + QString(arrError[m_c]), arrInfo[REC_ERROR].strSound); // сообщение - ошибка
 		return; 
 	}
 		
@@ -1460,7 +1460,7 @@ void Post::receiveMessage()
 		if (!reedTextMessage(m_pSocketPOP, in, ui.m_ptxtSender, vecstr)) // чтение текста письма в vecstr
 		{
 			m_pSocketPOP ->abort();
-			outputInfo(ui.m_pinfoReceive, arrInfo[REC_ERROR].strInfo + arrError[7], arrInfo[REC_ERROR].strSound); // сообщение - ошибка
+			outputInfo(ui.m_pinfoReceive, arrInfo[REC_ERROR].strInfo + QString(arrError[7]), arrInfo[REC_ERROR].strSound); // сообщение - ошибка
 			return; 
 		}  
 		
@@ -1478,7 +1478,7 @@ void Post::receiveMessage()
 		if (vecstr[0][0] == '-') // проверка ответа сервера после RETR
 		{
 			m_pSocketPOP ->abort();
-			outputInfo(ui.m_pinfoReceive, arrInfo[REC_ERROR].strInfo + arrError[m_c], arrInfo[REC_ERROR].strSound); // сообщение - ошибка
+			outputInfo(ui.m_pinfoReceive, arrInfo[REC_ERROR].strInfo + QString(arrError[m_c]), arrInfo[REC_ERROR].strSound); // сообщение - ошибка
 			return; 
 	    }
 
@@ -1486,7 +1486,7 @@ void Post::receiveMessage()
 		if ( vecstr.last().size() >= 5 && vecstr.last().right(5) != (RN + "." + RN))
 		{
 			m_pSocketPOP ->abort();
-			outputInfo(ui.m_pinfoReceive, arrInfo[REC_ERROR].strInfo + arrError[m_c], arrInfo[REC_ERROR].strSound); // сообщение - ошибка
+			outputInfo(ui.m_pinfoReceive, arrInfo[REC_ERROR].strInfo + QString(arrError[m_c]), arrInfo[REC_ERROR].strSound); // сообщение - ошибка
 			return; 
 		}
 	
@@ -1507,7 +1507,7 @@ void Post::receiveMessage()
 		{
 			qDebug() << "false";
 			m_pSocketPOP ->abort();
-			outputInfo(ui.m_pinfoReceive, arrInfo[REC_ERROR].strInfo + arrError[7], arrInfo[REC_ERROR].strSound); // сообщение - ошибка ("Неполадки в сети")
+			outputInfo(ui.m_pinfoReceive, arrInfo[REC_ERROR].strInfo + QString(arrError[7]), arrInfo[REC_ERROR].strSound); // сообщение - ошибка ("Неполадки в сети")
 			return;
 		}
 		
@@ -1520,7 +1520,7 @@ void Post::receiveMessage()
 		if (str[0] == '-') 
 		{ 
 			m_pSocketPOP ->abort();
-			outputInfo(ui.m_pinfoReceive, arrInfo[REC_ERROR].strInfo + arrError[m_c], arrInfo[REC_ERROR].strSound);
+			outputInfo(ui.m_pinfoReceive, arrInfo[REC_ERROR].strInfo + QString(arrError[m_c]), arrInfo[REC_ERROR].strSound);
 			return; 
 		}
 		
@@ -1542,7 +1542,7 @@ void Post::receiveMessage()
 	{
 		qDebug() << "false";
 		m_pSocketPOP ->abort();
-		outputInfo(ui.m_pinfoReceive, arrInfo[REC_ERROR].strInfo + arrError[7], arrInfo[REC_ERROR].strSound); // сообщение - ошибка ("Неполадки в сети")
+		outputInfo(ui.m_pinfoReceive, arrInfo[REC_ERROR].strInfo + QString(arrError[7]), arrInfo[REC_ERROR].strSound); // сообщение - ошибка ("Неполадки в сети")
 		return;
 	}
 	

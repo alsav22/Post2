@@ -24,8 +24,10 @@ QVector <QString> vectorCommands;
 
 struct Info
 {
-	QString strInfo;
-	QString strSound;
+	//QString strInfo;
+	//QString strSound;
+	const char* strInfo;
+	const char* strSound;
 };
 
 enum INFO { SEND_DONE, SEND_ERROR, REC_DONE, REC_ERROR, REC_INFO };
@@ -36,7 +38,7 @@ Info arrInfo[] = { {"Письмо успешно отправлено!"  , "sound/send_done.wav"  },
                    {"Ошибка при получении писем!" , "sound/rec_error.wav"  },
                    {"Нет новых писем!" ,            "sound/rec_info2.wav"  } }; 
 				 
-QString arrError[] =  {"\nОшибка приветствия сервера.",       "\nЗапрос на аутентификацию не прошёл.", 
+const char* arrError[] =  {"\nОшибка приветствия сервера.",       "\nЗапрос на аутентификацию не прошёл.", 
                        "\nПроверьте логин или пароль.",       "\nПроверьте логин или пароль.",
 			           "\nПроверьте Ящик.",                   "\nПроверьте Адрес.", 
 				       "\nНеполадки в сети или на сервере.",  "\nНеполадки в сети или на сервере."};

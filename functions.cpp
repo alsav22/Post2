@@ -66,7 +66,9 @@ void outputInfo(QLabel *pinfo, const QString str, const QString str_sound, int e
 		pinfo ->setStyleSheet("font: bold oblique 13pt Times; color: #483D8B;");
 	pinfo ->clear();
 	
-	pinfo ->setText(QWidget::tr(str.toStdString().c_str()));
+	//pinfo ->setText(QWidget::tr(str.toStdString().c_str()));
+	//pinfo ->setText(QWidget::tr(str.toAscii().data()));
+	pinfo ->setText(str);
 	QSound::play(str_sound);
 }
 
