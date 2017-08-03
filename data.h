@@ -35,9 +35,9 @@ struct Info
 
 enum INFO { SEND_DONE, SEND_ERROR, REC_DONE, REC_ERROR, REC_INFO };
 
-extern Info arrInfo[5];
+extern QVector <Info> arrInfo;
 				 
-extern QString arrError[8];
+extern QVector <QString> arrError;
 					  
 enum HEADER {DATE, FROM, TO, SUBJECT};
 

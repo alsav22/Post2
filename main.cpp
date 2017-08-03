@@ -10,12 +10,6 @@
 
 int main(int argc, char *argv[])
 {
-	/*QApplication a(argc, argv);
-	Post w;
-	w.show();
-	return a.exec();*/
-/////////////////////////////////////////////////	
-	
 	//SetConsoleCP(1251);
 	//SetConsoleOutputCP(1251);
 	
@@ -24,14 +18,10 @@ int main(int argc, char *argv[])
 	QSplashScreen splash(QPixmap("icon1.png"));
 	splash.show();
 	
-	
-	
 	initData(); // утсановка нужного кодека для Си-строк и tr, и инициализация глобальных данных
 	
 	//QString arr[] = {"Ошибка при отправке письма!"};
 	////QString str = QWidget::tr("Когда я на почте.");
-	QString str("Когда я на почте.");
-	
 	//QTextDecoder dec(LocalCodec);
 	//dec.toUnicode(&str, "Когда я на почте.", strlen("Когда я на почте."));
 	//

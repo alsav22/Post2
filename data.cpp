@@ -13,7 +13,7 @@ extern const QString PATH_ATTACHMENT = "./Attachment/";
 
 QString *pPathAttachment = NULL;
 
-QTextCodec *LocalCodec = QTextCodec::codecForName(QTextCodec::codecForLocale() ->name()/*"Windows-1251"*/);
+QTextCodec *LocalCodec = QTextCodec::codecForName(QTextCodec::codecForLocale() ->name());
 
 uint OK_code[] = {OK220, OK250, OK334, OK334, OK235, OK250, OK250, OK354, OK250, OK221};
 
@@ -31,16 +31,9 @@ QString arrCommandsPOP_USER      [7] = {"USER ", "PASS ",  "NOOP",
 						                      
 QVector <QString> vectorCommands;
 
-Info arrInfo[5]; /*= { {"Письмо успешно отправлено!"  , "sound/send_done.wav"  },
-                   {"Ошибка при отправке письма!" , "sound/send_error.wav" },
-                   {"У вас новая почта!"          , "sound/rec_done.wav"   },
-                   {"Ошибка при получении писем!" , "sound/rec_error.wav"  },
-                   {"Нет новых писем!" ,            "sound/rec_info2.wav"  } }; */
+QVector <Info> arrInfo;
 				 
-QString arrError[8]; /*=  {"\nОшибка приветствия сервера.",       "\nЗапрос на аутентификацию не прошёл.", 
-                       "\nПроверьте логин или пароль.",       "\nПроверьте логин или пароль.",
-			           "\nПроверьте Ящик.",                   "\nПроверьте Адрес.", 
-				       "\nНеполадки в сети или на сервере.",  "\nНеполадки в сети или на сервере."};*/
+QVector <QString> arrError;
 					  
 QString  arrHEADER[] = {"Date: ", "From: ", "To: ", "Subject: "};
 

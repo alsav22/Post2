@@ -18,21 +18,21 @@ void initData()
 	QTextCodec::setCodecForCStrings(LocalCodec); // кодек для Си-строк и QByteArray
 	
 	Info tempInfo[] = { {"Письмо успешно отправлено!"  , "sound/send_done.wav"  },
-                         {"Ошибка при отправке письма!" , "sound/send_error.wav" },
-                         {"У вас новая почта!"          , "sound/rec_done.wav"   },
-                         {"Ошибка при получении писем!" , "sound/rec_error.wav"  },
-                         {"Нет новых писем!" ,            "sound/rec_info2.wav"  } }; 
+                        {"Ошибка при отправке письма!" , "sound/send_error.wav" },
+                        {"У вас новая почта!"          , "sound/rec_done.wav"   },
+                        {"Ошибка при получении писем!" , "sound/rec_error.wav"  },
+                        {"Нет новых писем!" ,            "sound/rec_info2.wav"  } }; 
 	
 	for (int i = 0; i < sizeof(tempInfo) / sizeof(Info); ++i)
-		arrInfo[i] = tempInfo[i];
+		arrInfo.push_back(tempInfo[i]);
 	
 	QString tempError[] = {"\nОшибка приветствия сервера.",       "\nЗапрос на аутентификацию не прошёл.", 
-                            "\nПроверьте логин или пароль.",       "\nПроверьте логин или пароль.",
-			                "\nПроверьте Ящик.",                   "\nПроверьте Адрес.", 
-				            "\nНеполадки в сети или на сервере.",  "\nНеполадки в сети или на сервере."};
+                           "\nПроверьте логин или пароль.",       "\nПроверьте логин или пароль.",
+			               "\nПроверьте Ящик.",                   "\nПроверьте Адрес.", 
+				           "\nНеполадки в сети или на сервере.",  "\nНеполадки в сети или на сервере."};
 
 	for (int i = 0; i < sizeof(tempError) / sizeof(tempError[0]); ++i)
-		arrError[i] = tempError[i];
+		arrError.push_back(tempError[i]);
 }
 
 // форматирование данных для отправки на SMTP сервер
