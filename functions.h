@@ -12,7 +12,7 @@
 //#include <QSound>
 #include <QtGui>
 
-void initData(); // инициализация глобальных данных
+void initData(); // инициализация кодеков и глобальных данных
 
 // создание сообщения, если текущего ящика нет
 int messageAccount(); 

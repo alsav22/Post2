@@ -11,20 +11,22 @@
 #include <QtNetwork>
 #include "data.h"
 
+// инициализация кодеков и глобальных данных
 void initData()
 {
 	QTextCodec::setCodecForTr(LocalCodec);
 	QTextCodec::setCodecForCStrings(LocalCodec); // кодек для Си-строк и QByteArray
 	
-	Info tempInfo[5] = { {"Письмо успешно отправлено!"  , "sound/send_done.wav"  },
+	Info tempInfo[] = { {"Письмо успешно отправлено!"  , "sound/send_done.wav"  },
                          {"Ошибка при отправке письма!" , "sound/send_error.wav" },
                          {"У вас новая почта!"          , "sound/rec_done.wav"   },
                          {"Ошибка при получении писем!" , "sound/rec_error.wav"  },
                          {"Нет новых писем!" ,            "sound/rec_info2.wav"  } }; 
+	
 	for (int i = 0; i < sizeof(tempInfo) / sizeof(Info); ++i)
 		arrInfo[i] = tempInfo[i];
 	
-	QString tempError[8] = {"\nОшибка приветствия сервера.",       "\nЗапрос на аутентификацию не прошёл.", 
+	QString tempError[] = {"\nОшибка приветствия сервера.",       "\nЗапрос на аутентификацию не прошёл.", 
                             "\nПроверьте логин или пароль.",       "\nПроверьте логин или пароль.",
 			                "\nПроверьте Ящик.",                   "\nПроверьте Адрес.", 
 				            "\nНеполадки в сети или на сервере.",  "\nНеполадки в сети или на сервере."};

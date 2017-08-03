@@ -8,15 +8,6 @@
 
 #include <iostream>
 
-
-
-int messageAccount();
-
-void foo(QString& str)
-{
-	str = "Когда я на почте.";
-}
-
 int main(int argc, char *argv[])
 {
 	/*QApplication a(argc, argv);
@@ -35,12 +26,12 @@ int main(int argc, char *argv[])
 	
 	
 	
-	initData(); // инициализация глобальных данных (после установки нужно кодека)
+	initData(); // утсановка нужного кодека для Си-строк и tr, и инициализация глобальных данных
 	
 	//QString arr[] = {"Ошибка при отправке письма!"};
 	////QString str = QWidget::tr("Когда я на почте.");
-	//QString str;//(arr[0] + "Когда я на почте.");
-	//foo(str);
+	QString str("Когда я на почте.");
+	
 	//QTextDecoder dec(LocalCodec);
 	//dec.toUnicode(&str, "Когда я на почте.", strlen("Когда я на почте."));
 	//
