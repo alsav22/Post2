@@ -172,7 +172,7 @@ Post::Post(QWidget *pwgt /*= 0*/) : QWidget(pwgt), m_pcodec(QTextCodec::codecFor
 
 /////////////////////////////////////////////////////////////////////////////////
 
-// форматирование данных для отправки на SMTP сервер
+// форматирование данных письма для отправки на SMTP сервер
 void Post::formatMessageForSMTP()
 {
 	dataLetter.clear();
@@ -612,13 +612,8 @@ if (ui.m_pCheckBox ->checkState() != Qt::Checked)
 //---------------------------------------------------------------------------------------	
 	if (m_c == 7)  
 	{
-		//QString letter; // строка под письмо
-		//QTextCodec* codec = QTextCodec::codecForName("UTF-8");
-		//
-		//formatMessageForSMTP(letter, this, codec);
-		
 		out.setCodec(m_pcodec); // установка для потока кодировки 
-		                     // (в этой кодировке письмо будет отправлено на сервер SMTP)
+		                        // (в этой кодировке письмо будет отправлено на сервер SMTP)
 		out << dataLetter; // отправка данных письма на сервер SMTP
 
 //================================================================================		

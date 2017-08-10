@@ -48,7 +48,7 @@ class Post : public QWidget
 private :
     Ui::PostClass ui;
 	
-	QTextCodec       *m_pcodec;
+	QTextCodec       *m_pcodec; // кодек для форматирования данных письма
 	
 	QCursor          *m_pCursor;
 	CreateAccount    *m_pсreateAccount;    // окно диалога создания ящика
