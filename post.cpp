@@ -22,7 +22,7 @@
 
 // конструктор ======================================================================
 
-Post::Post(QWidget *pwgt /*= 0*/) : QWidget(pwgt)
+Post::Post(QWidget *pwgt /*= 0*/) : QWidget(pwgt), m_pcodec(QTextCodec::codecForName("UTF-8"))
 {
 	//m_ptxtSender      = NULL;
 	//m_pCheckBox       = NULL;
@@ -172,6 +172,36 @@ Post::Post(QWidget *pwgt /*= 0*/) : QWidget(pwgt)
 
 /////////////////////////////////////////////////////////////////////////////////
 
+// форматирование данных для отправки на SMTP сервер
+void Post::formatMessageForSMTP()
+{
+	dataLetter.clear();
+	
+	QString charset("=?" + m_pcodec ->name() + "?");
+	QString beg("B?");
+	QString end("?= ");
+	dataLetter.append("From: " + charset + beg +
+			        m_pcodec ->fromUnicode(m_pcurrentAccount ->getname()).toBase64() + 
+					end + '<' + m_pcurrentAccount ->gete_mail() + '>' + RN); 
+		
+	dataLetter.append("To: " + charset + beg +
+					m_pcodec ->fromUnicode(m_pcurrentAddress ->getname()).toBase64() +
+					end + '<' + m_pcurrentAddress ->gete_mail() + '>' + RN);
+		
+	dataLetter.append("Subject: " + charset + beg +
+					m_pcodec ->fromUnicode(m_pcurrentMessage ->getsubject()).toBase64() + 
+					end + RN);
+
+	dataLetter.append("MIME-Version: 1.0" + RN );
+	dataLetter.append("Content-Type: text/plain; charset=" + m_pcodec ->name() + RN);
+	dataLetter.append("Content-Transfer-Encoding: 8bit" + RN); // без этого в оригинале письма будет quoted-printable
+
+	dataLetter.append(RN); // отделяем заголовки от тела письма
+	dataLetter.append(m_pcurrentMessage ->gettext()); // тело письма
+	dataLetter.append(QString(RN + "." + RN)); // признак конца данных
+}
+
+
 void Post::slotSendMessage()
 {
 	if (this ->m_flagExistAccount == 0) // если ящика не существует
@@ -202,12 +232,29 @@ void Post::slotSendMessage()
 	
 	QApplication::restoreOverrideCursor(); // возвращаем обычный курсор
 	QApplication::setOverrideCursor(QCursor(Qt::WaitCursor)); // песочные часы
-    
+
+	// формирование текущего сообщения
+	QDateTime date;
+
+	m_pcurrentMessage ->setdate   (date.currentDateTime().toString(Qt::SystemLocaleDate)); // дата отправки
+	m_pcurrentMessage ->setfrom   (m_pcurrentAccount ->getname() + " <" + m_pcurrentAccount ->gete_mail() + ">"); // добавляем имя к полю from, добавляем к e-mail "<>"
+	m_pcurrentMessage ->setto     (m_pcurrentAddress ->getname() + " <" + m_pcurrentAddress ->gete_mail() + ">"); // добавляем имя к полю to,   добавляем к e-mail "<>"
+	m_pcurrentMessage ->setsubject(ui.m_pSubject        ->text());
+	m_pcurrentMessage ->settext   (ui.m_ptxtMessage     ->toPlainText());
+
+	formatMessageForSMTP(); // формирование данных письма
+
+	setcommandsSMTP(m_pcurrentAccount, ui.m_pTo); // заполнение вектора командами для сервера SMTP
+
 	if (m_pSocketSMTP ->state() == QAbstractSocket::ConnectedState) 
 		m_pSocketSMTP ->abort();
 	
 	m_pSocketSMTP ->connectToHostEncrypted(m_pcurrentAccount ->getHostSMTP(), 
 	                                       m_pcurrentAccount ->getPortSMTP().toUInt());
+
+	flagErrorSend     = 0;
+	m_c               = 0;
+	m_flagReadmessage = 0;
     
 	//qDebug() << "peerCertificate()" << m_pSocketSMTP ->peerCertificate();
 
@@ -219,15 +266,6 @@ void Post::slotSendMessage()
 m_pTo ->clear();
 m_pTo ->insert(m_pcurrentAccount ->gete_mail());	
 //.......................................................................*/	
-	
-	QDateTime date;
-
-	m_pcurrentMessage ->setdate   (date.currentDateTime().toString(Qt::SystemLocaleDate)); // дата отправки
-	m_pcurrentMessage ->setfrom   (m_pcurrentAccount ->getname() + " <" + m_pcurrentAccount ->gete_mail() + ">"); // добавляем имя к полю from, добавляем к e-mail "<>"
-	m_pcurrentMessage ->setto     (m_pcurrentAddress ->getname() + " <" + m_pcurrentAddress ->gete_mail() + ">"); // добавляем имя к полю to,   добавляем к e-mail "<>"
-	m_pcurrentMessage ->setsubject(ui.m_pSubject        ->text());
-	m_pcurrentMessage ->settext   (ui.m_ptxtMessage     ->toPlainText());
-	
 	//if (m_pcurrentMessage != NULL) 
 	//{
 		//delete m_pcurrentMessage;
@@ -242,12 +280,6 @@ m_pTo ->insert(m_pcurrentAccount ->gete_mail());
 	//								 m_pSubject        ->text(), 
 	//								 m_ptxtMessage     ->toPlainText());
    
-   setcommandsSMTP(m_pcurrentAccount, ui.m_pTo); // заполнение вектора командами для сервера SMTP
-
-   flagErrorSend     = 0;
-   m_c               = 0;
-   m_flagReadmessage = 0;
-
    //qDebug() << m_pSocketSMTP ->caCertificates();
 }
 
@@ -580,14 +612,14 @@ if (ui.m_pCheckBox ->checkState() != Qt::Checked)
 //---------------------------------------------------------------------------------------	
 	if (m_c == 7)  
 	{
-		QString letter; // строка под письмо
-		QTextCodec* codec = QTextCodec::codecForName("UTF-8");
+		//QString letter; // строка под письмо
+		//QTextCodec* codec = QTextCodec::codecForName("UTF-8");
+		//
+		//formatMessageForSMTP(letter, this, codec);
 		
-		formatMessageForSMTP(letter, this, codec);
-		
-		out.setCodec(codec); // установка для потока кодировки 
+		out.setCodec(m_pcodec); // установка для потока кодировки 
 		                     // (в этой кодировке письмо будет отправлено на сервер SMTP)
-		out << letter; // отправка письма на сервер SMTP
+		out << dataLetter; // отправка данных письма на сервер SMTP
 
 //================================================================================		
 		//letter.append("From: " + m_pcurrentMessage ->getfrom() + RN); 
@@ -615,7 +647,7 @@ if (ui.m_pCheckBox ->checkState() != Qt::Checked)
 		QByteArray sub = arr2.toBase64();*/
 //================================================================================
 		
-		ui.m_ptxtSender ->append(letter); // вывод письма (в Юникоде) в поле служебной информации
+		ui.m_ptxtSender ->append(dataLetter); // вывод письма (в Юникоде) в поле служебной информации
 
 #ifdef DEBUG		
 		// запись письма в файл в той же кодировке, что и при отправке на сервер
@@ -623,8 +655,8 @@ if (ui.m_pCheckBox ->checkState() != Qt::Checked)
 		QFile file("outfile.txt");
 		file.open(QIODevice::WriteOnly);
 		QTextStream outfile(&file);
-		outfile.setCodec(codec);
-		outfile << letter;
+		outfile.setCodec(m_pcodec);
+		outfile << dataLetter;
 		file.close();
 #endif
 		
@@ -637,7 +669,8 @@ if (ui.m_pCheckBox ->checkState() != Qt::Checked)
 	{
 	    outputCommands(ui.m_ptxtSender, vectorCommands[m_c - 1], out); // вывод QUIT
 		
-		ui.m_ptxtMessage ->clear();
+		//ui.m_ptxtMessage ->clear();
+		//dataLetter.clear();
 		
 		outputInfo(ui.m_pinfoSend, arrInfo[SEND_DONE].strInfo, arrInfo[SEND_DONE].strSound, SEND_DONE); // успешно отправлено
 		flagErrorSend = 0;
@@ -830,6 +863,8 @@ else // автоматический ввод команд
 void Post::slotConnectedSMTP()
 {
 	ui.m_ptxtSender ->append(QWidget::tr("Соединения с сервером SMTP установлено."));
+
+	
 }
 
 //----------------------------------------------------------------------------------

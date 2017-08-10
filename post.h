@@ -69,23 +69,12 @@ private :
     Account          *m_pcurrentAccount;  // ящик
 	Message          *m_pcurrentMessage;  // текущее письмо
 	Address          *m_pcurrentAddress;  // текущий адрес
-	//QLabel           *m_pinfoSend;        // вывод инфосообщения об отправке
-	//QLabel           *m_pinfoReceive;     // вывод инфосообщения о получении
-	//QLabel           *m_pAccountInfo;     // вывод адреса ящика
-	//QLineEdit        *m_pTo;              // строка ввода адреса получателя
-	//QLineEdit        *m_pSubject;         // строка ввода темы письма
-//.......................................................................
-	//QLineEdit        *m_pinput_comServer; // поле ввода команд сервера
-	//QCheckBox        *m_pCheckBox;        // если ручной ввод команд
-//.......................................................................	
-	//QTextEdit        *m_ptxtMessage;    // поле ввода текста нового письма
-	//QTextEdit        *m_ptxtSender;     // поле вывода служебной информации
-	//QTextEdit        *m_ptxtReceiver;   // поле вывода текста полученных писем
-
+	QString          dataLetter;          // данные письма (то, что передаётся после команды DATA)
+	
 	uint flagErrorSend; // флаг ошибки при отправке письма
-	uint m_c; // индекс, выводимого кода, в массиве
-	uint m_k; // счётчик считанных писем
-	uint m_number; // количество писем на сервере
+	uint m_c;           // индекс, выводимого кода, в массиве
+	uint m_k;           // счётчик считанных писем
+	uint m_number;      // количество писем на сервере
 	uint m_flagReadmessage; // флаг чтения текста письма
 	
 public :
@@ -95,7 +84,7 @@ public :
 	void receiveMessage(); // получение письма
 	
 	// форматирование данных для отправки на SMTP сервер
-    friend void formatMessageForSMTP(QString& data, const Post* post, const QTextCodec* codec);
+    void formatMessageForSMTP();
 	
 	uint m_flagExistAccount; // флаг установлен, если хотя бы один ящик был создан
 
@@ -128,7 +117,7 @@ public slots :
 };
 
 // форматирование данных для отправки на SMTP сервер
-void formatMessageForSMTP(QString& data, const Post* post, const QTextCodec* codec);
+//void formatMessageForSMTP(QString& data, const Post* post, const QTextCodec* codec);
 
 bool reedTextMessage                 (QSslSocket *m_pSocketPOP, QTextStream &in, 
                                       QTextEdit  *m_ptxtSender, QVector <QString> &vecstr);
