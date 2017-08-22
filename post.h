@@ -70,6 +70,7 @@ private :
 	Message          *m_pcurrentMessage;  // текущее письмо
 	Address          *m_pcurrentAddress;  // текущий адрес
 	QString          dataLetter;          // данные письма (то, что передаётся после команды DATA)
+	QString          dataOutput;              // данные письм для вывода в поле служебной информации
 	
 	uint flagErrorSend; // флаг ошибки при отправке письма
 	uint m_c;           // индекс, выводимого кода, в массиве
@@ -84,7 +85,7 @@ public :
 	void receiveMessage(); // получение письма
 	
 	// форматирование данных для отправки на SMTP сервер
-    void formatMessageForSMTP();
+    bool formatMessageForSMTP();
 	
 	uint m_flagExistAccount; // флаг установлен, если хотя бы один ящик был создан
 

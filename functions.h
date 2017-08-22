@@ -14,6 +14,14 @@
 
 void initData(); // инициализация кодеков и глобальных данных
 
+bool readFile(QByteArray& buffer, const QString path); // чтение данных из прикрепляемого файла
+
+// кодирование в заголовках не ASCII текста
+inline QString encodeNonASCII(const QString& text, const QTextCodec* pcodec)
+{
+	return QString("=?" + pcodec ->name() + "?B?" + pcodec ->fromUnicode(text).toBase64() + "?=");
+}
+
 // создание сообщения, если текущего ящика нет
 int messageAccount(); 
 

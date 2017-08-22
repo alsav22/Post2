@@ -169,36 +169,62 @@ Post::Post(QWidget *pwgt /*= 0*/) : QWidget(pwgt), m_pcodec(QTextCodec::codecFor
 	////qDebug() << base64_encode(s, s.size());
 }
 
-
 /////////////////////////////////////////////////////////////////////////////////
 
 // форматирование данных письма для отправки на SMTP сервер
-void Post::formatMessageForSMTP()
+bool Post::formatMessageForSMTP()
 {
 	dataLetter.clear();
-	
-	QString charset("=?" + m_pcodec ->name() + "?");
-	QString beg("B?");
-	QString end("?= ");
-	dataLetter.append("From: " + charset + beg +
-			        m_pcodec ->fromUnicode(m_pcurrentAccount ->getname()).toBase64() + 
-					end + '<' + m_pcurrentAccount ->gete_mail() + '>' + RN); 
-		
-	dataLetter.append("To: " + charset + beg +
-					m_pcodec ->fromUnicode(m_pcurrentAddress ->getname()).toBase64() +
-					end + '<' + m_pcurrentAddress ->gete_mail() + '>' + RN);
-		
-	dataLetter.append("Subject: " + charset + beg +
-					m_pcodec ->fromUnicode(m_pcurrentMessage ->getsubject()).toBase64() + 
-					end + RN);
+	dataLetter.append("From: " + encodeNonASCII(m_pcurrentAccount ->getname(), m_pcodec)
+					           + '<' + m_pcurrentAccount ->gete_mail() + '>' + RN); 
+	dataLetter.append("To: "   + encodeNonASCII(m_pcurrentAddress ->getname(), m_pcodec) 
+		                       + '<' + m_pcurrentAddress ->gete_mail() + '>' + RN);
+	dataLetter.append("Subject: ");
+	if (!m_pcurrentMessage ->getsubject().isEmpty()) // если с темой
+		dataLetter.append(encodeNonASCII(m_pcurrentMessage ->getsubject(), m_pcodec) + RN);
+	else
+		dataLetter.append(RN);
 
 	dataLetter.append("MIME-Version: 1.0" + RN );
+	QString bound("1234_boundary42");
+	dataLetter.append("Content-Type: multipart/mixed; boundary=" + bound + RN);
+	
+	dataLetter.append("--" + bound + RN); // начало первой части 
 	dataLetter.append("Content-Type: text/plain; charset=" + m_pcodec ->name() + RN);
-	dataLetter.append("Content-Transfer-Encoding: 8bit" + RN); // без этого в оригинале письма будет quoted-printable
+	dataLetter.append("Content-Transfer-Encoding: base64" + RN);
 
 	dataLetter.append(RN); // отделяем заголовки от тела письма
-	dataLetter.append(m_pcurrentMessage ->gettext()); // тело письма
+	
+	dataLetter.append(m_pcodec ->fromUnicode(m_pcurrentMessage ->gettext()).toBase64());
+	
+	dataLetter.append(RN + "--" + bound + RN); // начало второй части
+	
+	// прикрепление файла
+	QString filename("Текст pdf.pdf");
+	
+	dataLetter.append("Content-Type: application; name=" + encodeNonASCII(filename, m_pcodec) + RN);
+	dataLetter.append("Content-Disposition: attachment; filename=" + encodeNonASCII(filename, m_pcodec)  + RN);				
+	dataLetter.append("Content-Transfer-Encoding: base64" + RN);
+	
+	dataLetter.append(RN); // отделяем заголовки от тела письма
+	
+	QByteArray buffer; // под файл
+	if (!readFile(buffer, filename)) // чтение файла в QByteArray
+		return false;
+	
+	dataOutput.append(dataLetter); // для вывода в поле служебной информации (без содержимого файла)
+	
+	dataLetter.append(buffer.toBase64()); // добавляем байты из файла в кодировке Base64
+	//dataLetter.append(m_pcodec ->fromUnicode(QString("Вторая часть. То есть, продолжение!")).toBase64());
+	
+	dataLetter.append(RN + "--" + bound + "--" + RN); // конец частей
 	dataLetter.append(QString(RN + "." + RN)); // признак конца данных
+	
+	// для вывода в поле служебной информации (без файла)
+	dataOutput.append(RN + "--" + bound + "--" + RN); // конец частей
+	dataOutput.append(QString(RN + "." + RN)); // признак конца данных
+
+	return true;
 }
 
 
@@ -231,7 +257,7 @@ void Post::slotSendMessage()
     
 	
 	QApplication::restoreOverrideCursor(); // возвращаем обычный курсор
-	QApplication::setOverrideCursor(QCursor(Qt::WaitCursor)); // песочные часы
+	//QApplication::setOverrideCursor(QCursor(Qt::WaitCursor)); // песочные часы
 
 	// формирование текущего сообщения
 	QDateTime date;
@@ -239,16 +265,20 @@ void Post::slotSendMessage()
 	m_pcurrentMessage ->setdate   (date.currentDateTime().toString(Qt::SystemLocaleDate)); // дата отправки
 	m_pcurrentMessage ->setfrom   (m_pcurrentAccount ->getname() + " <" + m_pcurrentAccount ->gete_mail() + ">"); // добавляем имя к полю from, добавляем к e-mail "<>"
 	m_pcurrentMessage ->setto     (m_pcurrentAddress ->getname() + " <" + m_pcurrentAddress ->gete_mail() + ">"); // добавляем имя к полю to,   добавляем к e-mail "<>"
-	m_pcurrentMessage ->setsubject(ui.m_pSubject        ->text());
-	m_pcurrentMessage ->settext   (ui.m_ptxtMessage     ->toPlainText());
+	m_pcurrentMessage ->setsubject(ui.m_pSubject     ->text());
+	m_pcurrentMessage ->settext   (ui.m_ptxtMessage  ->toPlainText());
 
-	formatMessageForSMTP(); // формирование данных письма
+	if (!formatMessageForSMTP()) // формирование данных письма
+	{
+		return;
+	}
 
 	setcommandsSMTP(m_pcurrentAccount, ui.m_pTo); // заполнение вектора командами для сервера SMTP
 
 	if (m_pSocketSMTP ->state() == QAbstractSocket::ConnectedState) 
 		m_pSocketSMTP ->abort();
 	
+	// соединение с сервером
 	m_pSocketSMTP ->connectToHostEncrypted(m_pcurrentAccount ->getHostSMTP(), 
 	                                       m_pcurrentAccount ->getPortSMTP().toUInt());
 
@@ -641,17 +671,17 @@ if (ui.m_pCheckBox ->checkState() != Qt::Checked)
 		QByteArray arr2 = codec ->fromUnicode(s);
 		QByteArray sub = arr2.toBase64();*/
 //================================================================================
-		
-		ui.m_ptxtSender ->append(dataLetter); // вывод письма (в Юникоде) в поле служебной информации
+		// если в письме файл, то зависает на выводе (решить)
+		ui.m_ptxtSender ->append(dataOutput); // вывод письма (в Юникоде, без прикреплённых файлов) в поле служебной информации
 
 #ifdef DEBUG		
-		// запись письма в файл в той же кодировке, что и при отправке на сервер
+		// запись письма (без файлов) в файл в той же кодировке, что и при отправке на сервер
 		// для проверки: в каком виде письмо отправляется на сервер
 		QFile file("outfile.txt");
 		file.open(QIODevice::WriteOnly);
 		QTextStream outfile(&file);
 		outfile.setCodec(m_pcodec);
-		outfile << dataLetter;
+		outfile << dataOutput;
 		file.close();
 #endif
 		

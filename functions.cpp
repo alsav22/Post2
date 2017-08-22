@@ -35,6 +35,36 @@ void initData()
 		arrError.push_back(tempError[i]);
 }
 
+// чтение данных из прикрепляемого файла
+bool readFile(QByteArray& buffer, const QString path)
+{
+	QFile file(path);
+	if (file.open(QIODevice::ReadOnly))
+	{
+		qint64 sizefile = file.size();
+		buffer.resize(sizefile); // выделяем память (readRawData() не делает resize() массива)
+
+		QDataStream stream(&file);
+		int sizeread = stream.readRawData(buffer.data(), sizefile);
+		//stream >> buffer; // это не хочет (пытается прочитать, якобы, сериализованный QByteArray,
+		                    // сначала читает размер, якобы, записанного в файл массива, потом байты,
+		                    // память при этом перевыделяется)
+		if (sizeread == sizefile)
+			return true;
+		else
+		{
+			QMessageBox::critical(0, "Ошибка!", "Ошибка при загрузке файла " + path + "!");
+			return false;
+		}
+	}
+	else
+	{
+		QMessageBox::critical(nullptr, "Ошибка!", "Файл " + path + " не найден!");
+	qDebug() << "Error opening file!";
+		return false;
+	}
+}
+
 // вывод команд для серверов на поле Служебная информация и вывод в сокет......................................................................................
 void outputCommands(QTextEdit *m_ptxtSender, const QString commands, QTextStream &out)
 {
