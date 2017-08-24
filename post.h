@@ -86,6 +86,8 @@ public :
 	
 	// форматирование данных для отправки на SMTP сервер
     bool formatMessageForSMTP();
+	// вывод информации
+	void outInfo();
 	
 	uint m_flagExistAccount; // флаг установлен, если хотя бы один ящик был создан
 

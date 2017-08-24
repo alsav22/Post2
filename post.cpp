@@ -172,6 +172,10 @@ Post::Post(QWidget *pwgt /*= 0*/) : QWidget(pwgt), m_pcodec(QTextCodec::codecFor
 }
 
 /////////////////////////////////////////////////////////////////////////////////
+// вывод информации
+void Post::outInfo()
+{
+}
 
 // форматирование данных письма для отправки на SMTP сервер
 bool Post::formatMessageForSMTP()
@@ -251,6 +255,7 @@ void Post::slotSendMessage()
 	// или в slotChoiceAddress, или в slottextChanged
 	if (ui.m_pTo ->text().isEmpty()) 
 	{
+		ui.stackedWidget ->setCurrentWidget(ui.infoSend);
 		outputInfo(ui.m_pinfoSend, arrInfo[SEND_ERROR].strInfo + "\nВведите или выберите адрес.", arrInfo[SEND_ERROR].strSound, 1);
 		return;
 	}
@@ -626,8 +631,8 @@ if (ui.m_pCheckBox ->checkState() != Qt::Checked)
 		flagErrorSend = 1;
 		if (m_c != 9) // если ошибка не в ответ на QUIT, то вывод сообщения 
 		{
-			outputInfo(ui.m_pinfoSend, arrInfo[SEND_ERROR].strInfo + QString(arrError[m_c - 1]), arrInfo[SEND_ERROR].strSound, SEND_ERROR);
 			ui.stackedWidget ->setCurrentWidget(ui.infoSend);
+			outputInfo(ui.m_pinfoSend, arrInfo[SEND_ERROR].strInfo + QString(arrError[m_c - 1]), arrInfo[SEND_ERROR].strSound, SEND_ERROR);
 		}
 		
 		QApplication::restoreOverrideCursor();
@@ -713,8 +718,8 @@ if (ui.m_pCheckBox ->checkState() != Qt::Checked)
 		
 		//ui.m_ptxtMessage ->clear();
 		//dataLetter.clear();
-		ui.stackedWidget ->setCurrentWidget(ui.infoSend);
 		
+		ui.stackedWidget ->setCurrentWidget(ui.infoSend);
 		outputInfo(ui.m_pinfoSend, arrInfo[SEND_DONE].strInfo, arrInfo[SEND_DONE].strSound, SEND_DONE); // успешно отправлено
 		flagErrorSend = 0;
 		
@@ -777,6 +782,7 @@ else // автоматический ввод команд
 		if (Str[0] == '-') // если сервер выдал ошибку
 		{ 
 			m_pSocketPOP ->abort();
+
 			outputInfo(ui.m_pinfoReceive, arrInfo[REC_ERROR].strInfo, arrInfo[REC_ERROR].strSound); // сообщение - ошибка
 			return; 
 		}
@@ -795,6 +801,7 @@ else // автоматический ввод команд
 			Str = List + in.readAll(); 
 			ui.m_ptxtSender ->append(Str); qDebug() << Str;
 			m_pSocketPOP ->abort();
+			
 			outputInfo(ui.m_pinfoReceive, arrInfo[REC_ERROR].strInfo, arrInfo[REC_ERROR].strSound); // сообщение - ошибка
 			return; 
 		}
@@ -806,6 +813,7 @@ else // автоматический ввод команд
 		if (m_number == 0) // выход, если писем 0
 		{
 			m_pSocketPOP ->abort();
+
 			outputInfo(ui.m_pinfoReceive, arrInfo[REC_INFO].strInfo, arrInfo[REC_INFO].strSound);
 			return; 
 		}
@@ -827,6 +835,7 @@ else // автоматический ввод команд
 			if (List[0] == '-') 
 			{ 
 				m_pSocketPOP ->abort();
+
 				outputInfo(ui.m_pinfoReceive, arrInfo[REC_ERROR].strInfo, arrInfo[REC_ERROR].strSound);
 				return; 
 			}
@@ -866,6 +875,7 @@ else // автоматический ввод команд
 		if (List[0] == '-') 
 		{ 
 			m_pSocketPOP ->abort();
+
 			outputInfo(ui.m_pinfoReceive, arrInfo[REC_ERROR].strInfo, arrInfo[REC_ERROR].strSound);
 			return; 
 		}
@@ -922,8 +932,10 @@ void Post::slotConnectedPOP()
 void Post::slotErrorSMTP(QAbstractSocket::SocketError err)
 {
   if (err == QAbstractSocket::HostNotFoundError/* || QAbstractSocket::UnknownSocketError*/)
-         outputInfo(ui.m_pinfoSend, arrInfo[SEND_ERROR].strInfo + QString("\nПроверьте соединение с интернетом."), arrInfo[SEND_ERROR].strSound);
-		                                                        
+  {
+      ui.stackedWidget ->setCurrentWidget(ui.infoSend);   
+	  outputInfo(ui.m_pinfoSend, arrInfo[SEND_ERROR].strInfo + QString("\nПроверьте соединение с интернетом."), arrInfo[SEND_ERROR].strSound);
+  }	                                                        
     QString strError = 
         QWidget::tr("Ошибка: ") + (err == QAbstractSocket::HostNotFoundError ? 
                      QWidget::tr("Хост не найден.") : //"The host was not found." :
@@ -945,8 +957,9 @@ void Post::slotErrorSMTP(QAbstractSocket::SocketError err)
 void Post::slotErrorPOP(QAbstractSocket::SocketError err)
 {
     if (err == QAbstractSocket::HostNotFoundError/* || QAbstractSocket::UnknownSocketError*/)
+	{
          outputInfo(ui.m_pinfoReceive, arrInfo[REC_ERROR].strInfo + QString("\nПроверьте соединение с интернетом."), arrInfo[REC_ERROR].strSound);
-   
+	}
     QString strError = 
         "Error: " + (err == QAbstractSocket::HostNotFoundError ? 
                       QWidget::tr("Хост не найден.") : //"The host was not found." :

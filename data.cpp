@@ -17,7 +17,7 @@ QTextCodec *LocalCodec = QTextCodec::codecForName(QTextCodec::codecForLocale() -
 
 uint OK_code[] = {OK220, OK250, OK334, OK334, OK235, OK250, OK250, OK354, OK250, OK221};
 
-QString arrCommandsSMTP[8] = {"EHO ",       "AUTH LOGIN", "",      "",
+QString arrCommandsSMTP[8] = {"EHLO ",       "AUTH LOGIN", "",      "",
                               "MAIL FROM: ", "RCPT TO: ",  "DATA",  "QUIT"};
                                
 
