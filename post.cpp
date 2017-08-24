@@ -34,7 +34,7 @@ Post::Post(QWidget *pwgt /*= 0*/) : QWidget(pwgt), m_pcodec(QTextCodec::codecFor
     //QTextCodec::setCodecForTr(m_pcodec);
 	
 	ui.setupUi(this);
-
+	ui.stackedWidget ->setCurrentWidget(ui.infoSend);
 // список отправленных писем
 	
 	m_pListMessageSend = new QListWidget;
@@ -82,6 +82,8 @@ Post::Post(QWidget *pwgt /*= 0*/) : QWidget(pwgt), m_pcodec(QTextCodec::codecFor
     connect(m_pSocketSMTP, SIGNAL(readyRead()), SLOT(slotReadyReadSMTP()));
     connect(m_pSocketSMTP, SIGNAL(error(QAbstractSocket::SocketError)),
                      this, SLOT(slotErrorSMTP(QAbstractSocket::SocketError)));
+
+	connect(m_pSocketSMTP, SIGNAL(encryptedBytesWritten(qint64)), this, SLOT(slotProgress(qint64)));
 
 // создание сокета дл€ POP и соединение его со слотами обработки сигналов
 	//m_pSocketPOP = new QTcpSocket(this);
@@ -174,6 +176,11 @@ Post::Post(QWidget *pwgt /*= 0*/) : QWidget(pwgt), m_pcodec(QTextCodec::codecFor
 // форматирование данных письма дл€ отправки на SMTP сервер
 bool Post::formatMessageForSMTP()
 {
+	// ¬озможный не ASCII текст в заголовках должен быть закодирован (RFC1342).
+	// Ќепрерывно (начинаетс€ с =? и заканчиваетс€ ?=) : =?им€ кодировки?B?текст в указанной кодировке
+	// преобразованный или в Base64 (если ?B?), или в quoted-printable (если ?Q?)?=
+	// Q рекомендуетс€ дл€ латинских наборов символов, B - дл€ всех остальных.
+	
 	dataLetter.clear();
 	dataLetter.append("From: " + encodeNonASCII(m_pcurrentAccount ->getname(), m_pcodec)
 					           + '<' + m_pcurrentAccount ->gete_mail() + '>' + RN); 
@@ -214,8 +221,8 @@ bool Post::formatMessageForSMTP()
 	
 	dataOutput.append(dataLetter); // дл€ вывода в поле служебной информации (без содержимого файла)
 	
-	dataLetter.append(buffer.toBase64()); // добавл€ем байты из файла в кодировке Base64
-	//dataLetter.append(m_pcodec ->fromUnicode(QString("¬тора€ часть. “о есть, продолжение!")).toBase64());
+	dataLetter.reserve(dataLetter.size() + buffer.size() + buffer.size() / 3 + 10 + bound.size() + 4 + RN.size() * 4 + 1);
+	dataLetter.append(buffer.toBase64()); // добавл€ем байты файла из буфера в кодировке Base64
 	
 	dataLetter.append(RN + "--" + bound + "--" + RN); // конец частей
 	dataLetter.append(QString(RN + "." + RN)); // признак конца данных
@@ -268,6 +275,8 @@ void Post::slotSendMessage()
 	m_pcurrentMessage ->setsubject(ui.m_pSubject     ->text());
 	m_pcurrentMessage ->settext   (ui.m_ptxtMessage  ->toPlainText());
 
+	ui.stackedWidget ->setCurrentWidget(ui.ProgressBar); // вывод полосы прогресса
+	
 	if (!formatMessageForSMTP()) // формирование данных письма
 	{
 		return;
@@ -616,7 +625,10 @@ if (ui.m_pCheckBox ->checkState() != Qt::Checked)
 		m_pSocketSMTP ->abort();
 		flagErrorSend = 1;
 		if (m_c != 9) // если ошибка не в ответ на QUIT, то вывод сообщени€ 
+		{
 			outputInfo(ui.m_pinfoSend, arrInfo[SEND_ERROR].strInfo + QString(arrError[m_c - 1]), arrInfo[SEND_ERROR].strSound, SEND_ERROR);
+			ui.stackedWidget ->setCurrentWidget(ui.infoSend);
+		}
 		
 		QApplication::restoreOverrideCursor();
 		return;
@@ -644,8 +656,13 @@ if (ui.m_pCheckBox ->checkState() != Qt::Checked)
 	{
 		out.setCodec(m_pcodec); // установка дл€ потока кодировки 
 		                        // (в этой кодировке письмо будет отправлено на сервер SMTP)
+		//qDebug() << "dataLetter.size() = " << dataLetter.size();
+		//ui.stackedWidget ->setCurrentWidget(ui.ProgressBar); // вывод полосы прогресса
 		out << dataLetter; // отправка данных письма на сервер SMTP
-
+		//out.flush();
+		
+		
+		
 //================================================================================		
 		//letter.append("From: " + m_pcurrentMessage ->getfrom() + RN); 
 		//letter.append("To: "      + m_pcurrentMessage ->getto()      + RN);
@@ -671,7 +688,7 @@ if (ui.m_pCheckBox ->checkState() != Qt::Checked)
 		QByteArray arr2 = codec ->fromUnicode(s);
 		QByteArray sub = arr2.toBase64();*/
 //================================================================================
-		// если в письме файл, то зависает на выводе (решить)
+		
 		ui.m_ptxtSender ->append(dataOutput); // вывод письма (в ёникоде, без прикреплЄнных файлов) в поле служебной информации
 
 #ifdef DEBUG		
@@ -696,12 +713,13 @@ if (ui.m_pCheckBox ->checkState() != Qt::Checked)
 		
 		//ui.m_ptxtMessage ->clear();
 		//dataLetter.clear();
+		ui.stackedWidget ->setCurrentWidget(ui.infoSend);
 		
 		outputInfo(ui.m_pinfoSend, arrInfo[SEND_DONE].strInfo, arrInfo[SEND_DONE].strSound, SEND_DONE); // успешно отправлено
 		flagErrorSend = 0;
 		
 		//undoselected(ui.m_pListAddress); // сброс, если есть, выделени€ адреса
-		QApplication::restoreOverrideCursor(); // возвращаем обычный курсор
+		//QApplication::restoreOverrideCursor(); // возвращаем обычный курсор
 		
   //----------------------------------
 		m_pvectorMessageSend ->push_back(formatMessage(*m_pcurrentMessage)); // форматируем письмо и сохран€ем в векторе

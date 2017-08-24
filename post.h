@@ -3,7 +3,7 @@
 
 #include <QtGui/QWidget>
 #include <QAbstractSocket>
-#include "ui_post3_1.h"
+#include "ui_post3_2.h"
 
 //class Post : public QWidget
 //{
@@ -114,6 +114,10 @@ public slots :
 	void slotClear          (                            );
 	
 	void slotReadySSL       (QListWidgetItem *           );
+	void slotProgress       (qint64 written              )
+	{
+		qDebug() << written;
+	}
 
 };
 

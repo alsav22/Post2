@@ -19,9 +19,11 @@ int main(int argc, char *argv[])
 	splash.show();
 	
 	initData(); // утсановка нужного кодека для Си-строк и tr, и инициализация глобальных данных
-	std::string stdStr("Ошибка при отправке письма!\n");
-	QString arr[] = {"Ошибка при отправке письма!\r\n"};
-	QString str = QWidget::tr("Когда я на почте.");
+
+	///////////////////////////////////////////////////////////////////	
+	//std::string stdStr("Ошибка при отправке письма!\n");
+	//QString arr[] = {"Ошибка при отправке письма!\r\n"};
+	//QString str = QWidget::tr("Когда я на почте.");
 	//QTextDecoder dec(LocalCodec);
 	//dec.toUnicode(&str, "Когда я на почте.", strlen("Когда я на почте."));
 	//
@@ -59,7 +61,8 @@ int main(int argc, char *argv[])
 	//QChar ch = 'F';
 	//qDebug() << QChar(0xFF).toLatin1();
 	//qDebug() << codec ->fromUnicode(&ch, 1) << " " << ch.unicode() << " " << QChar(70);
-    
+ ///////////////////////////////////////////////////////////////////////////////////////////   
+	
 	Post post;
 	post.setObjectName("post");
 
@@ -73,13 +76,5 @@ int main(int argc, char *argv[])
 	if (post.m_flagExistAccount == 0 && messageAccount() == QMessageBox::Yes) // если ящика не существует, и если Yes,
 		post.slotCreateAccount();                                             // то переход к созданию ящика
 	
-	//qDebug() << QTextCodec::availableCodecs();
-	
-	//QTextCodec *codec = QTextCodec::codecForName("Windows-1251");
-	//qDebug() << '\n' << codec ->name();
-
-	//qDebug() << '\n' << QTextCodec::codecForLocale() ->name();
-
 	return app.exec();
-
 }
