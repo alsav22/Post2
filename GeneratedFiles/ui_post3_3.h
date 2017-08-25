@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'post3_2.ui'
+** Form generated from reading UI file 'post3_3.ui'
 **
 ** Created by: Qt User Interface Compiler version 4.8.5
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef UI_POST3_2_H
-#define UI_POST3_2_H
+#ifndef UI_POST3_3_H
+#define UI_POST3_3_H
 
 #include <QtCore/QVariant>
 #include <QtGui/QAction>
@@ -23,7 +23,6 @@
 #include <QtGui/QProgressBar>
 #include <QtGui/QPushButton>
 #include <QtGui/QSpacerItem>
-#include <QtGui/QStackedWidget>
 #include <QtGui/QTextEdit>
 #include <QtGui/QVBoxLayout>
 #include <QtGui/QWidget>
@@ -47,22 +46,17 @@ public:
     QSpacerItem *horizontalSpacer;
     QPushButton *pcmd_receive;
     QPushButton *pcmd_clearreceive;
-    QVBoxLayout *verticalLayout_5;
+    QVBoxLayout *verticalLayout_4;
     QLabel *plblMessage;
     QGridLayout *gridLayout;
-    QLineEdit *m_pTo;
-    QLineEdit *m_pSubject;
     QLabel *to;
+    QLineEdit *m_pTo;
     QLabel *subject;
+    QLineEdit *m_pSubject;
     QTextEdit *m_ptxtMessage;
-    QStackedWidget *stackedWidget;
-    QWidget *ProgressBar;
-    QVBoxLayout *verticalLayout_4;
-    QProgressBar *progressBar;
-    QWidget *infoSend;
     QLabel *m_pinfoSend;
     QHBoxLayout *horizontalLayout;
-    QSpacerItem *horizontalSpacer_2;
+    QProgressBar *progressBar;
     QPushButton *pcmd_send;
     QPushButton *pcmd_clearsend;
     QVBoxLayout *verticalLayout_3;
@@ -225,9 +219,9 @@ public:
 
         horizontalLayout_4->addLayout(verticalLayout_2);
 
-        verticalLayout_5 = new QVBoxLayout();
-        verticalLayout_5->setSpacing(6);
-        verticalLayout_5->setObjectName(QString::fromUtf8("verticalLayout_5"));
+        verticalLayout_4 = new QVBoxLayout();
+        verticalLayout_4->setSpacing(6);
+        verticalLayout_4->setObjectName(QString::fromUtf8("verticalLayout_4"));
         plblMessage = new QLabel(PostClass);
         plblMessage->setObjectName(QString::fromUtf8("plblMessage"));
         sizePolicy.setHeightForWidth(plblMessage->sizePolicy().hasHeightForWidth());
@@ -239,28 +233,12 @@ public:
         plblMessage->setLineWidth(6);
         plblMessage->setAlignment(Qt::AlignCenter);
 
-        verticalLayout_5->addWidget(plblMessage);
+        verticalLayout_4->addWidget(plblMessage);
 
         gridLayout = new QGridLayout();
         gridLayout->setSpacing(6);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
         gridLayout->setVerticalSpacing(9);
-        m_pTo = new QLineEdit(PostClass);
-        m_pTo->setObjectName(QString::fromUtf8("m_pTo"));
-        sizePolicy1.setHeightForWidth(m_pTo->sizePolicy().hasHeightForWidth());
-        m_pTo->setSizePolicy(sizePolicy1);
-        m_pTo->setStyleSheet(QString::fromUtf8("font: bold oblique 11pt Times; color: black;"));
-
-        gridLayout->addWidget(m_pTo, 2, 0, 1, 1);
-
-        m_pSubject = new QLineEdit(PostClass);
-        m_pSubject->setObjectName(QString::fromUtf8("m_pSubject"));
-        sizePolicy1.setHeightForWidth(m_pSubject->sizePolicy().hasHeightForWidth());
-        m_pSubject->setSizePolicy(sizePolicy1);
-        m_pSubject->setStyleSheet(QString::fromUtf8("font: bold oblique 11pt Times; color: black;"));
-
-        gridLayout->addWidget(m_pSubject, 2, 1, 1, 1);
-
         to = new QLabel(PostClass);
         to->setObjectName(QString::fromUtf8("to"));
         sizePolicy1.setHeightForWidth(to->sizePolicy().hasHeightForWidth());
@@ -272,6 +250,14 @@ public:
         to->setAlignment(Qt::AlignCenter);
 
         gridLayout->addWidget(to, 0, 0, 1, 1);
+
+        m_pTo = new QLineEdit(PostClass);
+        m_pTo->setObjectName(QString::fromUtf8("m_pTo"));
+        sizePolicy1.setHeightForWidth(m_pTo->sizePolicy().hasHeightForWidth());
+        m_pTo->setSizePolicy(sizePolicy1);
+        m_pTo->setStyleSheet(QString::fromUtf8("font: bold oblique 11pt Times; color: black;"));
+
+        gridLayout->addWidget(m_pTo, 1, 0, 1, 1);
 
         subject = new QLabel(PostClass);
         subject->setObjectName(QString::fromUtf8("subject"));
@@ -285,12 +271,20 @@ public:
 
         gridLayout->addWidget(subject, 0, 1, 1, 1);
 
+        m_pSubject = new QLineEdit(PostClass);
+        m_pSubject->setObjectName(QString::fromUtf8("m_pSubject"));
+        sizePolicy1.setHeightForWidth(m_pSubject->sizePolicy().hasHeightForWidth());
+        m_pSubject->setSizePolicy(sizePolicy1);
+        m_pSubject->setStyleSheet(QString::fromUtf8("font: bold oblique 11pt Times; color: black;"));
 
-        verticalLayout_5->addLayout(gridLayout);
+        gridLayout->addWidget(m_pSubject, 1, 1, 1, 1);
+
+
+        verticalLayout_4->addLayout(gridLayout);
 
         m_ptxtMessage = new QTextEdit(PostClass);
         m_ptxtMessage->setObjectName(QString::fromUtf8("m_ptxtMessage"));
-        QSizePolicy sizePolicy3(QSizePolicy::Preferred, QSizePolicy::Expanding);
+        QSizePolicy sizePolicy3(QSizePolicy::Expanding, QSizePolicy::Expanding);
         sizePolicy3.setHorizontalStretch(0);
         sizePolicy3.setVerticalStretch(0);
         sizePolicy3.setHeightForWidth(m_ptxtMessage->sizePolicy().hasHeightForWidth());
@@ -301,53 +295,27 @@ public:
         m_ptxtMessage->setFrameShadow(QFrame::Raised);
         m_ptxtMessage->setLineWidth(7);
 
-        verticalLayout_5->addWidget(m_ptxtMessage);
+        verticalLayout_4->addWidget(m_ptxtMessage);
 
-        stackedWidget = new QStackedWidget(PostClass);
-        stackedWidget->setObjectName(QString::fromUtf8("stackedWidget"));
-        sizePolicy.setHeightForWidth(stackedWidget->sizePolicy().hasHeightForWidth());
-        stackedWidget->setSizePolicy(sizePolicy);
-        stackedWidget->setFrameShape(QFrame::NoFrame);
-        stackedWidget->setFrameShadow(QFrame::Raised);
-        stackedWidget->setLineWidth(6);
-        ProgressBar = new QWidget();
-        ProgressBar->setObjectName(QString::fromUtf8("ProgressBar"));
-        verticalLayout_4 = new QVBoxLayout(ProgressBar);
-        verticalLayout_4->setSpacing(6);
-        verticalLayout_4->setContentsMargins(11, 11, 11, 11);
-        verticalLayout_4->setObjectName(QString::fromUtf8("verticalLayout_4"));
-        progressBar = new QProgressBar(ProgressBar);
-        progressBar->setObjectName(QString::fromUtf8("progressBar"));
-        progressBar->setValue(5);
-        progressBar->setInvertedAppearance(false);
-        progressBar->setTextDirection(QProgressBar::TopToBottom);
-
-        verticalLayout_4->addWidget(progressBar);
-
-        stackedWidget->addWidget(ProgressBar);
-        infoSend = new QWidget();
-        infoSend->setObjectName(QString::fromUtf8("infoSend"));
-        m_pinfoSend = new QLabel(infoSend);
+        m_pinfoSend = new QLabel(PostClass);
         m_pinfoSend->setObjectName(QString::fromUtf8("m_pinfoSend"));
-        m_pinfoSend->setGeometry(QRect(5, 5, 430, 41));
-        sizePolicy3.setHeightForWidth(m_pinfoSend->sizePolicy().hasHeightForWidth());
-        m_pinfoSend->setSizePolicy(sizePolicy3);
-        m_pinfoSend->setStyleSheet(QString::fromUtf8("font: bold oblique 13pt Times; color: red;"));
+        m_pinfoSend->setStyleSheet(QString::fromUtf8("font: bold oblique 13pt Times; color: blue;"));
         m_pinfoSend->setFrameShape(QFrame::WinPanel);
         m_pinfoSend->setFrameShadow(QFrame::Raised);
         m_pinfoSend->setLineWidth(6);
         m_pinfoSend->setAlignment(Qt::AlignCenter);
         m_pinfoSend->setMargin(3);
-        stackedWidget->addWidget(infoSend);
 
-        verticalLayout_5->addWidget(stackedWidget);
+        verticalLayout_4->addWidget(m_pinfoSend);
 
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setSpacing(6);
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
-        horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+        progressBar = new QProgressBar(PostClass);
+        progressBar->setObjectName(QString::fromUtf8("progressBar"));
+        progressBar->setValue(10);
 
-        horizontalLayout->addItem(horizontalSpacer_2);
+        horizontalLayout->addWidget(progressBar);
 
         pcmd_send = new QPushButton(PostClass);
         pcmd_send->setObjectName(QString::fromUtf8("pcmd_send"));
@@ -368,10 +336,10 @@ public:
         horizontalLayout->addWidget(pcmd_clearsend);
 
 
-        verticalLayout_5->addLayout(horizontalLayout);
+        verticalLayout_4->addLayout(horizontalLayout);
 
 
-        horizontalLayout_4->addLayout(verticalLayout_5);
+        horizontalLayout_4->addLayout(verticalLayout_4);
 
         verticalLayout_3 = new QVBoxLayout();
         verticalLayout_3->setSpacing(6);
@@ -541,9 +509,6 @@ public:
         QObject::connect(m_pSubject, SIGNAL(textChanged(QString)), PostClass, SLOT(slottextChanged(QString)));
         QObject::connect(m_pListAddress, SIGNAL(currentItemChanged(QListWidgetItem*,QListWidgetItem*)), PostClass, SLOT(slotChoiceAddress(QListWidgetItem*)));
 
-        stackedWidget->setCurrentIndex(1);
-
-
         QMetaObject::connectSlotsByName(PostClass);
     } // setupUi
 
@@ -583,4 +548,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // UI_POST3_2_H
+#endif // UI_POST3_3_H

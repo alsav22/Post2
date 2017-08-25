@@ -128,7 +128,7 @@
     <ClInclude Include="address.h" />
     <ClInclude Include="data.h" />
     <ClInclude Include="functions.h" />
-    <ClInclude Include="GeneratedFiles\ui_post3_2.h" />
+    <ClInclude Include="GeneratedFiles\ui_post3_3.h" />
     <ClInclude Include="message.h" />
     <CustomBuild Include="smtp.h">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
@@ -167,7 +167,7 @@
   <ItemGroup>
     <None Include="icon1.ico" />
     <None Include="Post2.ico" />
-    <CustomBuild Include="post3_2.ui">
+    <CustomBuild Include="post3_3.ui">
       <FileType>Document</FileType>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\uic.exe;%(AdditionalInputs)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Uic%27ing %(Identity)...</Message>

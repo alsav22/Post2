@@ -34,7 +34,9 @@ Post::Post(QWidget *pwgt /*= 0*/) : QWidget(pwgt), m_pcodec(QTextCodec::codecFor
     //QTextCodec::setCodecForTr(m_pcodec);
 	
 	ui.setupUi(this);
-	ui.stackedWidget ->setCurrentWidget(ui.infoSend);
+	//ui.stackedWidget ->setCurrentWidget(ui.infoSend);
+	ui.progressBar ->setHidden(true); // сокрытие полосы прогресса
+	
 // список отправленных писем
 	
 	m_pListMessageSend = new QListWidget;
@@ -255,7 +257,8 @@ void Post::slotSendMessage()
 	// или в slotChoiceAddress, или в slottextChanged
 	if (ui.m_pTo ->text().isEmpty()) 
 	{
-		ui.stackedWidget ->setCurrentWidget(ui.infoSend);
+		//ui.stackedWidget ->setCurrentWidget(ui.infoSend);
+		ui.progressBar ->setHidden(true); // сокрытие полосы прогресса
 		outputInfo(ui.m_pinfoSend, arrInfo[SEND_ERROR].strInfo + "\nВведите или выберите адрес.", arrInfo[SEND_ERROR].strSound, 1);
 		return;
 	}
@@ -280,7 +283,8 @@ void Post::slotSendMessage()
 	m_pcurrentMessage ->setsubject(ui.m_pSubject     ->text());
 	m_pcurrentMessage ->settext   (ui.m_ptxtMessage  ->toPlainText());
 
-	ui.stackedWidget ->setCurrentWidget(ui.ProgressBar); // вывод полосы прогресса
+	//ui.stackedWidget ->setCurrentWidget(ui.ProgressBar); // вывод полосы прогресса
+	ui.progressBar ->setVisible(true); // вывод полосы прогресса
 	
 	if (!formatMessageForSMTP()) // формирование данных письма
 	{
@@ -631,7 +635,8 @@ if (ui.m_pCheckBox ->checkState() != Qt::Checked)
 		flagErrorSend = 1;
 		if (m_c != 9) // если ошибка не в ответ на QUIT, то вывод сообщения 
 		{
-			ui.stackedWidget ->setCurrentWidget(ui.infoSend);
+			//ui.stackedWidget ->setCurrentWidget(ui.infoSend);
+			ui.progressBar ->setHidden(true); // сокрытие полосы прогресса
 			outputInfo(ui.m_pinfoSend, arrInfo[SEND_ERROR].strInfo + QString(arrError[m_c - 1]), arrInfo[SEND_ERROR].strSound, SEND_ERROR);
 		}
 		
@@ -719,7 +724,8 @@ if (ui.m_pCheckBox ->checkState() != Qt::Checked)
 		//ui.m_ptxtMessage ->clear();
 		//dataLetter.clear();
 		
-		ui.stackedWidget ->setCurrentWidget(ui.infoSend);
+		//ui.stackedWidget ->setCurrentWidget(ui.infoSend);
+		ui.progressBar ->setHidden(true); // сокрытие полосы прогресса
 		outputInfo(ui.m_pinfoSend, arrInfo[SEND_DONE].strInfo, arrInfo[SEND_DONE].strSound, SEND_DONE); // успешно отправлено
 		flagErrorSend = 0;
 		
@@ -933,7 +939,8 @@ void Post::slotErrorSMTP(QAbstractSocket::SocketError err)
 {
   if (err == QAbstractSocket::HostNotFoundError/* || QAbstractSocket::UnknownSocketError*/)
   {
-      ui.stackedWidget ->setCurrentWidget(ui.infoSend);   
+      //ui.stackedWidget ->setCurrentWidget(ui.infoSend); 
+	  ui.progressBar ->setHidden(true); // сокрытие полосы прогресса
 	  outputInfo(ui.m_pinfoSend, arrInfo[SEND_ERROR].strInfo + QString("\nПроверьте соединение с интернетом."), arrInfo[SEND_ERROR].strSound);
   }	                                                        
     QString strError = 
