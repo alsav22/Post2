@@ -34,6 +34,7 @@ class QListWidget;
 class QListWidgetItem;
 class QCheckBox;
 class QCursor;
+class QTimer;
 //class QAbstractSocket;
 
 class Account;
@@ -48,7 +49,8 @@ class Post : public QWidget
 private :
     Ui::PostClass ui;
 	
-	QTextCodec       *m_pcodec; // кодек для форматирования данных письма
+	QTextCodec       *m_pCodec; // кодек для форматирования данных письма
+	QTimer           *m_pTimer; // таймер для ProgressBar
 	
 	QCursor          *m_pCursor;
 	CreateAccount    *m_pсreateAccount;    // окно диалога создания ящика
@@ -116,11 +118,7 @@ public slots :
 	void slotClear          (                            );
 	
 	void slotReadySSL       (QListWidgetItem *           );
-	void slotProgress       (qint64 written              )
-	{
-		qDebug() << written;
-	}
-
+	void slotStepProgressBar(                            );
 };
 
 // форматирование данных для отправки на SMTP сервер

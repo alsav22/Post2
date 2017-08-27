@@ -22,20 +22,23 @@
 
 // конструктор ======================================================================
 
-Post::Post(QWidget *pwgt /*= 0*/) : QWidget(pwgt), m_pcodec(QTextCodec::codecForName("UTF-8"))
+Post::Post(QWidget *pwgt /*= 0*/) : QWidget(pwgt), m_pCodec(QTextCodec::codecForName("UTF-8"))
 {
+	m_pTimer = new QTimer(this);
+	connect(m_pTimer, SIGNAL(timeout()), this, SLOT(slotStepProgressBar()));
+	
 	//m_ptxtSender      = NULL;
 	//m_pCheckBox       = NULL;
     //m_pcurrentAccount = NULL;
 	//m_pcurrentMessage = NULL;
 	//m_pcurrentAddress = NULL;
 	  
-	//m_pcodec = QTextCodec::codecForName("CP1251");
-    //QTextCodec::setCodecForTr(m_pcodec);
+	//m_pCodec = QTextCodec::codecForName("CP1251");
+    //QTextCodec::setCodecForTr(m_pCodec);
 	
 	ui.setupUi(this);
-	//ui.stackedWidget ->setCurrentWidget(ui.infoSend);
-	ui.progressBar ->setHidden(true); // сокрытие полосы прогресса
+	//ui.stackedWidget ->setCurrentWidget(ui.page_2);
+	//ui.progressBar ->setHidden(true); // сокрытие полосы прогресса
 	
 // список отправленных писем
 	
@@ -85,7 +88,7 @@ Post::Post(QWidget *pwgt /*= 0*/) : QWidget(pwgt), m_pcodec(QTextCodec::codecFor
     connect(m_pSocketSMTP, SIGNAL(error(QAbstractSocket::SocketError)),
                      this, SLOT(slotErrorSMTP(QAbstractSocket::SocketError)));
 
-	connect(m_pSocketSMTP, SIGNAL(encryptedBytesWritten(qint64)), this, SLOT(slotProgress(qint64)));
+	//connect(m_pSocketSMTP, SIGNAL(encryptedBytesWritten(qint64)), this, SLOT(slotProgress(qint64)));
 
 // создание сокета для POP и соединение его со слотами обработки сигналов
 	//m_pSocketPOP = new QTcpSocket(this);
@@ -188,13 +191,13 @@ bool Post::formatMessageForSMTP()
 	// Q рекомендуется для латинских наборов символов, B - для всех остальных.
 	
 	dataLetter.clear();
-	dataLetter.append("From: " + encodeNonASCII(m_pcurrentAccount ->getname(), m_pcodec)
+	dataLetter.append("From: " + encodeNonASCII(m_pcurrentAccount ->getname(), m_pCodec)
 					           + '<' + m_pcurrentAccount ->gete_mail() + '>' + RN); 
-	dataLetter.append("To: "   + encodeNonASCII(m_pcurrentAddress ->getname(), m_pcodec) 
+	dataLetter.append("To: "   + encodeNonASCII(m_pcurrentAddress ->getname(), m_pCodec) 
 		                       + '<' + m_pcurrentAddress ->gete_mail() + '>' + RN);
 	dataLetter.append("Subject: ");
 	if (!m_pcurrentMessage ->getsubject().isEmpty()) // если с темой
-		dataLetter.append(encodeNonASCII(m_pcurrentMessage ->getsubject(), m_pcodec) + RN);
+		dataLetter.append(encodeNonASCII(m_pcurrentMessage ->getsubject(), m_pCodec) + RN);
 	else
 		dataLetter.append(RN);
 
@@ -203,29 +206,39 @@ bool Post::formatMessageForSMTP()
 	dataLetter.append("Content-Type: multipart/mixed; boundary=" + bound + RN);
 	
 	dataLetter.append("--" + bound + RN); // начало первой части 
-	dataLetter.append("Content-Type: text/plain; charset=" + m_pcodec ->name() + RN);
+	dataLetter.append("Content-Type: text/plain; charset=" + m_pCodec ->name() + RN);
 	dataLetter.append("Content-Transfer-Encoding: base64" + RN);
 
 	dataLetter.append(RN); // отделяем заголовки от тела письма
 	
-	dataLetter.append(m_pcodec ->fromUnicode(m_pcurrentMessage ->gettext()).toBase64());
+	dataLetter.append(m_pCodec ->fromUnicode(m_pcurrentMessage ->gettext()).toBase64());
 	
 	dataLetter.append(RN + "--" + bound + RN); // начало второй части
 	
 	// прикрепление файла
-	QString filename("Текст pdf.pdf");
+	QString filename("Текст.pdf");
+	//QString filename("outfile.txt");
 	
-	dataLetter.append("Content-Type: application; name=" + encodeNonASCII(filename, m_pcodec) + RN);
-	dataLetter.append("Content-Disposition: attachment; filename=" + encodeNonASCII(filename, m_pcodec)  + RN);				
+	dataLetter.append("Content-Type: application; name=" + encodeNonASCII(filename, m_pCodec) + RN);
+	dataLetter.append("Content-Disposition: attachment; filename=" + encodeNonASCII(filename, m_pCodec)  + RN);				
 	dataLetter.append("Content-Transfer-Encoding: base64" + RN);
 	
 	dataLetter.append(RN); // отделяем заголовки от тела письма
-	
+//qDebug() << "begin read file";
 	QByteArray buffer; // под файл
 	if (!readFile(buffer, filename)) // чтение файла в QByteArray
 		return false;
-	
+//qDebug() << "end read file";	
 	dataOutput.append(dataLetter); // для вывода в поле служебной информации (без содержимого файла)
+
+	
+	qint64 N = dataLetter.size() + buffer.size() + buffer.size() / 3 + 10 + bound.size() + 4 + RN.size() * 4 + 1;
+	if (N)
+	{
+		if (N > 5000000)
+			ui.progressBar ->setRange(0, (N / 1100000) * 2);
+		qDebug() << (N / 1100000) * 2;
+	}
 	
 	dataLetter.reserve(dataLetter.size() + buffer.size() + buffer.size() / 3 + 10 + bound.size() + 4 + RN.size() * 4 + 1);
 	dataLetter.append(buffer.toBase64()); // добавляем байты файла из буфера в кодировке Base64
@@ -238,6 +251,18 @@ bool Post::formatMessageForSMTP()
 	dataOutput.append(QString(RN + "." + RN)); // признак конца данных
 
 	return true;
+}
+
+void Post::slotStepProgressBar()
+{
+	ui.progressBar ->setValue(ui.progressBar ->value() + 1);
+	qDebug() << ui.progressBar ->value();
+	if (ui.progressBar ->value() >= ui.progressBar ->maximum())
+	{
+		qDebug() << "stop " << ui.progressBar ->value();
+		qDebug() << "stop " << ui.progressBar ->maximum();
+		m_pTimer ->stop();
+	}
 }
 
 
@@ -258,7 +283,11 @@ void Post::slotSendMessage()
 	if (ui.m_pTo ->text().isEmpty()) 
 	{
 		//ui.stackedWidget ->setCurrentWidget(ui.infoSend);
-		ui.progressBar ->setHidden(true); // сокрытие полосы прогресса
+		//ui.progressBar ->setHidden(true); // сокрытие полосы прогресса
+		if (m_pTimer ->isActive())
+				m_pTimer ->stop();
+		ui.progressBar ->setValue(0);
+		
 		outputInfo(ui.m_pinfoSend, arrInfo[SEND_ERROR].strInfo + "\nВведите или выберите адрес.", arrInfo[SEND_ERROR].strSound, 1);
 		return;
 	}
@@ -283,14 +312,18 @@ void Post::slotSendMessage()
 	m_pcurrentMessage ->setsubject(ui.m_pSubject     ->text());
 	m_pcurrentMessage ->settext   (ui.m_ptxtMessage  ->toPlainText());
 
-	//ui.stackedWidget ->setCurrentWidget(ui.ProgressBar); // вывод полосы прогресса
-	ui.progressBar ->setVisible(true); // вывод полосы прогресса
-	
+	//ui.stackedWidget ->setCurrentWidget(ui.page_2); // вывод полосы прогресса
+	ui.progressBar ->setValue(0);
+	ui.progressBar ->setRange(0, 10);
+    //ui.progressBar ->setVisible(true); // вывод полосы прогресса
+
+	m_pTimer ->start(1000);
+//qDebug() << "begin format";	
 	if (!formatMessageForSMTP()) // формирование данных письма
 	{
 		return;
 	}
-
+//qDebug() << "end format";
 	setcommandsSMTP(m_pcurrentAccount, ui.m_pTo); // заполнение вектора командами для сервера SMTP
 
 	if (m_pSocketSMTP ->state() == QAbstractSocket::ConnectedState) 
@@ -636,7 +669,11 @@ if (ui.m_pCheckBox ->checkState() != Qt::Checked)
 		if (m_c != 9) // если ошибка не в ответ на QUIT, то вывод сообщения 
 		{
 			//ui.stackedWidget ->setCurrentWidget(ui.infoSend);
-			ui.progressBar ->setHidden(true); // сокрытие полосы прогресса
+			//ui.progressBar ->setHidden(true); // сокрытие полосы прогресса
+			if (m_pTimer ->isActive())
+				m_pTimer ->stop();
+			ui.progressBar ->setValue(0);
+			
 			outputInfo(ui.m_pinfoSend, arrInfo[SEND_ERROR].strInfo + QString(arrError[m_c - 1]), arrInfo[SEND_ERROR].strSound, SEND_ERROR);
 		}
 		
@@ -664,12 +701,14 @@ if (ui.m_pCheckBox ->checkState() != Qt::Checked)
 //---------------------------------------------------------------------------------------	
 	if (m_c == 7)  
 	{
-		out.setCodec(m_pcodec); // установка для потока кодировки 
+		out.setCodec(m_pCodec); // установка для потока кодировки 
 		                        // (в этой кодировке письмо будет отправлено на сервер SMTP)
 		//qDebug() << "dataLetter.size() = " << dataLetter.size();
 		//ui.stackedWidget ->setCurrentWidget(ui.ProgressBar); // вывод полосы прогресса
+		//qDebug() << "begin out";
 		out << dataLetter; // отправка данных письма на сервер SMTP
 		//out.flush();
+		//qDebug() << "end out";
 		
 		
 		
@@ -707,7 +746,7 @@ if (ui.m_pCheckBox ->checkState() != Qt::Checked)
 		QFile file("outfile.txt");
 		file.open(QIODevice::WriteOnly);
 		QTextStream outfile(&file);
-		outfile.setCodec(m_pcodec);
+		outfile.setCodec(m_pCodec);
 		outfile << dataOutput;
 		file.close();
 #endif
@@ -725,7 +764,12 @@ if (ui.m_pCheckBox ->checkState() != Qt::Checked)
 		//dataLetter.clear();
 		
 		//ui.stackedWidget ->setCurrentWidget(ui.infoSend);
-		ui.progressBar ->setHidden(true); // сокрытие полосы прогресса
+		//qDebug() << ui.progressBar ->value();
+		//ui.progressBar ->setHidden(true); // сокрытие полосы прогресса
+		if (m_pTimer ->isActive())
+				m_pTimer ->stop();
+		ui.progressBar ->setValue(ui.progressBar ->maximum());
+		
 		outputInfo(ui.m_pinfoSend, arrInfo[SEND_DONE].strInfo, arrInfo[SEND_DONE].strSound, SEND_DONE); // успешно отправлено
 		flagErrorSend = 0;
 		
@@ -940,7 +984,11 @@ void Post::slotErrorSMTP(QAbstractSocket::SocketError err)
   if (err == QAbstractSocket::HostNotFoundError/* || QAbstractSocket::UnknownSocketError*/)
   {
       //ui.stackedWidget ->setCurrentWidget(ui.infoSend); 
-	  ui.progressBar ->setHidden(true); // сокрытие полосы прогресса
+	  //ui.progressBar ->setHidden(true); // сокрытие полосы прогресса
+	  if (m_pTimer ->isActive())
+				m_pTimer ->stop();
+	  ui.progressBar ->setValue(0);
+	  
 	  outputInfo(ui.m_pinfoSend, arrInfo[SEND_ERROR].strInfo + QString("\nПроверьте соединение с интернетом."), arrInfo[SEND_ERROR].strSound);
   }	                                                        
     QString strError = 
@@ -1384,6 +1432,7 @@ void Post::slotClear()
 	{
 		ui.m_pinfoSend    ->clear();
 		ui.m_ptxtMessage  ->clear();
+		ui.progressBar ->setValue(0);
 	}
 }
 

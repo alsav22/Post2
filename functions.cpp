@@ -60,7 +60,6 @@ bool readFile(QByteArray& buffer, const QString path)
 	else
 	{
 		QMessageBox::critical(nullptr, "Ошибка!", "Файл " + path + " не найден!");
-	qDebug() << "Error opening file!";
 		return false;
 	}
 }
