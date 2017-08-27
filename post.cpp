@@ -257,7 +257,7 @@ void Post::slotStepProgressBar()
 {
 	ui.progressBar ->setValue(ui.progressBar ->value() + 1);
 	qDebug() << ui.progressBar ->value();
-	if (ui.progressBar ->value() >= ui.progressBar ->maximum())
+	if (ui.progressBar ->value() == (ui.progressBar ->maximum() - 1))
 	{
 		qDebug() << "stop " << ui.progressBar ->value();
 		qDebug() << "stop " << ui.progressBar ->maximum();
@@ -1203,6 +1203,7 @@ void Post::slotChoiceAddress(QListWidgetItem *plistwidgetitem)
 	}
 	
 	ui.m_pinfoSend    ->clear();
+	ui.progressBar ->setValue(0);
     //ui.m_ptxtMessage ->clear();
 	//ui.m_pinfoReceive ->clear();
 
