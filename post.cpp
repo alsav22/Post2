@@ -26,7 +26,8 @@ Post::Post(QWidget *pwgt /*= 0*/) : QWidget(pwgt), m_pCodec(QTextCodec::codecFor
 {
 	m_pTimer = new QTimer(this);
 	connect(m_pTimer, SIGNAL(timeout()), this, SLOT(slotStepProgressBar()));
-	
+	speed = 1250000; // скорость интернета upload
+	k = 2; // поправочный коэффициент к speed
 	
 	//m_ptxtSender      = NULL;
 	//m_pCheckBox       = NULL;
@@ -217,8 +218,12 @@ bool Post::formatMessageForSMTP()
 	dataLetter.append(RN + "--" + bound + RN); // начало второй части
 	
 	// прикрепление файла
-	QString filename("Текст2.pdf");
-	//QString filename("outfile.txt");
+	// размер всего сообщения (после обработки Base64) должен быть не более чем 31457280 байт (20мгб)
+	//QString filename("Файл 40_3 мгб.pdf"); // слишком большой, не отправляется
+	//QString filename("Файл 17_8 мгб.pdf");
+	//QString filename("Файл 10_6 мгб.djvu");
+	QString filename("Файл 5_5 мгб.pdf");
+	//QString filename("outfile.txt"); // 523 байта
 	
 	dataLetter.append("Content-Type: application; name=" + encodeNonASCII(filename, m_pCodec) + RN);
 	dataLetter.append("Content-Disposition: attachment; filename=" + encodeNonASCII(filename, m_pCodec)  + RN);				
@@ -233,14 +238,10 @@ bool Post::formatMessageForSMTP()
 	dataOutput.append(dataLetter); // для вывода в поле служебной информации (без содержимого файла)
 
 	
-	qint64 N = dataLetter.size() + buffer.size() + buffer.size() / 3 + 10 + bound.size() + 4 + RN.size() * 4 + 1;
-	if (N)
-	{
-		if (N > 5000000)
-			ui.progressBar ->setRange(0, (N / 1100000) * 2);
-		qDebug() << (N / 1100000) * 2;
-	}
+	qint64 sizeData = dataLetter.size() + buffer.size() + buffer.size() / 3 + 10 + bound.size() + 4 + RN.size() * 4 + 1;
 	
+	ui.progressBar ->setRange(0, progressBarRange(sizeData, speed, k)); // установка диапазона полосы прогресса
+		
 	dataLetter.reserve(dataLetter.size() + buffer.size() + buffer.size() / 3 + 10 + bound.size() + 4 + RN.size() * 4 + 1);
 	dataLetter.append(buffer.toBase64()); // добавляем байты файла из буфера в кодировке Base64
 	
@@ -314,16 +315,18 @@ void Post::slotSendMessage()
 	m_pcurrentMessage ->settext   (ui.m_ptxtMessage  ->toPlainText());
 
 	//ui.stackedWidget ->setCurrentWidget(ui.page_2); // вывод полосы прогресса
-	ui.progressBar ->setValue(0);
-	ui.progressBar ->setRange(0, 10);
+	
     //ui.progressBar ->setVisible(true); // вывод полосы прогресса
-
-	m_pTimer ->start(1000);
+    ui.progressBar ->setValue(0);
+	ui.progressBar ->setRange(0, 10);
+	
 //qDebug() << "begin format";	
 	if (!formatMessageForSMTP()) // формирование данных письма
 	{
 		return;
 	}
+
+	m_pTimer ->start(1000);
 //qDebug() << "end format";
 	setcommandsSMTP(m_pcurrentAccount, ui.m_pTo); // заполнение вектора командами для сервера SMTP
 

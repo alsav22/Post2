@@ -42,6 +42,11 @@ bool readFile(QByteArray& buffer, const QString path)
 	if (file.open(QIODevice::ReadOnly))
 	{
 		qint64 sizefile = file.size();
+		if (sizefile > 20971520) // если файл больше 20мгб
+		{
+			QMessageBox::critical(0, "Ошибка!", "Слишком большое вложение!");
+			return false;
+		}
 		buffer.resize(sizefile); // выделяем память (readRawData() не делает resize() массива)
 
 		QDataStream stream(&file);
@@ -63,6 +68,33 @@ bool readFile(QByteArray& buffer, const QString path)
 		return false;
 	}
 }
+
+// вычисление диапазона полосы прогресса
+int progressBarRange(qint64 sizeData, uint speed, double& k)
+{
+    int Right = 0; // правая граница диапазона
+	if (sizeData)
+	{
+		if (sizeData >= speed)
+		{
+			if (sizeData > 20000000)
+				k = 1.6;
+			else if (sizeData > 10000000)
+				k = 1.8;
+			else if (sizeData > 5000000)
+				k = 2.0;
+			else 
+				k = 1;
+			Right = (sizeData / speed) * k;
+		}
+		else
+			Right = 1;
+	}
+	qDebug() << "k = " << k << " Right = " << Right;
+	
+	return Right;
+}
+
 
 // вывод команд для серверов на поле Служебная информация и вывод в сокет......................................................................................
 void outputCommands(QTextEdit *m_ptxtSender, const QString commands, QTextStream &out)

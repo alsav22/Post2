@@ -16,6 +16,8 @@ void initData(); // инициализация кодеков и глобальных данных
 
 bool readFile(QByteArray& buffer, const QString path); // чтение данных из прикрепляемого файла
 
+int progressBarRange(qint64 sizeData, uint speed, double& k); // вычисление диапазона полосы прогресса
+
 // кодирование в заголовках не ASCII текста
 inline QString encodeNonASCII(const QString& text, const QTextCodec* pcodec)
 {
