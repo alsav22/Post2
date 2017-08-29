@@ -119,6 +119,10 @@ public slots :
 	
 	void slotReadySSL       (QListWidgetItem *           );
 	void slotStepProgressBar(                            );
+	void slotBytesWritten(qint64 bytes)
+	{
+		qDebug() << bytes;
+	}
 };
 
 // форматирование данных дл€ отправки на SMTP сервер

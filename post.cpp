@@ -27,6 +27,7 @@ Post::Post(QWidget *pwgt /*= 0*/) : QWidget(pwgt), m_pCodec(QTextCodec::codecFor
 	m_pTimer = new QTimer(this);
 	connect(m_pTimer, SIGNAL(timeout()), this, SLOT(slotStepProgressBar()));
 	
+	
 	//m_ptxtSender      = NULL;
 	//m_pCheckBox       = NULL;
     //m_pcurrentAccount = NULL;
@@ -88,7 +89,7 @@ Post::Post(QWidget *pwgt /*= 0*/) : QWidget(pwgt), m_pCodec(QTextCodec::codecFor
     connect(m_pSocketSMTP, SIGNAL(error(QAbstractSocket::SocketError)),
                      this, SLOT(slotErrorSMTP(QAbstractSocket::SocketError)));
 
-	//connect(m_pSocketSMTP, SIGNAL(encryptedBytesWritten(qint64)), this, SLOT(slotProgress(qint64)));
+	connect(m_pSocketSMTP, SIGNAL(bytesWritten(qint64)), this, SLOT(slotBytesWritten(qint64)));
 
 // создание сокета для POP и соединение его со слотами обработки сигналов
 	//m_pSocketPOP = new QTcpSocket(this);
@@ -216,7 +217,7 @@ bool Post::formatMessageForSMTP()
 	dataLetter.append(RN + "--" + bound + RN); // начало второй части
 	
 	// прикрепление файла
-	QString filename("Текст.pdf");
+	QString filename("Текст2.pdf");
 	//QString filename("outfile.txt");
 	
 	dataLetter.append("Content-Type: application; name=" + encodeNonASCII(filename, m_pCodec) + RN);
@@ -332,6 +333,8 @@ void Post::slotSendMessage()
 	// соединение с сервером
 	m_pSocketSMTP ->connectToHostEncrypted(m_pcurrentAccount ->getHostSMTP(), 
 	                                       m_pcurrentAccount ->getPortSMTP().toUInt());
+	
+	
 
 	flagErrorSend     = 0;
 	m_c               = 0;
@@ -677,7 +680,8 @@ if (ui.m_pCheckBox ->checkState() != Qt::Checked)
 			outputInfo(ui.m_pinfoSend, arrInfo[SEND_ERROR].strInfo + QString(arrError[m_c - 1]), arrInfo[SEND_ERROR].strSound, SEND_ERROR);
 		}
 		
-		QApplication::restoreOverrideCursor();
+		
+		//QApplication::restoreOverrideCursor();
 		return;
 	}
 
@@ -989,7 +993,7 @@ void Post::slotErrorSMTP(QAbstractSocket::SocketError err)
 				m_pTimer ->stop();
 	  ui.progressBar ->setValue(0);
 	  
-	  outputInfo(ui.m_pinfoSend, arrInfo[SEND_ERROR].strInfo + QString("\nПроверьте соединение с интернетом."), arrInfo[SEND_ERROR].strSound);
+	  outputInfo(ui.m_pinfoSend, arrInfo[SEND_ERROR].strInfo + QString("\nПроверьте соединение с интернетом."), arrInfo[SEND_ERROR].strSound, SEND_ERROR);
   }	                                                        
     QString strError = 
         QWidget::tr("Ошибка: ") + (err == QAbstractSocket::HostNotFoundError ? 
@@ -1000,11 +1004,18 @@ void Post::slotErrorSMTP(QAbstractSocket::SocketError err)
                      QWidget::tr("В соединении отказано.") : //"The connection was refused." :
                      QString(m_pSocketSMTP ->errorString())
                     );
-    
+					
 		ui.m_ptxtSender ->append(strError);
+        
+		if (m_c != 9) // не в ответ на QUIT
+		{
+			outputInfo(ui.m_pinfoSend, arrInfo[SEND_ERROR].strInfo + QString("\nПроверьте соединение с интернетом."), arrInfo[SEND_ERROR].strSound, SEND_ERROR);
+		}
+		if (m_pTimer ->isActive())
+				m_pTimer ->stop();
+	    ui.progressBar ->setValue(0);
 		
 		QApplication::restoreOverrideCursor(); // возвращаем обычный курсор
-		
 }
 
 //---------------------------------------------------------------------------
