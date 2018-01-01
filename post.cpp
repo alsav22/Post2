@@ -219,10 +219,10 @@ bool Post::formatMessageForSMTP()
 	
 	// прикрепление файла
 	// размер всего сообщения (после обработки Base64) должен быть не более чем 31457280 байт (20мгб)
-	//QString filename("Файл 40_3 мгб.pdf"); // слишком большой, не отправляется
+	QString filename("Файл 40_3 мгб.pdf"); // слишком большой, не отправляется
 	//QString filename("Файл 17_8 мгб.pdf");
 	//QString filename("Файл 10_6 мгб.djvu");
-	QString filename("Файл 5_5 мгб.pdf");
+	//QString filename("Файл 5_5 мгб.pdf");
 	//QString filename("outfile.txt"); // 523 байта
 	
 	dataLetter.append("Content-Type: application; name=" + encodeNonASCII(filename, m_pCodec) + RN);
@@ -232,8 +232,10 @@ bool Post::formatMessageForSMTP()
 	dataLetter.append(RN); // отделяем заголовки от тела письма
 //qDebug() << "begin read file";
 	QByteArray buffer; // под файл
-	if (!readFile(buffer, filename)) // чтение файла в QByteArray
+	if (!readFile(buffer, filename, ui.m_pinfoSend)) // чтение файла в QByteArray
+	{
 		return false;
+	}
 //qDebug() << "end read file";	
 	dataOutput.append(dataLetter); // для вывода в поле служебной информации (без содержимого файла)
 
@@ -316,17 +318,19 @@ void Post::slotSendMessage()
 
 	//ui.stackedWidget ->setCurrentWidget(ui.page_2); // вывод полосы прогресса
 	
-    //ui.progressBar ->setVisible(true); // вывод полосы прогресса
+    // запуск полосы прогресса
     ui.progressBar ->setValue(0);
 	ui.progressBar ->setRange(0, 10);
-	
+	m_pTimer ->start(1000);
 //qDebug() << "begin format";	
 	if (!formatMessageForSMTP()) // формирование данных письма
 	{
+		m_pTimer ->stop();
+		ui.progressBar ->setValue(0);
 		return;
 	}
 
-	m_pTimer ->start(1000);
+	
 //qDebug() << "end format";
 	setcommandsSMTP(m_pcurrentAccount, ui.m_pTo); // заполнение вектора командами для сервера SMTP
 

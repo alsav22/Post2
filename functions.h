@@ -12,9 +12,11 @@
 //#include <QSound>
 #include <QtGui>
 
+class Post;
+
 void initData(); // инициализация кодеков и глобальных данных
 
-bool readFile(QByteArray& buffer, const QString path); // чтение данных из прикрепляемого файла
+bool readFile(QByteArray& buffer, const QString path, QLabel* pinfoSend); // чтение данных из прикрепляемого файла
 
 int progressBarRange(qint64 sizeData, uint speed, double& k); // вычисление диапазона полосы прогресса
 

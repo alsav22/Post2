@@ -1,4 +1,4 @@
-﻿#include <QTextCodec>
+#include <QTextCodec>
 #include <QtGui>
 #include <QApplication>
 //#include <Windows.h>
@@ -18,21 +18,16 @@ int main(int argc, char *argv[])
 	QSplashScreen splash(QPixmap("icon1.png"));
 	splash.show();
 	
-	initData(); // утсановка нужного кодека для Си-строк и tr, и инициализация глобальных данных
+	initData(); // ��������� ������� ������ ��� ��-����� � tr, � ������������� ���������� ������
 
 	///////////////////////////////////////////////////////////////////	
-	//std::string stdStr("Ошибка при отправке письма!\n");
-	//QString arr[] = {"Ошибка при отправке письма!\r\n"};
-	//QString str = QWidget::tr("Когда я на почте.");
-	//QTextDecoder dec(LocalCodec);
-	//dec.toUnicode(&str, "Когда я на почте.", strlen("Когда я на почте."));
-	//
+	
 	//bool flag = LocalCodec ->canEncode(str);
 	////QByteArray arr = str.toAscii();
 	//std::cout << str.toLocal8Bit().data() << std::endl;
 	//int a = 4;
 	//QTextCodec *codec = QTextCodec::codecForName("ISO-8859-1");
- //   QString str = "Êîãäà ÿ íà ïî÷òå.";
+ //   QString str = "????? ? ?? ?????.";
 	////str = codec->toUnicode(str.toAscii());
 	////qDebug() << str;
 	//QChar *data = str.data();
@@ -49,7 +44,7 @@ int main(int argc, char *argv[])
 
 	//QTextCodec *codec = QTextCodec::codecForName(/*"UTF-8"*/"ISO-8859-1"/*"KOI8-R"*/);
 	//qDebug() << codec ->aliases();
-	//QString str = QWidget::tr("Когда я на почте.");
+	
 	//QString str = /*QWidget::tr(*/"Go to me.";
 	//qDebug() << (int)(str.toStdString().c_str()[0]);
 	//QByteArray arr = codec ->fromUnicode(str);
@@ -73,8 +68,8 @@ int main(int argc, char *argv[])
     post.show();
     splash.finish(&post);
 	
-	if (post.m_flagExistAccount == 0 && messageAccount() == QMessageBox::Yes) // если ящика не существует, и если Yes,
-		post.slotCreateAccount();                                             // то переход к созданию ящика
+	if (post.m_flagExistAccount == 0 && messageAccount() == QMessageBox::Yes) // ���� ����� �� ����������, � ���� Yes,
+		post.slotCreateAccount();                                             // �� ������� � �������� �����
 	
 	return app.exec();
 }

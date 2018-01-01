@@ -96,8 +96,14 @@ public :
 	void outInfo();
 	
 	uint m_flagExistAccount; // флаг установлен, если хотя бы один ящик был создан
+	
+	QTimer* getTimer() const
+	{ return m_pTimer; }
+	
+	Ui::PostClass getUi() const
+	{ return ui; }
 
-public slots :
+	public slots :
 	void slotReadyReadSMTP  (                            );
 	void slotReadyReadPOP   (                            );
     void slotErrorSMTP      (QAbstractSocket::SocketError);

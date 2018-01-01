@@ -36,7 +36,7 @@ void initData()
 }
 
 // чтение данных из прикрепляемого файла
-bool readFile(QByteArray& buffer, const QString path)
+bool readFile(QByteArray& buffer, const QString path, QLabel* pinfoSend)
 {
 	QFile file(path);
 	if (file.open(QIODevice::ReadOnly))
@@ -44,7 +44,9 @@ bool readFile(QByteArray& buffer, const QString path)
 		qint64 sizefile = file.size();
 		if (sizefile > 20971520) // если файл больше 20мгб
 		{
-			QMessageBox::critical(0, "Ошибка!", "Слишком большое вложение!");
+			outputInfo(pinfoSend, QString("Слишком большой файл!\n" + path 
+				                           + " (" + QString::number(sizefile / 1048576) 
+										   + "мгб)" + "\nДопустимый размер - 20мгб"), arrInfo[SEND_ERROR].strSound, SEND_ERROR);
 			return false;
 		}
 		buffer.resize(sizefile); // выделяем память (readRawData() не делает resize() массива)
@@ -58,13 +60,13 @@ bool readFile(QByteArray& buffer, const QString path)
 			return true;
 		else
 		{
-			QMessageBox::critical(0, "Ошибка!", "Ошибка при загрузке файла " + path + "!");
+			outputInfo(pinfoSend, "Ошибка при загрузке прикрепляемого файла!", arrInfo[SEND_ERROR].strSound, SEND_ERROR);
 			return false;
 		}
 	}
 	else
 	{
-		QMessageBox::critical(nullptr, "Ошибка!", "Файл " + path + " не найден!");
+		outputInfo(pinfoSend, "Прикрепляемый файл не найден!", arrInfo[SEND_ERROR].strSound, SEND_ERROR);
 		return false;
 	}
 }
